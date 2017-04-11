@@ -1,5 +1,5 @@
 /*
- * Built in 2016© By Code Managers in Kraken Tech Ltd.
+ * Built in 2017© By Worker's in Kraken Tech Ltd.
  * Compiled and Revised by Advisors outside the company
  * Refer to documentation attached for any other reference on code or anything related to this Source Code
  */
