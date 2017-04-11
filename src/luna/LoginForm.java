@@ -75,6 +75,12 @@ public class LoginForm extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(23, 18, 0, 6);
         getContentPane().add(username, gridBagConstraints);
+
+        password.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passwordActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
@@ -119,14 +125,12 @@ public class LoginForm extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelActionPerformed
 
     private void inputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputActionPerformed
-        if(DatabaseManager.userValidation(username.getText(), password.getPassword())){
-            Session session = DatabaseManager.userSessionCreation(username.getText());
-            MainWindowForm mw = new MainWindowForm(session);
-            mw.setVisible(true);
-        }else{
-            System.out.println("no");
-        }
+        Login();
     }//GEN-LAST:event_inputActionPerformed
+
+    private void passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordActionPerformed
+        Login();
+    }//GEN-LAST:event_passwordActionPerformed
 
     /**
      * @param args the command line arguments
@@ -171,4 +175,14 @@ public class LoginForm extends javax.swing.JFrame {
     private javax.swing.JPasswordField password;
     private javax.swing.JTextField username;
     // End of variables declaration//GEN-END:variables
+
+    private void Login() {
+        if(DatabaseManager.userValidation(username.getText(), password.getPassword())){
+            Session session = DatabaseManager.userSessionCreation(username.getText());
+            MainWindowForm mw = new MainWindowForm(session);
+            mw.setVisible(true);
+        }else{
+            System.out.println("no");
+        }
+    }
 }
