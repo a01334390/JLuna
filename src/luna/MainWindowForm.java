@@ -64,7 +64,7 @@ public class MainWindowForm extends javax.swing.JFrame {
         pedido = new javax.swing.JButton();
         inventario = new javax.swing.JButton();
         materiales = new javax.swing.JButton();
-        ajustes = new javax.swing.JButton();
+        Avanzado = new javax.swing.JButton();
         empleados = new javax.swing.JButton();
         cliente = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -222,22 +222,21 @@ public class MainWindowForm extends javax.swing.JFrame {
             jPanel4.add(materiales, gridBagConstraints);
         }
 
-        ajustes.setText("Ajustes");
-        ajustes.addActionListener(new java.awt.event.ActionListener() {
+        Avanzado.setText("Avanzado");
+        Avanzado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ajustesActionPerformed(evt);
+                AvanzadoActionPerformed(evt);
             }
         });
         if(session.getPrivilege().equals("admin")){
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 2;
             gridBagConstraints.gridy = 1;
-            gridBagConstraints.gridheight = 2;
-            gridBagConstraints.ipadx = 44;
+            gridBagConstraints.ipadx = 30;
             gridBagConstraints.ipady = 106;
             gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
             gridBagConstraints.insets = new java.awt.Insets(7, 6, 0, 0);
-            jPanel4.add(ajustes, gridBagConstraints);
+            jPanel4.add(Avanzado, gridBagConstraints);
         }
 
         empleados.setText("Empleados");
@@ -250,7 +249,6 @@ public class MainWindowForm extends javax.swing.JFrame {
             gridBagConstraints = new java.awt.GridBagConstraints();
             gridBagConstraints.gridx = 1;
             gridBagConstraints.gridy = 1;
-            gridBagConstraints.gridheight = 2;
             gridBagConstraints.ipadx = 23;
             gridBagConstraints.ipady = 106;
             gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -269,7 +267,7 @@ public class MainWindowForm extends javax.swing.JFrame {
             gridBagConstraints.gridx = 0;
             gridBagConstraints.gridy = 1;
             gridBagConstraints.ipadx = 47;
-            gridBagConstraints.ipady = 100;
+            gridBagConstraints.ipady = 106;
             gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
             gridBagConstraints.insets = new java.awt.Insets(7, 7, 0, 0);
             jPanel4.add(cliente, gridBagConstraints);
@@ -308,7 +306,7 @@ public class MainWindowForm extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addGap(35, 35, 35)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -343,7 +341,8 @@ public class MainWindowForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void materialesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_materialesActionPerformed
-        // TODO add your handling code here:
+        MaterialesForm mf = new MaterialesForm(session);
+        mf.setVisible(true);
     }//GEN-LAST:event_materialesActionPerformed
 
     private void empleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_empleadosActionPerformed
@@ -351,9 +350,9 @@ public class MainWindowForm extends javax.swing.JFrame {
         uf.setVisible(true);
     }//GEN-LAST:event_empleadosActionPerformed
 
-    private void ajustesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajustesActionPerformed
+    private void AvanzadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AvanzadoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ajustesActionPerformed
+    }//GEN-LAST:event_AvanzadoActionPerformed
 
     private void clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clienteActionPerformed
         // TODO add your handling code here:
@@ -365,7 +364,7 @@ public class MainWindowForm extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton ajustes;
+    private javax.swing.JButton Avanzado;
     private javax.swing.JButton cliente;
     private javax.swing.JLabel daylabel;
     private javax.swing.JButton empleados;
