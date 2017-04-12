@@ -380,6 +380,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="A&#xf1;adir"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="orderAddActionPerformed"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="if(session.getPrivilege().equals(&quot;admin&quot;) || session.getPrivilege().equals(&quot;manager&quot;)){&#xa;    orderAdd.setEnabled(true);&#xa;}else{&#xa;    orderAdd.setEnabled(false);&#xa;}"/>
               </AuxValues>

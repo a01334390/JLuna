@@ -520,7 +520,7 @@ public class DatabaseManager {
         try {
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
             Statement statement = connection.createStatement();
-            int rowsaffected = statement.executeUpdate("INSERT Pola.Order (date,priority,create_time,client_id) VALUES ('" + ord.getDate() + "' , '" + ord.getPriority() + "' , '" + dateToString() + "'," + ord.getClient_id() + ") ;");
+            int rowsaffected = statement.executeUpdate("INSERT INTO Pola.Order(date,priority,create_time,client_id) VALUES ('" + ord.getDate() + "' , '" + ord.getPriority() + "' , '" + dateToString() + "'," + ord.getClient_id() + ") ;");
         } catch (SQLException e) {
             System.out.println(e.getSQLState()); //Must be a JPopup or something
         }
@@ -552,7 +552,7 @@ public class DatabaseManager {
         try {
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
             Statement statement = connection.createStatement();
-            int rowsaffected = statement.executeUpdate("INSERT Customization (ribbon,image,elastic,pageType) VALUES ('" + cust.getRibbon() + "' , '" + cust.getImage() + "' , '" + cust.getImage() + "','" + cust.getPagetype() + "') ;");
+            int rowsaffected = statement.executeUpdate("INSERT INTO Customization(ribbon,image,elastic,pageType) VALUES ('" + cust.getRibbon() + "' , '" + cust.getImage() + "' , '" + cust.getElastic() + "','" + cust.getPagetype() + "') ;");
         } catch (SQLException e) {
             System.out.println(e.getSQLState()); //Must be a JPopup or something
         }
@@ -584,7 +584,7 @@ public class DatabaseManager {
         try {
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
             Statement statement = connection.createStatement();
-            int rowsaffected = statement.executeUpdate("INSERT Notebook_Order (id_Notebook,id_Order,quantity,status,id_Customization) VALUES (" + nbo.getId_Notebook() + " , " + nbo.getId_Order() + " , " + nbo.getQuantity() + ",'" + nbo.getStatus() + "'," + nbo.getId_Customization() + ") ;");
+            int rowsaffected = statement.executeUpdate("INSERT INTO Notebook_Order (id_Notebook,id_Order,quantity,status,id_Customization) VALUES (" + nbo.getId_Notebook() + " , " + nbo.getId_Order() + " , " + nbo.getQuantity() + ",'" + nbo.getStatus() + "'," + nbo.getId_Customization() + ") ;");
         } catch (SQLException e) {
             System.out.println(e.getSQLState()); //Must be a JPopup or something
         }

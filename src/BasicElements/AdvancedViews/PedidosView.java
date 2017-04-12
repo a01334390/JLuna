@@ -229,6 +229,11 @@ public class PedidosView extends javax.swing.JFrame {
             orderAdd.setEnabled(false);
         }
         orderAdd.setText("Añadir");
+        orderAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                orderAddActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
@@ -515,6 +520,11 @@ public class PedidosView extends javax.swing.JFrame {
     private void pagetypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pagetypeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_pagetypeActionPerformed
+
+    private void orderAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderAddActionPerformed
+       NotebookForm nf = new NotebookForm(session,currentClient);
+       nf.setVisible(true);
+    }//GEN-LAST:event_orderAddActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

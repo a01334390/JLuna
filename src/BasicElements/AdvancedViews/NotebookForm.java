@@ -29,6 +29,8 @@ public class NotebookForm extends javax.swing.JFrame {
     private ArrayList<Order> orders = new ArrayList<>();
     private ArrayList<Customization> customization = new ArrayList<>();
     private ArrayList<OrderNotebooks> nborder = new ArrayList<>();
+    int x=0;
+    int y=0;
 
     /**
      * Creates new form Cuaderno
@@ -75,7 +77,7 @@ public class NotebookForm extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         priority = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
-        date = new javax.swing.JTextField();
+        dateField = new javax.swing.JTextField();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         confirmedOrders = new javax.swing.JList<>();
@@ -273,7 +275,7 @@ public class NotebookForm extends javax.swing.JFrame {
 
         priority.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Baja", "Media", "Alta" }));
 
-        jLabel9.setText("Fecha de Entrega (Aprox) [YYYY-MM-DD]");
+        jLabel9.setText("Fecha de Entrega (Aprox) [YYYY/MM/DD]");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -287,7 +289,7 @@ public class NotebookForm extends javax.swing.JFrame {
                         .addComponent(jLabel9))
                     .addComponent(jLabel8)
                     .addComponent(priority, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(date))
+                    .addComponent(dateField))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -300,7 +302,7 @@ public class NotebookForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(dateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -326,7 +328,7 @@ public class NotebookForm extends javax.swing.JFrame {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -399,7 +401,7 @@ public class NotebookForm extends javax.swing.JFrame {
     }//GEN-LAST:event_allNotebooksValueChanged
 
     private void confirmOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmOrderActionPerformed
-        String simage = ""; //To be changed, is just a small thing
+        String simage = "path"; //To be changed, is just a small thing
         String spriority;
         switch (priority.getSelectedIndex()) {
             case 0:
@@ -415,7 +417,7 @@ public class NotebookForm extends javax.swing.JFrame {
                 spriority = "LOW";
                 break;
         }
-        String sfecha = date.getSelectedText();
+        String sfecha = dateField.getText();
         String sribbon;
         switch (ribbon.getSelectedIndex()) {
             case 0:
@@ -449,7 +451,7 @@ public class NotebookForm extends javax.swing.JFrame {
                 spagetype = "PLAIN";
                 break;
             case 1:
-                spagetype = "RULED";
+                spagetype = "LINED";
                 break;
             default:
                 spagetype = "AGENDA";
@@ -457,9 +459,11 @@ public class NotebookForm extends javax.swing.JFrame {
         }
         int squantity = Integer.parseInt(quantity.getText());
         //Create a new Order
-        orders.add(new Order(1000, StringDate(sfecha), spriority, DatabaseManager.dateToString(), client.getId()));
-        customization.add(new Customization(1000, sribbon, simage, selastic, spagetype));
-        nborder.add(new OrderNotebooks(currentNotebook.getId(), 1000, squantity, "Diseño", 1000));
+        orders.add(new Order(x, sfecha, spriority, DatabaseManager.dateToString(), client.getId()));
+        customization.add(new Customization(y, sribbon, simage, selastic, spagetype));
+        nborder.add(new OrderNotebooks(currentNotebook.getId(), x, squantity, "Diseño", y));
+        x++;
+        y++;
         updateView();
     }//GEN-LAST:event_confirmOrderActionPerformed
 
@@ -482,7 +486,7 @@ public class NotebookForm extends javax.swing.JFrame {
     private javax.swing.JButton chooseImage;
     private javax.swing.JButton confirmOrder;
     private javax.swing.JList<String> confirmedOrders;
-    private javax.swing.JTextField date;
+    private javax.swing.JTextField dateField;
     private javax.swing.JComboBox<String> elastic;
     private javax.swing.JButton generateAllOrders;
     private javax.swing.JLabel jLabel1;
@@ -509,11 +513,6 @@ public class NotebookForm extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> ribbon;
     // End of variables declaration//GEN-END:variables
 
-    private String StringDate(String fecha) {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        fecha += " 06:06:06";
-        return dateFormat.format(fecha);
-    }
 
     private void updateView() {
         confirmedOrders.setModel(new javax.swing.AbstractListModel<String>() {
@@ -529,7 +528,7 @@ public class NotebookForm extends javax.swing.JFrame {
         });
 
         priority.setSelectedIndex(0);
-        date.setText("");
+        dateField.setText("");
         ribbon.setSelectedIndex(0);
         elastic.setSelectedIndex(0);
         pageType.setSelectedIndex(0);
