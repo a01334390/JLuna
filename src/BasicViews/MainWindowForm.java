@@ -335,7 +335,8 @@ public class MainWindowForm extends javax.swing.JFrame {
     }//GEN-LAST:event_pedidoActionPerformed
 
     private void inventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inventarioActionPerformed
-        // TODO add your handling code here:
+        InventoryView iv = new InventoryView(session);
+        iv.setVisible(true);
     }//GEN-LAST:event_inventarioActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed

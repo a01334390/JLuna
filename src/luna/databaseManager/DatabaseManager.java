@@ -465,7 +465,7 @@ public class DatabaseManager {
         try {
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
             Statement statement = connection.createStatement();
-            int rowsaffected = statement.executeUpdate("DELETE FROM Pola.Order WHERE idOrder='" + Integer.toString(orderid) + "';");
+            int rowsaffected = statement.executeUpdate("DELETE FROM Pola.Order WHERE idOrder=" + Integer.toString(orderid) + ";");
             return rowsaffected > 0;
         } catch (SQLException e) {
             System.out.println(e.getSQLState()); //Must be a JPopup or something
@@ -484,7 +484,7 @@ public class DatabaseManager {
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT * FROM Notebook;");
             while (resultset.next()) {
-                array.add(new Notebook(resultset.getInt("idNotebook"), resultset.getTime("average_time").toString(), resultset.getString("type"), resultset.getFloat("benefit"), resultset.getInt("onInventory")));
+                array.add(new Notebook(resultset.getInt("idNotebook"), resultset.getTime("average_time").toString(), resultset.getString("type"), resultset.getFloat("benefit")));
             }
             return array.toArray(new Notebook[array.size()]);
         } catch (SQLException e) {
@@ -504,7 +504,7 @@ public class DatabaseManager {
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT * FROM Notebook WHERE type='" + ntype + "';");
             while (resultset.next()) {
-                return new Notebook(resultset.getInt("idNotebook"), resultset.getTime("average_time").toString(), resultset.getString("type"), resultset.getFloat("benefit"), resultset.getInt("onInventory"));
+                return new Notebook(resultset.getInt("idNotebook"), resultset.getTime("average_time").toString(), resultset.getString("type"), resultset.getFloat("benefit"));
             }
         } catch (SQLException e) {
             System.out.println(e.getSQLState()); //Must be a JPopup or something
@@ -588,6 +588,36 @@ public class DatabaseManager {
         } catch (SQLException e) {
             System.out.println(e.getSQLState()); //Must be a JPopup or something
         }
+    }
+
+    public static Inventory getInventoryByNotebookID(int id) {
+         try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+            Statement statement = connection.createStatement();
+            ResultSet resultset = statement.executeQuery("SELECT * FROM Inventory WHERE id_Notebook="+Integer.toString(id)+";");
+            while (resultset.next()) {
+                return new Inventory(resultset.getInt("ammount"),resultset.getInt("id_Notebook"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getSQLState()); //Must be a JPopup or something
+        }
+        return null;
+    }
+
+    public static boolean editInventoryInDatabase(int idNotebook, int ammounty) {
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+            Statement statement = connection.createStatement();
+            int rowsaffected = statement.executeUpdate(
+                    "UPDATE Inventory"
+                    + " SET ammount="+Integer.toString(ammounty)
+                    + " WHERE id_Notebook="+Integer.toString(idNotebook)+";");
+            return rowsaffected > 0;
+        } catch (SQLException e) {
+            System.out.println(e.getSQLState() + "," + e.getLocalizedMessage()); //Must be a JPopup or something
+
+        }
+        return false;
     }
 
 }

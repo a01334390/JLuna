@@ -27,6 +27,7 @@ public class NotebookForm extends javax.swing.JFrame {
     private final Cliente client;
     private Notebook currentNotebook;
     private ArrayList<Order> orders = new ArrayList<>();
+    private Order inhOrder;
     private ArrayList<Customization> customization = new ArrayList<>();
     private ArrayList<OrderNotebooks> nborder = new ArrayList<>();
     int x=0;
@@ -38,9 +39,10 @@ public class NotebookForm extends javax.swing.JFrame {
      * @param session
      * @param client
      */
-    public NotebookForm(Session session, Cliente client) {
+    public NotebookForm(Session session, Cliente client,Order order) {
         this.session = session;
         this.client = client;
+        this.inhOrder = order;
         initComponents();
     }
 
@@ -468,7 +470,7 @@ public class NotebookForm extends javax.swing.JFrame {
     }//GEN-LAST:event_confirmOrderActionPerformed
 
     private void generateAllOrdersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateAllOrdersActionPerformed
-        for (int i = 0; i < orders.size(); i++) {
+       for (int i = 0; i < orders.size(); i++) {
             DatabaseManager.addOrderToDatabase(orders.get(i));
             int orderID = DatabaseManager.getLastOrderGenerated();
             DatabaseManager.addCustomizationInDatabase(customization.get(i));
@@ -534,4 +536,5 @@ public class NotebookForm extends javax.swing.JFrame {
         pageType.setSelectedIndex(0);
         quantity.setText("");
     }
+
 }

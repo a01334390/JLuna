@@ -200,6 +200,11 @@ public class PedidosView extends javax.swing.JFrame {
             orderEdit.setEnabled(false);
         }
         orderEdit.setText("Editar");
+        orderEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                orderEditActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -522,9 +527,13 @@ public class PedidosView extends javax.swing.JFrame {
     }//GEN-LAST:event_pagetypeActionPerformed
 
     private void orderAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderAddActionPerformed
-       NotebookForm nf = new NotebookForm(session,currentClient);
+       NotebookForm nf = new NotebookForm(session,currentClient,currentOrder);
        nf.setVisible(true);
     }//GEN-LAST:event_orderAddActionPerformed
+
+    private void orderEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderEditActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_orderEditActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

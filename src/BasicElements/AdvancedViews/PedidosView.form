@@ -351,6 +351,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Editar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="orderEditActionPerformed"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="if(session.getPrivilege().equals(&quot;admin&quot;) || session.getPrivilege().equals(&quot;manager&quot;)){&#xa;    orderEdit.setEnabled(true);&#xa;}else{&#xa;    orderEdit.setEnabled(false);&#xa;}"/>
               </AuxValues>

@@ -19,22 +19,12 @@ public class Notebook {
     private String average_time;
     private String type;
     private float benefit;
-    private int onInventory;
 
-    public Notebook(int id, String average_time, String type, float benefit, int onnventory) {
+    public Notebook(int id, String average_time, String type, float benefit) {
         this.id = id;
         this.average_time = average_time;
         this.type = type;
         this.benefit = benefit;
-        this.onInventory = onInventory;
-    }
-
-    public int getOnInventory() {
-        return onInventory;
-    }
-
-    public void setOnInventory(int onInventory) {
-        this.onInventory = onInventory;
     }
 
     public int getId() {
