@@ -620,4 +620,44 @@ public class DatabaseManager {
         return false;
     }
 
+    public static boolean addNotebookToDatabase(Notebook currentNotebook) {
+       try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+            Statement statement = connection.createStatement();
+            int rowsaffected = statement.executeUpdate("INSERT INTO Notebook(average_time,type,benefit) VALUES ('" + currentNotebook.getAverage_time() + "' , '" + currentNotebook.getType() + "' , " + currentNotebook.getBenefit() +") ;");
+            return rowsaffected > 0;
+        } catch (SQLException e) {
+            System.out.println(e.getSQLState()); //Must be a JPopup or something
+        }
+        return false;
+    }
+
+    public static boolean editNotebookInDatabase(Notebook currentNotebook) {
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+            Statement statement = connection.createStatement();
+            int rowsaffected = statement.executeUpdate(
+                    "UPDATE Notebook"
+                    + " SET average_time='"+currentNotebook.getAverage_time()+"',type='"+currentNotebook.getType()+"',benefit="+currentNotebook.getBenefit()
+                    + " WHERE idNotebook="+Integer.toString(currentNotebook.getId())+";");
+            return rowsaffected > 0;
+        } catch (SQLException e) {
+            System.out.println(e.getSQLState() + "," + e.getLocalizedMessage()); //Must be a JPopup or something
+
+        }
+        return false;
+    }
+
+    public static boolean deleteNotebookInDatabase(Notebook currentNotebook) {
+         try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+            Statement statement = connection.createStatement();
+            int rowsaffected = statement.executeUpdate("DELETE FROM Notebook WHERE idNotebook=" + Integer.toString(currentNotebook.getId()) + ";");
+            return rowsaffected > 0;
+        } catch (SQLException e) {
+            System.out.println(e.getSQLState()); //Must be a JPopup or something
+        }
+        return false;
+    }
+
 }

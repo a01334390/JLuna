@@ -377,7 +377,10 @@ public class MainWindowForm extends javax.swing.JFrame {
     }//GEN-LAST:event_empleadosActionPerformed
 
     private void AvanzadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AvanzadoActionPerformed
-        // TODO add your handling code here:
+        dispose();
+        NotebookView nv = new NotebookView(session);
+        nv.setVisible(true);
+        
     }//GEN-LAST:event_AvanzadoActionPerformed
 
     private void clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clienteActionPerformed
