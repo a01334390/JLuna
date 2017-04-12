@@ -131,13 +131,13 @@ public class DatabaseManager {
         }
         return false;
     }
-    
-    private static String dateToString() {
+
+    public static String dateToString() {
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         java.util.Date date = new java.util.Date();
         return dateFormat.format(date);
     }
-    
+
     public static boolean deleteUserInDatabase(String usname) {
         try {
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
@@ -371,7 +371,7 @@ public class DatabaseManager {
         }
         return null;
     }
-    
+
     /**
      *
      * @param clientID
@@ -392,7 +392,7 @@ public class DatabaseManager {
         }
         return null;
     }
-    
+
     /**
      *
      * @param orderID
@@ -402,7 +402,7 @@ public class DatabaseManager {
         try {
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
             Statement statement = connection.createStatement();
-            ResultSet resultset = statement.executeQuery("SELECT * FROM Pola.Order WHERE idOrder= "+orderID +";");
+            ResultSet resultset = statement.executeQuery("SELECT * FROM Pola.Order WHERE idOrder= " + orderID + ";");
             while (resultset.next()) {
                 return new Order(resultset.getInt("idOrder"), resultset.getDate("date").toString(), resultset.getString("priority"), resultset.getDate("create_time").toString(), resultset.getInt("client_id"));
             }
@@ -411,7 +411,7 @@ public class DatabaseManager {
         }
         return null;
     }
-    
+
     /**
      *
      * @param id
@@ -432,7 +432,7 @@ public class DatabaseManager {
         }
         return null;
     }
-    
+
     /**
      *
      * @param idNotebook
@@ -446,7 +446,7 @@ public class DatabaseManager {
             ResultSet resultset = statement.executeQuery("SELECT Notebook.type,Customization.ribbon,Customization.elastic,Customization.pageType,Customization.image "
                     + "FROM ((Notebook_Order INNER JOIN Notebook ON Notebook_Order.id_Notebook = Notebook.idNotebook) "
                     + "INNER JOIN Customization ON Notebook_Order.id_Customization = Customization.idCustomization) "
-                    + "WHERE id_Order = "+idOrder+" AND id_Notebook = "+Integer.parseInt(idNotebook)+"");
+                    + "WHERE id_Order = " + idOrder + " AND id_Notebook = " + Integer.parseInt(idNotebook) + "");
             while (resultset.next()) {
                 return new AVOrderNotebook(resultset.getString("type"), resultset.getString("ribbon"), resultset.getString("elastic"), resultset.getString("pageType"), resultset.getString("image"));
             }
@@ -455,5 +455,139 @@ public class DatabaseManager {
         }
         return null;
     }
-    
+
+    /**
+     *
+     * @param orderid
+     * @return
+     */
+    public static boolean deleteOrder(int orderid) {
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+            Statement statement = connection.createStatement();
+            int rowsaffected = statement.executeUpdate("DELETE FROM Pola.Order WHERE idOrder='" + Integer.toString(orderid) + "';");
+            return rowsaffected > 0;
+        } catch (SQLException e) {
+            System.out.println(e.getSQLState()); //Must be a JPopup or something
+        }
+        return false;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public static Notebook[] getAllNotebooks() {
+        ArrayList<Notebook> array = new ArrayList<>();
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+            Statement statement = connection.createStatement();
+            ResultSet resultset = statement.executeQuery("SELECT * FROM Notebook;");
+            while (resultset.next()) {
+                array.add(new Notebook(resultset.getInt("idNotebook"), resultset.getTime("average_time").toString(), resultset.getString("type"), resultset.getFloat("benefit"), resultset.getInt("onInventory")));
+            }
+            return array.toArray(new Notebook[array.size()]);
+        } catch (SQLException e) {
+            System.out.println(e.getSQLState()); //Must be a JPopup or something
+        }
+        return null;
+    }
+
+    /**
+     *
+     * @param ntype
+     * @return
+     */
+    public static Notebook searchNotebookByType(String ntype) {
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+            Statement statement = connection.createStatement();
+            ResultSet resultset = statement.executeQuery("SELECT * FROM Notebook WHERE type='" + ntype + "';");
+            while (resultset.next()) {
+                return new Notebook(resultset.getInt("idNotebook"), resultset.getTime("average_time").toString(), resultset.getString("type"), resultset.getFloat("benefit"), resultset.getInt("onInventory"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getSQLState()); //Must be a JPopup or something
+        }
+        return null;
+    }
+
+    /**
+     *
+     * @param ord
+     */
+    public static void addOrderToDatabase(Order ord) {
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+            Statement statement = connection.createStatement();
+            int rowsaffected = statement.executeUpdate("INSERT Pola.Order (date,priority,create_time,client_id) VALUES ('" + ord.getDate() + "' , '" + ord.getPriority() + "' , '" + dateToString() + "'," + ord.getClient_id() + ") ;");
+        } catch (SQLException e) {
+            System.out.println(e.getSQLState()); //Must be a JPopup or something
+        }
+    }
+
+    /**
+     *
+     * @return
+     */
+    public static int getLastOrderGenerated() {
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+            Statement statement = connection.createStatement();
+            ResultSet resultset = statement.executeQuery("SELECT MAX(idOrder) FROM Pola.Order;");
+            while (resultset.next()) {
+                return resultset.getInt("MAX(idOrder)");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getSQLState()); //Must be a JPopup or something
+        }
+        return -1;
+    }
+
+    /**
+     *
+     * @param cust
+     */
+    public static void addCustomizationInDatabase(Customization cust) {
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+            Statement statement = connection.createStatement();
+            int rowsaffected = statement.executeUpdate("INSERT Customization (ribbon,image,elastic,pageType) VALUES ('" + cust.getRibbon() + "' , '" + cust.getImage() + "' , '" + cust.getImage() + "','" + cust.getPagetype() + "') ;");
+        } catch (SQLException e) {
+            System.out.println(e.getSQLState()); //Must be a JPopup or something
+        }
+    }
+
+    /**
+     *
+     * @return
+     */
+    public static int getLastCustomizationGenerated() {
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+            Statement statement = connection.createStatement();
+            ResultSet resultset = statement.executeQuery("SELECT MAX(idCustomization) FROM Customization;");
+            while (resultset.next()) {
+                return resultset.getInt("MAX(idCustomization)");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getSQLState()); //Must be a JPopup or something
+        }
+        return -1;
+    }
+
+    /**
+     *
+     * @param nbo
+     */
+    public static void addOrderNotebookToDatabase(OrderNotebooks nbo) {
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+            Statement statement = connection.createStatement();
+            int rowsaffected = statement.executeUpdate("INSERT Notebook_Order (id_Notebook,id_Order,quantity,status,id_Customization) VALUES (" + nbo.getId_Notebook() + " , " + nbo.getId_Order() + " , " + nbo.getQuantity() + ",'" + nbo.getStatus() + "'," + nbo.getId_Customization() + ") ;");
+        } catch (SQLException e) {
+            System.out.println(e.getSQLState()); //Must be a JPopup or something
+        }
+    }
+
 }

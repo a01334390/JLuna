@@ -67,11 +67,11 @@ public class PedidosView extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         orderID = new javax.swing.JTextField();
         quantity = new javax.swing.JTextField();
-        status = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
         orderEdit = new javax.swing.JButton();
         orderDelete = new javax.swing.JButton();
         orderAdd = new javax.swing.JButton();
+        status = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         type = new javax.swing.JTextField();
@@ -81,16 +81,15 @@ public class PedidosView extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         pagetype = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
-        jPanel6 = new javax.swing.JPanel();
-        notebookAdd = new javax.swing.JButton();
-        notebookDelete = new javax.swing.JButton();
-        notebookModify = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         elastic = new javax.swing.JComboBox<>();
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Pedidos");
+        setAlwaysOnTop(true);
+        setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Busqueda de Cliente"));
 
@@ -183,11 +182,6 @@ public class PedidosView extends javax.swing.JFrame {
 
         jLabel5.setText("Status:");
 
-        NotebookList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         NotebookList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 NotebookListValueChanged(evt);
@@ -217,6 +211,11 @@ public class PedidosView extends javax.swing.JFrame {
             orderDelete.setEnabled(false);
         }
         orderDelete.setText("Eliminar");
+        orderDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                orderDeleteActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -236,6 +235,13 @@ public class PedidosView extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(24, 31, 18, 12);
         jPanel5.add(orderAdd, gridBagConstraints);
+
+        status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Diseño", "Preview", "Laminado", "Revision", "Prensa", "Embalaje", "Envio", "Entrega" }));
+        status.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                statusActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -269,8 +275,8 @@ public class PedidosView extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(quantity)
-                                            .addComponent(status))))))
-                        .addContainerGap())))
+                                            .addComponent(status, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addContainerGap())))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -311,7 +317,12 @@ public class PedidosView extends javax.swing.JFrame {
 
         jLabel10.setText("Imagen");
 
-        pagetype.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Plano", "Rayado" }));
+        pagetype.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Plano", "Rayado", "Agenda" }));
+        pagetype.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pagetypeActionPerformed(evt);
+            }
+        });
 
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -326,53 +337,6 @@ public class PedidosView extends javax.swing.JFrame {
             .addGap(0, 188, Short.MAX_VALUE)
         );
 
-        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Funciones de Cuaderno"));
-        jPanel6.setLayout(new java.awt.GridBagLayout());
-
-        if(session.getPrivilege().equals("admin") || session.getPrivilege().equals("manager")){
-            notebookAdd.setEnabled(true);
-        }else{
-            notebookAdd.setEnabled(false);
-        }
-        notebookAdd.setText("Añadir");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipadx = 18;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(50, 37, 0, 37);
-        jPanel6.add(notebookAdd, gridBagConstraints);
-
-        if(!session.getPrivilege().equals("admin")){
-            notebookDelete.setEnabled(false);
-        }
-        notebookDelete.setText("Eliminar");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.ipadx = 8;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 37, 0, 37);
-        jPanel6.add(notebookDelete, gridBagConstraints);
-
-        if(session.getPrivilege().equals("admin") || session.getPrivilege().equals("manager")){
-            notebookModify.setEnabled(true);
-        }else{
-            notebookModify.setEnabled(false);
-        }
-        notebookModify.setText("Modificar");
-        notebookModify.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                notebookModifyActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 37, 55, 37);
-        jPanel6.add(notebookModify, gridBagConstraints);
-
         jLabel11.setText("Elastico");
 
         elastic.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Si", "No" }));
@@ -383,7 +347,7 @@ public class PedidosView extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ribbon, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ribbon, 0, 195, Short.MAX_VALUE)
                     .addComponent(pagetype, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -393,7 +357,6 @@ public class PedidosView extends javax.swing.JFrame {
                             .addComponent(jLabel7)
                             .addComponent(jLabel8)
                             .addComponent(jLabel9)
-                            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jLabel11)
                                 .addComponent(jLabel10))))
@@ -423,9 +386,7 @@ public class PedidosView extends javax.swing.JFrame {
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(178, 178, 178))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -454,10 +415,6 @@ public class PedidosView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void notebookModifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_notebookModifyActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_notebookModifyActionPerformed
 
     private void clientIDSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientIDSearchActionPerformed
         String id = clientIDSearch.getText();
@@ -529,6 +486,9 @@ public class PedidosView extends javax.swing.JFrame {
             case "LINED":
                 pagetype.setSelectedIndex(1);
                 break;
+            case "AGENDA":
+                pagetype.setSelectedIndex(2);
+                break;
         }
 
         if (currentAV.getElastic().equals("Y")) {
@@ -537,6 +497,24 @@ public class PedidosView extends javax.swing.JFrame {
             elastic.setSelectedIndex(1);
         }
     }//GEN-LAST:event_NotebookListValueChanged
+
+    private void orderDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderDeleteActionPerformed
+        int orderid = currentOrder.getId();
+        if (DatabaseManager.deleteOrder(orderid)) {
+            JOptionPane.showMessageDialog(null, "El pedido se borro correctamente", "Orden del Cliente", JOptionPane.INFORMATION_MESSAGE);
+            updateListView();
+        } else {
+            JOptionPane.showMessageDialog(null, "El pedido no se pudo borrar", "Orden del Cliente", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_orderDeleteActionPerformed
+
+    private void statusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statusActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_statusActionPerformed
+
+    private void pagetypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pagetypeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pagetypeActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -564,13 +542,9 @@ public class PedidosView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JButton notebookAdd;
-    private javax.swing.JButton notebookDelete;
-    private javax.swing.JButton notebookModify;
     private javax.swing.JButton orderAdd;
     private javax.swing.JButton orderDelete;
     private javax.swing.JButton orderEdit;
@@ -578,7 +552,7 @@ public class PedidosView extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> pagetype;
     private javax.swing.JTextField quantity;
     private javax.swing.JComboBox<String> ribbon;
-    private javax.swing.JTextField status;
+    private javax.swing.JComboBox<String> status;
     private javax.swing.JTextField type;
     // End of variables declaration//GEN-END:variables
 
@@ -607,9 +581,35 @@ public class PedidosView extends javax.swing.JFrame {
                 return currentON[i].toString();
             }
         });
-        orderID.setText(Integer.toString(currentON[0].getId_Order()));
-        quantity.setText(Integer.toString(currentON[0].getQuantity()));
-        status.setText(currentON[0].getStatus());
+        int idorder = OrderList.getSelectedIndex();
+        orderID.setText(Integer.toString(currentON[idorder].getId_Order()));
+        quantity.setText(Integer.toString(currentON[idorder].getQuantity()));
+        switch (currentON[idorder].getStatus()) {
+            case "Diseño":
+                status.setSelectedIndex(0);
+                break;
+            case "Preview":
+                status.setSelectedIndex(1);
+                break;
+            case "Laminado":
+                status.setSelectedIndex(2);
+                break;
+            case "Revision":
+                status.setSelectedIndex(3);
+                break;
+            case "Prensa":
+                status.setSelectedIndex(4);
+                break;
+            case "Embalaje":
+                status.setSelectedIndex(5);
+                break;
+            case "Envio":
+                status.setSelectedIndex(6);
+                break;
+            case "Entrega":
+                status.setSelectedIndex(7);
+                break;
+        }
     }
 
 }

@@ -4,19 +4,13 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group name="AyDA">
             <file>file:/Users/a01334390/Documents/Git%20Projects/Luna/src/luna/databaseManager/DatabaseManager.java</file>
-            <file>file:/Users/a01334390/Documents/Git%20Projects/Luna/src/BasicElements/AdvancedViews/NotebookForm.java</file>
             <file>file:/Users/a01334390/Documents/Git%20Projects/Luna/src/BasicViews/MainWindowForm.java</file>
-            <file>file:/Users/a01334390/Documents/Git%20Projects/Luna/src/BasicElements/Cliente.java</file>
             <file>file:/Users/a01334390/Documents/Git%20Projects/Luna/src/BasicElements/User.java</file>
+            <file>file:/Users/a01334390/Documents/Git%20Projects/Luna/src/luna/LoginForm.java</file>
             <file>file:/Users/a01334390/Documents/Git%20Projects/Luna/src/BasicElements/Material.java</file>
+            <file>file:/Users/a01334390/Documents/Git%20Projects/Luna/src/BasicElements/Order.java</file>
             <file>file:/Users/a01334390/Documents/Git%20Projects/Luna/src/luna/Luna.java</file>
             <file>file:/Users/a01334390/Documents/Git%20Projects/Luna/src/BasicElements/AdvancedViews/PedidosView.java</file>
-            <file>file:/Users/a01334390/Documents/Git%20Projects/Luna/src/BasicElements/OrderNotebooks.java</file>
-            <file>file:/Users/a01334390/Documents/Git%20Projects/Luna/src/luna/LoginForm.java</file>
-            <file>file:/Users/a01334390/Documents/Git%20Projects/Luna/src/BasicElements/Order.java</file>
-            <file>file:/Users/a01334390/Documents/Git%20Projects/Luna/src/BasicViews/MaterialesForm.java</file>
-            <file>file:/Users/a01334390/Documents/Git%20Projects/Luna/src/BasicViews/ClientesForm.java</file>
-            <file>file:/Users/a01334390/Documents/Git%20Projects/Luna/src/BasicElements/Notebook.java</file>
         </group>
     </open-files>
 </project-private>
