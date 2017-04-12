@@ -278,6 +278,8 @@ public class ClientesForm extends javax.swing.JFrame {
                 isPhysical.setSelected(true);
             }
             status.setText("Editando...");
+        }else{
+             JOptionPane.showMessageDialog(null, "No se encontro al cliente con este criterio", "Cliente", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_nameSearchActionPerformed
 
@@ -334,6 +336,8 @@ public class ClientesForm extends javax.swing.JFrame {
                 isPhysical.setSelected(true);
             }
             status.setText("Editando...");
+        }else{
+             JOptionPane.showMessageDialog(null, "No se encontro al cliente con este criterio", "Cliente", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_searchListValueChanged
 

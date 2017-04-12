@@ -10,9 +10,7 @@
  */
 package luna.databaseManager;
 
-import BasicElements.Cliente;
-import BasicElements.Material;
-import BasicElements.User;
+import BasicElements.*;
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -133,13 +131,13 @@ public class DatabaseManager {
         }
         return false;
     }
-
+    
     private static String dateToString() {
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         java.util.Date date = new java.util.Date();
         return dateFormat.format(date);
     }
-
+    
     public static boolean deleteUserInDatabase(String usname) {
         try {
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
@@ -373,4 +371,89 @@ public class DatabaseManager {
         }
         return null;
     }
+    
+    /**
+     *
+     * @param clientID
+     * @return
+     */
+    public static Order[] getOrdersFromClient(int clientID) {
+        ArrayList<Order> array = new ArrayList<>();
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+            Statement statement = connection.createStatement();
+            ResultSet resultset = statement.executeQuery("SELECT * FROM Order WHERE client_id= '" + Integer.toString(clientID) + "';");
+            while (resultset.next()) {
+                array.add(new Order(resultset.getInt("idOrder"), resultset.getDate("date").toString(), resultset.getString("priority"), resultset.getDate("create_time").toString(), resultset.getInt("client_id")));
+            }
+            return array.toArray(new Order[array.size()]);
+        } catch (SQLException e) {
+            System.out.println(e.getSQLState()); //Must be a JPopup or something
+        }
+        return null;
+    }
+    
+    /**
+     *
+     * @param orderID
+     * @return
+     */
+    public static Order searchOrderByID(String orderID) {
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+            Statement statement = connection.createStatement();
+            ResultSet resultset = statement.executeQuery("SELECT * FROM Order WHERE idOrder= '" + orderID + "';");
+            while (resultset.next()) {
+                return new Order(resultset.getInt("idOrder"), resultset.getDate("date").toString(), resultset.getString("priority"), resultset.getDate("create_time").toString(), resultset.getInt("client_id"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getSQLState()); //Must be a JPopup or something
+        }
+        return null;
+    }
+    
+    /**
+     *
+     * @param id
+     * @return
+     */
+    public static OrderNotebooks[] getOrderNotebookBasicView(int id) {
+        ArrayList<OrderNotebooks> array = new ArrayList<>();
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+            Statement statement = connection.createStatement();
+            ResultSet resultset = statement.executeQuery("SELECT * FROM Notebook_Order WHERE id_Order= '" + Integer.toString(id) + "';");
+            while (resultset.next()) {
+                array.add(new OrderNotebooks(resultset.getInt("id_Notebook"), resultset.getInt("id_Order"), resultset.getInt("quantity"), resultset.getString("status"), resultset.getInt("id_Customization")));
+            }
+            return array.toArray(new OrderNotebooks[array.size()]);
+        } catch (SQLException e) {
+            System.out.println(e.getSQLState()); //Must be a JPopup or something
+        }
+        return null;
+    }
+    
+    /**
+     *
+     * @param idNotebook
+     * @param idOrder
+     * @return
+     */
+    public static AVOrderNotebook searchNotebookON(String idNotebook, int idOrder) {
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+            Statement statement = connection.createStatement();
+            ResultSet resultset = statement.executeQuery("SELECT Notebook.type,Customization.ribbon,Customization.elastic,Customization.pageType,Customization.image "
+                    + "FROM ((Notebook_Order INNER JOIN Notebook ON Notebook_Order.id_Notebook = Notebook.idNotebook) "
+                    + "INNER JOIN Customization ON Notebook_Order.id_Customization = Customization.idCustomization) "
+                    + "WHERE id_Order = "+idOrder+" AND id_Notebook = "+Integer.parseInt(idNotebook)+"");
+            while (resultset.next()) {
+                return new AVOrderNotebook(resultset.getString("type"), resultset.getString("ribbon"), resultset.getString("elastic"), resultset.getString("pageType"), resultset.getString("image"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getSQLState()); //Must be a JPopup or something
+        }
+        return null;
+    }
+    
 }
