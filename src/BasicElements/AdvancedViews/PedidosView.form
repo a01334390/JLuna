@@ -357,7 +357,7 @@
                 <Property name="text" type="java.lang.String" value="Editar"/>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="if(!session.getPrivilege().equals(&quot;admin&quot;) || !session.getPrivilege().equals(&quot;manager&quot;)){&#xa;    orderEdit.setEnabled(false);&#xa;}"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="if(session.getPrivilege().equals(&quot;admin&quot;) || session.getPrivilege().equals(&quot;manager&quot;)){&#xa;    orderEdit.setEnabled(true);&#xa;}else{&#xa;    orderEdit.setEnabled(false);&#xa;}"/>
               </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -383,7 +383,7 @@
                 <Property name="text" type="java.lang.String" value="A&#xf1;adir"/>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="if(!session.getPrivilege().equals(&quot;admin&quot;) || !session.getPrivilege().equals(&quot;manager&quot;)){&#xa;    orderAdd.setEnabled(false);&#xa;}"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="if(session.getPrivilege().equals(&quot;admin&quot;) || session.getPrivilege().equals(&quot;manager&quot;)){&#xa;    orderAdd.setEnabled(true);&#xa;}else{&#xa;    orderAdd.setEnabled(false);&#xa;}"/>
               </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -550,7 +550,7 @@
                 <Property name="text" type="java.lang.String" value="A&#xf1;adir"/>
               </Properties>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="if(!session.getPrivilege().equals(&quot;admin&quot;) || !session.getPrivilege().equals(&quot;manager&quot;)){&#xa;    notebookAdd.setEnabled(false);&#xa;}"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="if(session.getPrivilege().equals(&quot;admin&quot;) || session.getPrivilege().equals(&quot;manager&quot;)){&#xa;    notebookAdd.setEnabled(true);&#xa;}else{&#xa;    notebookAdd.setEnabled(false);&#xa;}"/>
               </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -579,7 +579,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="notebookModifyActionPerformed"/>
               </Events>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="if(!session.getPrivilege().equals(&quot;admin&quot;) || !session.getPrivilege().equals(&quot;manager&quot;)){&#xa;    notebookModify.setEnabled(false);&#xa;}"/>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="if(session.getPrivilege().equals(&quot;admin&quot;) || session.getPrivilege().equals(&quot;manager&quot;)){&#xa;    notebookModify.setEnabled(true);&#xa;}else{&#xa;     notebookModify.setEnabled(false);&#xa;}"/>
               </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">

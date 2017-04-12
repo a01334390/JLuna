@@ -200,7 +200,9 @@ public class PedidosView extends javax.swing.JFrame {
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Funciones de Orden"));
         jPanel5.setLayout(new java.awt.GridBagLayout());
 
-        if(!session.getPrivilege().equals("admin") || !session.getPrivilege().equals("manager")){
+        if(session.getPrivilege().equals("admin") || session.getPrivilege().equals("manager")){
+            orderEdit.setEnabled(true);
+        }else{
             orderEdit.setEnabled(false);
         }
         orderEdit.setText("Editar");
@@ -222,7 +224,9 @@ public class PedidosView extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(24, 29, 18, 0);
         jPanel5.add(orderDelete, gridBagConstraints);
 
-        if(!session.getPrivilege().equals("admin") || !session.getPrivilege().equals("manager")){
+        if(session.getPrivilege().equals("admin") || session.getPrivilege().equals("manager")){
+            orderAdd.setEnabled(true);
+        }else{
             orderAdd.setEnabled(false);
         }
         orderAdd.setText("Añadir");
@@ -325,7 +329,9 @@ public class PedidosView extends javax.swing.JFrame {
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Funciones de Cuaderno"));
         jPanel6.setLayout(new java.awt.GridBagLayout());
 
-        if(!session.getPrivilege().equals("admin") || !session.getPrivilege().equals("manager")){
+        if(session.getPrivilege().equals("admin") || session.getPrivilege().equals("manager")){
+            notebookAdd.setEnabled(true);
+        }else{
             notebookAdd.setEnabled(false);
         }
         notebookAdd.setText("Añadir");
@@ -349,7 +355,9 @@ public class PedidosView extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(6, 37, 0, 37);
         jPanel6.add(notebookDelete, gridBagConstraints);
 
-        if(!session.getPrivilege().equals("admin") || !session.getPrivilege().equals("manager")){
+        if(session.getPrivilege().equals("admin") || session.getPrivilege().equals("manager")){
+            notebookModify.setEnabled(true);
+        }else{
             notebookModify.setEnabled(false);
         }
         notebookModify.setText("Modificar");
@@ -599,7 +607,6 @@ public class PedidosView extends javax.swing.JFrame {
                 return currentON[i].toString();
             }
         });
-        NotebookList.setSelectedIndex(0);
         orderID.setText(Integer.toString(currentON[0].getId_Order()));
         quantity.setText(Integer.toString(currentON[0].getQuantity()));
         status.setText(currentON[0].getStatus());
