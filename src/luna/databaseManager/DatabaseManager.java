@@ -21,7 +21,9 @@ import java.util.ArrayList;
  * @author a01334390
  */
 public class DatabaseManager {
-
+private static String host = "jdbc:mysql://35.188.87.36/Pola";
+private static String huser = "superuser";
+private static String hpassword = "superuser123";
     /**
      * This method validates if the user exit, however, it does so without ever
      * touching the password
@@ -34,7 +36,7 @@ public class DatabaseManager {
         String pass = new String(password);
         int count = 0;
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+            Connection connection = DriverManager.getConnection(host,huser,hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT username FROM User WHERE username='" + username + "' AND password='" + pass + "'");
             //if there is no data on the data set, the session return will be false
@@ -60,7 +62,7 @@ public class DatabaseManager {
      */
     public static Session userSessionCreation(String username) {
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+            Connection connection = DriverManager.getConnection(host,huser,hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT * FROM User WHERE username='" + username + "';");
             while (resultset.next()) {
@@ -80,7 +82,7 @@ public class DatabaseManager {
      */
     public static User searchUsername(String username) {
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+            Connection connection = DriverManager.getConnection(host,huser,hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT * FROM User WHERE username='" + username + "';");
             while (resultset.next()) {
@@ -100,7 +102,7 @@ public class DatabaseManager {
      */
     public static boolean addUserToDatabase(User user) {
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+           Connection connection = DriverManager.getConnection(host,huser,hpassword);
             Statement statement = connection.createStatement();
             int rowsaffected = statement.executeUpdate("INSERT INTO User VALUES ('" + user.getUsername() + "' , '" + user.getEmail() + "' , '" + user.getPassword() + "' , '" + user.getPrivilege() + "' , '" + user.getFirst_name() + "' , '" + user.getSecond_name() + "' , '" + user.getImage() + "' , '" + dateToString() + "') ;");
             return rowsaffected > 0;
@@ -118,7 +120,7 @@ public class DatabaseManager {
      */
     public static boolean editUserInDatase(User user) {
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+            Connection connection = DriverManager.getConnection(host,huser,hpassword);
             Statement statement = connection.createStatement();
             int rowsaffected = statement.executeUpdate(
                     "UPDATE User"
@@ -140,7 +142,7 @@ public class DatabaseManager {
 
     public static boolean deleteUserInDatabase(String usname) {
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+            Connection connection = DriverManager.getConnection(host,huser,hpassword);
             Statement statement = connection.createStatement();
             int rowsaffected = statement.executeUpdate("DELETE FROM User WHERE username='" + usname + "';");
             return rowsaffected > 0;
@@ -158,7 +160,7 @@ public class DatabaseManager {
     public static User[] getAllUsers() {
         ArrayList<User> array = new ArrayList<>();
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+            Connection connection = DriverManager.getConnection(host,huser,hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT * FROM User;");
             while (resultset.next()) {
@@ -179,7 +181,7 @@ public class DatabaseManager {
     public static Material[] getAllMaterials() {
         ArrayList<Material> array = new ArrayList<>();
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+            Connection connection = DriverManager.getConnection(host,huser,hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT * FROM Material;");
             while (resultset.next()) {
@@ -199,7 +201,7 @@ public class DatabaseManager {
      */
     public static boolean deleteMaterialInDatabase(String matname) {
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+            Connection connection = DriverManager.getConnection(host,huser,hpassword);
             Statement statement = connection.createStatement();
             int rowsaffected = statement.executeUpdate("DELETE FROM Material WHERE name='" + matname + "';");
             return rowsaffected > 0;
@@ -216,7 +218,7 @@ public class DatabaseManager {
      */
     public static boolean addMaterialToDatabase(Material mat) {
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+            Connection connection = DriverManager.getConnection(host,huser,hpassword);
             Statement statement = connection.createStatement();
             int rowsaffected = statement.executeUpdate("INSERT INTO Material(name,quantity,cost) VALUES ('" + mat.getName() + "' , '" + mat.getQuantity() + "' , '" + mat.getCost() + "') ;");
             return rowsaffected > 0;
@@ -233,7 +235,7 @@ public class DatabaseManager {
      */
     public static boolean editMaterialInDatabase(Material mat) {
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+            Connection connection = DriverManager.getConnection(host,huser,hpassword);
             Statement statement = connection.createStatement();
             int rowsaffected = statement.executeUpdate("UPDATE Material SET name='" + mat.getName() + "' , quantity='" + mat.getQuantity() + "' , cost='" + mat.getCost() + "' WHERE idMaterial=" + mat.getId() + " ;");
             return rowsaffected > 0;
@@ -250,7 +252,7 @@ public class DatabaseManager {
      */
     public static Material searchMaterial(String searname) {
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+            Connection connection = DriverManager.getConnection(host,huser,hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT * FROM Material WHERE name='" + searname + "';");
             while (resultset.next()) {
@@ -270,7 +272,7 @@ public class DatabaseManager {
      */
     public static boolean deleteClient(int id) {
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+            Connection connection = DriverManager.getConnection(host,huser,hpassword);
             Statement statement = connection.createStatement();
             int rowsaffected = statement.executeUpdate("DELETE FROM Client WHERE idClient='" + Integer.toString(id) + "';");
             return rowsaffected > 0;
@@ -287,7 +289,7 @@ public class DatabaseManager {
      */
     public static Cliente searchClientByID(String id) {
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+            Connection connection = DriverManager.getConnection(host,huser,hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT * FROM Client WHERE idClient='" + id + "';");
             while (resultset.next()) {
@@ -306,7 +308,7 @@ public class DatabaseManager {
      */
     public static Cliente searchClientByName(String name) {
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+            Connection connection = DriverManager.getConnection(host,huser,hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT * FROM Client WHERE first_name='" + name + "' OR second_name='" + name + "';");
             while (resultset.next()) {
@@ -325,7 +327,7 @@ public class DatabaseManager {
      */
     public static boolean addClientToDatabase(Cliente cli) {
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+            Connection connection = DriverManager.getConnection(host,huser,hpassword);
             Statement statement = connection.createStatement();
             int rowsaffected = statement.executeUpdate("INSERT INTO Client(first_name,second_name,address,isPhysical) VALUES ('" + cli.getFirst_name() + "' , '" + cli.getSecond_name() + "' , '" + cli.getAddress() + "','" + cli.getIsPhysical() + "') ;");
             return rowsaffected > 0;
@@ -342,7 +344,7 @@ public class DatabaseManager {
      */
     public static boolean editClientInDatabase(Cliente cli) {
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+            Connection connection = DriverManager.getConnection(host,huser,hpassword);
             Statement statement = connection.createStatement();
             int rowsaffected = statement.executeUpdate("UPDATE Client SET first_name='" + cli.getFirst_name() + "' , second_name='" + cli.getSecond_name() + "' , address='" + cli.getAddress() + "',isPhysical='" + cli.getIsPhysical() + "' WHERE idClient=" + cli.getId() + " ;");
             return rowsaffected > 0;
@@ -359,7 +361,7 @@ public class DatabaseManager {
     public static Cliente[] getAllClients() {
         ArrayList<Cliente> array = new ArrayList<>();
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+            Connection connection = DriverManager.getConnection(host,huser,hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT * FROM Client;");
             while (resultset.next()) {
@@ -380,7 +382,7 @@ public class DatabaseManager {
     public static Order[] getOrdersFromClient(int clientID) {
         ArrayList<Order> array = new ArrayList<>();
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+            Connection connection = DriverManager.getConnection(host,huser,hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT * FROM Pola.Order WHERE client_id= " + Integer.toString(clientID) + ";");
             while (resultset.next()) {
@@ -400,7 +402,7 @@ public class DatabaseManager {
      */
     public static Order searchOrderByID(String orderID) {
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+            Connection connection = DriverManager.getConnection(host,huser,hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT * FROM Pola.Order WHERE idOrder= " + orderID + ";");
             while (resultset.next()) {
@@ -420,7 +422,7 @@ public class DatabaseManager {
     public static OrderNotebooks[] getOrderNotebookBasicView(int id) {
         ArrayList<OrderNotebooks> array = new ArrayList<>();
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+            Connection connection = DriverManager.getConnection(host,huser,hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT * FROM Notebook_Order WHERE id_Order= '" + Integer.toString(id) + "';");
             while (resultset.next()) {
@@ -441,7 +443,7 @@ public class DatabaseManager {
      */
     public static AVOrderNotebook searchNotebookON(String idNotebook, int idOrder) {
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+           Connection connection = DriverManager.getConnection(host,huser,hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT Notebook.type,Customization.ribbon,Customization.elastic,Customization.pageType,Customization.image "
                     + "FROM ((Notebook_Order INNER JOIN Notebook ON Notebook_Order.id_Notebook = Notebook.idNotebook) "
@@ -463,7 +465,7 @@ public class DatabaseManager {
      */
     public static boolean deleteOrder(int orderid) {
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+            Connection connection = DriverManager.getConnection(host,huser,hpassword);
             Statement statement = connection.createStatement();
             int rowsaffected = statement.executeUpdate("DELETE FROM Pola.Order WHERE idOrder=" + Integer.toString(orderid) + ";");
             return rowsaffected > 0;
@@ -480,7 +482,7 @@ public class DatabaseManager {
     public static Notebook[] getAllNotebooks() {
         ArrayList<Notebook> array = new ArrayList<>();
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+            Connection connection = DriverManager.getConnection(host,huser,hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT * FROM Notebook;");
             while (resultset.next()) {
@@ -500,7 +502,7 @@ public class DatabaseManager {
      */
     public static Notebook searchNotebookByType(String ntype) {
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+            Connection connection = DriverManager.getConnection(host,huser,hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT * FROM Notebook WHERE type='" + ntype + "';");
             while (resultset.next()) {
@@ -518,7 +520,7 @@ public class DatabaseManager {
      */
     public static void addOrderToDatabase(Order ord) {
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+            Connection connection = DriverManager.getConnection(host,huser,hpassword);
             Statement statement = connection.createStatement();
             int rowsaffected = statement.executeUpdate("INSERT INTO Pola.Order(date,priority,create_time,client_id) VALUES ('" + ord.getDate() + "' , '" + ord.getPriority() + "' , '" + dateToString() + "'," + ord.getClient_id() + ") ;");
         } catch (SQLException e) {
@@ -532,7 +534,7 @@ public class DatabaseManager {
      */
     public static int getLastOrderGenerated() {
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+            Connection connection = DriverManager.getConnection(host,huser,hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT MAX(idOrder) FROM Pola.Order;");
             while (resultset.next()) {
@@ -550,7 +552,7 @@ public class DatabaseManager {
      */
     public static void addCustomizationInDatabase(Customization cust) {
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+            Connection connection = DriverManager.getConnection(host,huser,hpassword);
             Statement statement = connection.createStatement();
             int rowsaffected = statement.executeUpdate("INSERT INTO Customization(ribbon,image,elastic,pageType) VALUES ('" + cust.getRibbon() + "' , '" + cust.getImage() + "' , '" + cust.getElastic() + "','" + cust.getPagetype() + "') ;");
         } catch (SQLException e) {
@@ -564,7 +566,7 @@ public class DatabaseManager {
      */
     public static int getLastCustomizationGenerated() {
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+            Connection connection = DriverManager.getConnection(host,huser,hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT MAX(idCustomization) FROM Customization;");
             while (resultset.next()) {
@@ -582,7 +584,7 @@ public class DatabaseManager {
      */
     public static void addOrderNotebookToDatabase(OrderNotebooks nbo) {
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+           Connection connection = DriverManager.getConnection(host,huser,hpassword);
             Statement statement = connection.createStatement();
             int rowsaffected = statement.executeUpdate("INSERT INTO Notebook_Order (id_Notebook,id_Order,quantity,status,id_Customization) VALUES (" + nbo.getId_Notebook() + " , " + nbo.getId_Order() + " , " + nbo.getQuantity() + ",'" + nbo.getStatus() + "'," + nbo.getId_Customization() + ") ;");
         } catch (SQLException e) {
@@ -592,7 +594,7 @@ public class DatabaseManager {
 
     public static Inventory getInventoryByNotebookID(int id) {
          try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+            Connection connection = DriverManager.getConnection(host,huser,hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT * FROM Inventory WHERE id_Notebook="+Integer.toString(id)+";");
             while (resultset.next()) {
@@ -606,7 +608,7 @@ public class DatabaseManager {
 
     public static boolean editInventoryInDatabase(int idNotebook, int ammounty) {
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+            Connection connection = DriverManager.getConnection(host,huser,hpassword);
             Statement statement = connection.createStatement();
             int rowsaffected = statement.executeUpdate(
                     "UPDATE Inventory"
@@ -622,7 +624,7 @@ public class DatabaseManager {
 
     public static boolean addNotebookToDatabase(Notebook currentNotebook) {
        try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+            Connection connection = DriverManager.getConnection(host,huser,hpassword);
             Statement statement = connection.createStatement();
             int rowsaffected = statement.executeUpdate("INSERT INTO Notebook(average_time,type,benefit) VALUES ('" + currentNotebook.getAverage_time() + "' , '" + currentNotebook.getType() + "' , " + currentNotebook.getBenefit() +") ;");
             return rowsaffected > 0;
@@ -634,7 +636,7 @@ public class DatabaseManager {
 
     public static boolean editNotebookInDatabase(Notebook currentNotebook) {
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+            Connection connection = DriverManager.getConnection(host,huser,hpassword);
             Statement statement = connection.createStatement();
             int rowsaffected = statement.executeUpdate(
                     "UPDATE Notebook"
@@ -650,7 +652,7 @@ public class DatabaseManager {
 
     public static boolean deleteNotebookInDatabase(Notebook currentNotebook) {
          try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+            Connection connection = DriverManager.getConnection(host,huser,hpassword);
             Statement statement = connection.createStatement();
             int rowsaffected = statement.executeUpdate("DELETE FROM Notebook WHERE idNotebook=" + Integer.toString(currentNotebook.getId()) + ";");
             return rowsaffected > 0;
