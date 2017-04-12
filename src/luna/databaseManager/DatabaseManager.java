@@ -382,7 +382,7 @@ public class DatabaseManager {
         try {
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
             Statement statement = connection.createStatement();
-            ResultSet resultset = statement.executeQuery("SELECT * FROM Order WHERE client_id= '" + Integer.toString(clientID) + "';");
+            ResultSet resultset = statement.executeQuery("SELECT * FROM Pola.Order WHERE client_id= " + Integer.toString(clientID) + ";");
             while (resultset.next()) {
                 array.add(new Order(resultset.getInt("idOrder"), resultset.getDate("date").toString(), resultset.getString("priority"), resultset.getDate("create_time").toString(), resultset.getInt("client_id")));
             }
@@ -402,7 +402,7 @@ public class DatabaseManager {
         try {
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
             Statement statement = connection.createStatement();
-            ResultSet resultset = statement.executeQuery("SELECT * FROM Order WHERE idOrder= '" + orderID + "';");
+            ResultSet resultset = statement.executeQuery("SELECT * FROM Pola.Order WHERE idOrder= "+orderID +";");
             while (resultset.next()) {
                 return new Order(resultset.getInt("idOrder"), resultset.getDate("date").toString(), resultset.getString("priority"), resultset.getDate("create_time").toString(), resultset.getInt("client_id"));
             }

@@ -25,6 +25,7 @@ public class PedidosView extends javax.swing.JFrame {
     private Order currentOrder;
     private OrderNotebooks[] currentON;
     private AVOrderNotebook currentAV;
+    private Order orderList[] = new Order[0];
 
     /**
      * Creates new form PedidosForm
@@ -84,6 +85,8 @@ public class PedidosView extends javax.swing.JFrame {
         notebookAdd = new javax.swing.JButton();
         notebookDelete = new javax.swing.JButton();
         notebookModify = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        elastic = new javax.swing.JComboBox<>();
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -164,9 +167,8 @@ public class PedidosView extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Pedidos del Cliente"));
 
         OrderList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = {"No hay pedidos"};
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+            public int getSize() { return orderList.length; }
+            public String getElementAt(int i) { return orderList[i].toString(); }
         });
         OrderList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
@@ -363,6 +365,10 @@ public class PedidosView extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(6, 37, 55, 37);
         jPanel6.add(notebookModify, gridBagConstraints);
 
+        jLabel11.setText("Elastico");
+
+        elastic.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Si", "No" }));
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -379,8 +385,11 @@ public class PedidosView extends javax.swing.JFrame {
                             .addComponent(jLabel7)
                             .addComponent(jLabel8)
                             .addComponent(jLabel9)
-                            .addComponent(jLabel10)
-                            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel11)
+                                .addComponent(jLabel10))))
+                    .addComponent(elastic, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -399,11 +408,15 @@ public class PedidosView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pagetype, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(elastic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -459,7 +472,8 @@ public class PedidosView extends javax.swing.JFrame {
     }//GEN-LAST:event_clientNameSearchActionPerformed
 
     private void clientListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_clientListValueChanged
-        String name = clientList.getSelectedValue();
+        String[] sname = clientList.getSelectedValue().split(",");
+        String name = sname[1];
         currentClient = DatabaseManager.searchClientByName(name);
         if (currentClient != null) {
             updateListView();
@@ -469,20 +483,51 @@ public class PedidosView extends javax.swing.JFrame {
     }//GEN-LAST:event_clientListValueChanged
 
     private void OrderListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_OrderListValueChanged
-       String orderid = OrderList.getSelectedValue();
-       currentOrder = DatabaseManager.searchOrderByID(orderid);
-       if(currentOrder!=null){
-           orderID.setText(Integer.toString(currentOrder.getId()));
-           currentON = DatabaseManager.getOrderNotebookBasicView(currentOrder.getId());
-           updateONView();
-       }else{
-           JOptionPane.showMessageDialog(null, "No hay ordenes para este cliente", "Orden del Cliente", JOptionPane.WARNING_MESSAGE);
-       }
+        String orderid = OrderList.getSelectedValue();
+        currentOrder = DatabaseManager.searchOrderByID(orderid);
+        if (currentOrder != null) {
+            orderID.setText(Integer.toString(currentOrder.getId()));
+            currentON = DatabaseManager.getOrderNotebookBasicView(currentOrder.getId());
+            updateONView();
+        } else {
+            JOptionPane.showMessageDialog(null, "No hay ordenes para este cliente", "Orden del Cliente", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_OrderListValueChanged
 
     private void NotebookListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_NotebookListValueChanged
-       String idNotebook = NotebookList.getSelectedValue();
-       currentAV = DatabaseManager.searchNotebookON(idNotebook,currentOrder.getId());
+        String idNotebook = NotebookList.getSelectedValue();
+        currentAV = DatabaseManager.searchNotebookON(idNotebook, currentOrder.getId());
+        type.setText(currentAV.getType());
+
+        switch (currentAV.getRibbon()) {
+            case "B":
+                ribbon.setSelectedIndex(0);
+                break;
+            case "W":
+                ribbon.setSelectedIndex(1);
+                break;
+            case "NONE":
+                ribbon.setSelectedIndex(2);
+                break;
+            default:
+                ribbon.setSelectedIndex(0);
+                break;
+        }
+
+        switch (currentAV.getPageType()) {
+            case "PLAIN":
+                pagetype.setSelectedIndex(0);
+                break;
+            case "LINED":
+                pagetype.setSelectedIndex(1);
+                break;
+        }
+
+        if (currentAV.getElastic().equals("Y")) {
+            elastic.setSelectedIndex(0);
+        } else {
+            elastic.setSelectedIndex(1);
+        }
     }//GEN-LAST:event_NotebookListValueChanged
 
 
@@ -493,9 +538,11 @@ public class PedidosView extends javax.swing.JFrame {
     private javax.swing.JTextField clientIDSearch;
     private javax.swing.JList<String> clientList;
     private javax.swing.JTextField clientNameSearch;
+    private javax.swing.JComboBox<String> elastic;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -529,16 +576,29 @@ public class PedidosView extends javax.swing.JFrame {
 
     private void updateListView() {
         int clientID = currentClient.getId();
-        Order[] orderList = DatabaseManager.getOrdersFromClient(clientID);
-        for (Order orderList1 : orderList) {
-            ((DefaultListModel) OrderList.getModel()).addElement(orderList1);
-        }
+        orderList = DatabaseManager.getOrdersFromClient(clientID);
+        OrderList.setModel(new javax.swing.AbstractListModel<String>() {
+            public int getSize() {
+                return orderList.length;
+            }
+
+            public String getElementAt(int i) {
+                return orderList[i].toString();
+            }
+        });
+        OrderList.repaint();
     }
 
     private void updateONView() {
-        for (OrderNotebooks currentON1 : currentON) {
-            ((DefaultListModel) NotebookList.getModel()).addElement(currentON1.toString());
-        }
+        NotebookList.setModel(new javax.swing.AbstractListModel<String>() {
+            public int getSize() {
+                return currentON.length;
+            }
+
+            public String getElementAt(int i) {
+                return currentON[i].toString();
+            }
+        });
         NotebookList.setSelectedIndex(0);
         orderID.setText(Integer.toString(currentON[0].getId_Order()));
         quantity.setText(Integer.toString(currentON[0].getQuantity()));

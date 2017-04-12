@@ -10,6 +10,7 @@
  */
 package BasicViews;
 
+import BasicElements.AdvancedViews.PedidosView;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -329,7 +330,8 @@ public class MainWindowForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void pedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pedidoActionPerformed
-        // TODO add your handling code here:
+        PedidosView pv = new PedidosView(session);
+        pv.setVisible(true);
     }//GEN-LAST:event_pedidoActionPerformed
 
     private void inventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inventarioActionPerformed
