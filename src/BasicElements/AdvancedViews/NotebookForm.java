@@ -11,8 +11,6 @@
 package BasicElements.AdvancedViews;
 
 import BasicElements.*;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.*;
 import javax.swing.JOptionPane;
 import luna.databaseManager.*;

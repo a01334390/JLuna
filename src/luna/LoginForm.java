@@ -11,6 +11,7 @@
 package luna;
 
 import BasicViews.MainWindowForm;
+import javax.swing.JOptionPane;
 import luna.databaseManager.DatabaseManager;
 import luna.databaseManager.Session;
 
@@ -122,10 +123,12 @@ public class LoginForm extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelActionPerformed
 
     private void inputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputActionPerformed
+        dispose();
         Login();
     }//GEN-LAST:event_inputActionPerformed
 
     private void passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordActionPerformed
+        dispose();
         Login();
     }//GEN-LAST:event_passwordActionPerformed
 
@@ -179,7 +182,7 @@ public class LoginForm extends javax.swing.JFrame {
             MainWindowForm mw = new MainWindowForm(session);
             mw.setVisible(true);
         }else{
-            System.out.println("no");
+             JOptionPane.showMessageDialog(null, "No se encontro un usuario con esa combinacion, intentelo de nuevo mas tarde", "Usuario", JOptionPane.WARNING_MESSAGE);
         }
     }
 }

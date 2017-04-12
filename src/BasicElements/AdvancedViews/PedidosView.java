@@ -11,7 +11,9 @@
 package BasicElements.AdvancedViews;
 
 import BasicElements.*;
+import BasicViews.MainWindowForm;
 import javax.swing.*;
+import luna.LoginForm;
 import luna.databaseManager.*;
 
 /**
@@ -35,6 +37,15 @@ public class PedidosView extends javax.swing.JFrame {
     public PedidosView(Session session) {
         this.session = session;
         initComponents();
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                
+                    MainWindowForm mwf = new MainWindowForm(session);
+                    mwf.setVisible(true);
+                
+            }
+        });
     }
 
     /**
@@ -86,7 +97,7 @@ public class PedidosView extends javax.swing.JFrame {
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Pedidos");
         setAlwaysOnTop(true);
         setResizable(false);
@@ -527,8 +538,8 @@ public class PedidosView extends javax.swing.JFrame {
     }//GEN-LAST:event_pagetypeActionPerformed
 
     private void orderAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderAddActionPerformed
-       NotebookForm nf = new NotebookForm(session,currentClient,currentOrder);
-       nf.setVisible(true);
+        NotebookForm nf = new NotebookForm(session, currentClient, currentOrder);
+        nf.setVisible(true);
     }//GEN-LAST:event_orderAddActionPerformed
 
     private void orderEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderEditActionPerformed

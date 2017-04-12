@@ -14,6 +14,8 @@ import BasicElements.AdvancedViews.PedidosView;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.JOptionPane;
+import luna.LoginForm;
 import luna.databaseManager.Session;
 
 /**
@@ -22,7 +24,7 @@ import luna.databaseManager.Session;
  */
 public class MainWindowForm extends javax.swing.JFrame {
 
-     Session session;
+    Session session;
 
     /**
      * Creates new form MainWindowForm
@@ -32,6 +34,18 @@ public class MainWindowForm extends javax.swing.JFrame {
     public MainWindowForm(Session session) {
         this.session = session;
         initComponents();
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                if (JOptionPane.showConfirmDialog(null,
+                        "Are you sure to close this window?", "Really Closing?",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+                    LoginForm lf = new LoginForm();
+                    lf.setVisible(true);
+                }
+            }
+        });
     }
 
     private String dateToString() {
@@ -77,9 +91,8 @@ public class MainWindowForm extends javax.swing.JFrame {
 
         jLabel1.setText("jLabel1");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Pagina de Gestion Basica");
-        setAlwaysOnTop(true);
         setResizable(false);
 
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -291,7 +304,13 @@ public class MainWindowForm extends javax.swing.JFrame {
 
         jMenu2.setText("Acciones");
 
+        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, 0));
         jMenuItem3.setText("Cerrar Sesion");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem3);
 
         jMenuBar1.add(jMenu2);
@@ -330,11 +349,13 @@ public class MainWindowForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void pedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pedidoActionPerformed
+        dispose();
         PedidosView pv = new PedidosView(session);
         pv.setVisible(true);
     }//GEN-LAST:event_pedidoActionPerformed
 
     private void inventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inventarioActionPerformed
+        dispose();
         InventoryView iv = new InventoryView(session);
         iv.setVisible(true);
     }//GEN-LAST:event_inventarioActionPerformed
@@ -344,11 +365,13 @@ public class MainWindowForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void materialesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_materialesActionPerformed
+        dispose();
         MaterialesForm mf = new MaterialesForm(session);
         mf.setVisible(true);
     }//GEN-LAST:event_materialesActionPerformed
 
     private void empleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_empleadosActionPerformed
+        dispose();
         UsuariosForm uf = new UsuariosForm(session);
         uf.setVisible(true);
     }//GEN-LAST:event_empleadosActionPerformed
@@ -358,14 +381,20 @@ public class MainWindowForm extends javax.swing.JFrame {
     }//GEN-LAST:event_AvanzadoActionPerformed
 
     private void clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clienteActionPerformed
+        dispose();
         ClientesForm cf = new ClientesForm(session);
         cf.setVisible(true);
     }//GEN-LAST:event_clienteActionPerformed
 
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+       dispose();
+       LoginForm lf = new LoginForm();
+       lf.setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Avanzado;

@@ -31,6 +31,15 @@ private Inventory currentInventory;
     public InventoryView(Session session) {
         this.session = session;
         initComponents();
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                
+                    MainWindowForm mwf = new MainWindowForm(session);
+                    mwf.setVisible(true);
+                
+            }
+        });
     }
 
     /**
@@ -55,7 +64,7 @@ private Inventory currentInventory;
         ammount = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Búsqueda"));
 
