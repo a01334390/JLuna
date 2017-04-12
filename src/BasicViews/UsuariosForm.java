@@ -8,7 +8,7 @@
  * Contributors:
  *    a01334390 - initial API and implementation and/or initial documentation
  */
-package luna;
+package BasicViews;
 
 import BasicElements.User;
 import javax.swing.JOptionPane;

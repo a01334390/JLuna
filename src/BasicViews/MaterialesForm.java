@@ -8,7 +8,7 @@
  * Contributors:
  *    a01334390 - initial API and implementation and/or initial documentation
  */
-package luna;
+package BasicViews;
 
 import BasicElements.Material;
 import javax.swing.JOptionPane;
@@ -224,6 +224,7 @@ public class MaterialesForm extends javax.swing.JFrame {
     private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
         isAdding = true;
         clearAllFields();
+        currentMaterial = new Material(1000,"",0,0);
         status.setText("Añadiendo...");
     }//GEN-LAST:event_addActionPerformed
 

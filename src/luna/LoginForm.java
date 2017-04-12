@@ -10,6 +10,7 @@
  */
 package luna;
 
+import BasicViews.MainWindowForm;
 import luna.databaseManager.DatabaseManager;
 import luna.databaseManager.Session;
 

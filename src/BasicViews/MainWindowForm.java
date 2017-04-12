@@ -8,7 +8,7 @@
  * Contributors:
  *    a01334390 - initial API and implementation and/or initial documentation
  */
-package luna;
+package BasicViews;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -355,7 +355,8 @@ public class MainWindowForm extends javax.swing.JFrame {
     }//GEN-LAST:event_AvanzadoActionPerformed
 
     private void clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clienteActionPerformed
-        // TODO add your handling code here:
+        ClientesForm cf = new ClientesForm(session);
+        cf.setVisible(true);
     }//GEN-LAST:event_clienteActionPerformed
 
     /**

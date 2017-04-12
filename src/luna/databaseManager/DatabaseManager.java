@@ -10,6 +10,7 @@
  */
 package luna.databaseManager;
 
+import BasicElements.Cliente;
 import BasicElements.Material;
 import BasicElements.User;
 import java.sql.*;
@@ -173,6 +174,10 @@ public class DatabaseManager {
     }
 
     //From this point on, all Queries are material based
+    /**
+     *
+     * @return
+     */
     public static Material[] getAllMaterials() {
         ArrayList<Material> array = new ArrayList<>();
         try {
@@ -189,6 +194,11 @@ public class DatabaseManager {
         return null;
     }
 
+    /**
+     *
+     * @param matname
+     * @return
+     */
     public static boolean deleteMaterialInDatabase(String matname) {
         try {
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
@@ -201,6 +211,11 @@ public class DatabaseManager {
         return false;
     }
 
+    /**
+     *
+     * @param mat
+     * @return
+     */
     public static boolean addMaterialToDatabase(Material mat) {
         try {
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
@@ -213,6 +228,11 @@ public class DatabaseManager {
         return false;
     }
 
+    /**
+     *
+     * @param mat
+     * @return
+     */
     public static boolean editMaterialInDatabase(Material mat) {
         try {
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
@@ -225,15 +245,129 @@ public class DatabaseManager {
         return false;
     }
 
+    /**
+     *
+     * @param searname
+     * @return
+     */
     public static Material searchMaterial(String searname) {
-       try {
+        try {
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
             Statement statement = connection.createStatement();
-            ResultSet resultset = statement.executeQuery("SELECT * FROM Material WHERE name='"+searname+"';");
+            ResultSet resultset = statement.executeQuery("SELECT * FROM Material WHERE name='" + searname + "';");
             while (resultset.next()) {
                 return new Material(resultset.getInt("idMaterial"), resultset.getString("name"), resultset.getInt("quantity"), resultset.getFloat("cost"));
             }
             return null;
+        } catch (SQLException e) {
+            System.out.println(e.getSQLState()); //Must be a JPopup or something
+        }
+        return null;
+    }
+
+    /**
+     *
+     * @param id
+     * @return
+     */
+    public static boolean deleteClient(int id) {
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+            Statement statement = connection.createStatement();
+            int rowsaffected = statement.executeUpdate("DELETE FROM Client WHERE idClient='" + Integer.toString(id) + "';");
+            return rowsaffected > 0;
+        } catch (SQLException e) {
+            System.out.println(e.getSQLState()); //Must be a JPopup or something
+        }
+        return false;
+    }
+
+    /**
+     *
+     * @param id
+     * @return
+     */
+    public static Cliente searchClientByID(String id) {
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+            Statement statement = connection.createStatement();
+            ResultSet resultset = statement.executeQuery("SELECT * FROM Client WHERE idClient='" + id + "';");
+            while (resultset.next()) {
+                return new Cliente(resultset.getInt("idClient"), resultset.getString("first_name"), resultset.getString("second_name"), resultset.getString("address"), resultset.getInt("isPhysical"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getSQLState()); //Must be a JPopup or something
+        }
+        return null;
+    }
+
+    /**
+     *
+     * @param name
+     * @return
+     */
+    public static Cliente searchClientByName(String name) {
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+            Statement statement = connection.createStatement();
+            ResultSet resultset = statement.executeQuery("SELECT * FROM Client WHERE first_name='" + name + "' OR second_name='" + name + "';");
+            while (resultset.next()) {
+                return new Cliente(resultset.getInt("idClient"), resultset.getString("first_name"), resultset.getString("second_name"), resultset.getString("address"), resultset.getInt("isPhysical"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getSQLState()); //Must be a JPopup or something
+        }
+        return null;
+    }
+
+    /**
+     *
+     * @param currentClient
+     * @return
+     */
+    public static boolean addClientToDatabase(Cliente cli) {
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+            Statement statement = connection.createStatement();
+            int rowsaffected = statement.executeUpdate("INSERT INTO Client(first_name,second_name,address,isPhysical) VALUES ('" + cli.getFirst_name() + "' , '" + cli.getSecond_name() + "' , '" + cli.getAddress() + "','" + cli.getIsPhysical() + "') ;");
+            return rowsaffected > 0;
+        } catch (SQLException e) {
+            System.out.println(e.getSQLState()); //Must be a JPopup or something
+        }
+        return false;
+    }
+
+    /**
+     *
+     * @param currentClient
+     * @return
+     */
+    public static boolean editClientInDatabase(Cliente cli) {
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+            Statement statement = connection.createStatement();
+            int rowsaffected = statement.executeUpdate("UPDATE Client SET first_name='" + cli.getFirst_name() + "' , second_name='" + cli.getSecond_name() + "' , address='" + cli.getAddress() + "',isPhysical='" + cli.getIsPhysical() + "' WHERE idClient=" + cli.getId() + " ;");
+            return rowsaffected > 0;
+        } catch (SQLException e) {
+            System.out.println(e.getSQLState()); //Must be a JPopup or something
+        }
+        return false;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public static Cliente[] getAllClients() {
+        ArrayList<Cliente> array = new ArrayList<>();
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Pola", "superadmin", "superadmin123");
+            Statement statement = connection.createStatement();
+            ResultSet resultset = statement.executeQuery("SELECT * FROM Client;");
+            while (resultset.next()) {
+                array.add(new Cliente(resultset.getInt("idClient"), resultset.getString("first_name"), resultset.getString("second_name"), resultset.getString("address"), resultset.getInt("isPhysical")));
+            }
+            return array.toArray(new Cliente[array.size()]);
         } catch (SQLException e) {
             System.out.println(e.getSQLState()); //Must be a JPopup or something
         }
