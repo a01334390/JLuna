@@ -26,6 +26,11 @@ public class Material {
         this.cost = cost;
     }
 
+    public Material(String name, int quantity) {
+        this.name = name;
+        this.quantity = quantity;
+    }
+
     public int getId() {
         return id;
     }

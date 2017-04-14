@@ -40,6 +40,12 @@ public class Order {
         this.create_time = create_time;
     }
 
+    public Order(int id, String date, String priority) {
+        this.id = id;
+        this.date = date;
+        this.priority = priority;        
+    }
+
     public int getId() {
         return id;
     }

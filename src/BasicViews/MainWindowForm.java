@@ -10,12 +10,16 @@
  */
 package BasicViews;
 
+import BasicElements.AdvancedViews.AdvancedViewsMenu;
 import BasicElements.AdvancedViews.PedidosView;
+import BasicElements.Inventory;
+import BasicElements.Material;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import luna.LoginForm;
+import luna.databaseManager.DatabaseManager;
 import luna.databaseManager.Session;
 
 /**
@@ -46,6 +50,7 @@ public class MainWindowForm extends javax.swing.JFrame {
                 }
             }
         });
+        
     }
 
     private String dateToString() {
@@ -73,8 +78,7 @@ public class MainWindowForm extends javax.swing.JFrame {
         daylabel = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        textArea1 = new java.awt.TextArea();
         jPanel4 = new javax.swing.JPanel();
         pedido = new javax.swing.JButton();
         inventario = new javax.swing.JButton();
@@ -155,34 +159,29 @@ public class MainWindowForm extends javax.swing.JFrame {
         jLabel2.setText("Mensajes Recientes");
         jLabel2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(jList1);
+        updateTextArea();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(6, 6, 6)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(textArea1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(6, 6, 6)
                 .addComponent(jLabel2)
-                .addGap(6, 6, 6)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 516, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19)
+                .addComponent(textArea1, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanel4.setLayout(new java.awt.GridBagLayout());
@@ -326,7 +325,7 @@ public class MainWindowForm extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
+                .addGap(29, 29, 29)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -335,14 +334,14 @@ public class MainWindowForm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         pack();
@@ -378,8 +377,8 @@ public class MainWindowForm extends javax.swing.JFrame {
 
     private void AvanzadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AvanzadoActionPerformed
         dispose();
-        NotebookView nv = new NotebookView(session);
-        nv.setVisible(true);
+        AdvancedViewsMenu menu = new AdvancedViewsMenu(session);
+        menu.setVisible(true);
         
     }//GEN-LAST:event_AvanzadoActionPerformed
 
@@ -395,6 +394,19 @@ public class MainWindowForm extends javax.swing.JFrame {
        lf.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    private void updateTextArea(){
+        textArea1.setEditable(false);
+        Material [] material = DatabaseManager.getShortageOfMaterial();
+        textArea1.append("Hay escasez de los siguientes materiales:\n");
+        for(int i = 0;i < material.length; i++){
+            textArea1.append(material[i].getQuantity()+" "+material[i].getName()+"\n");
+        }
+        String [] notebooks = DatabaseManager.getShortageOfNotebooks();
+        textArea1.append("Hay escasez de los siguientes cuadernos:\n");
+        for(int i = 0;i < notebooks.length; i++){
+            textArea1.append(notebooks[i]+"\n");
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -410,7 +422,6 @@ public class MainWindowForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -421,8 +432,8 @@ public class MainWindowForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton materiales;
     private javax.swing.JButton pedido;
+    private java.awt.TextArea textArea1;
     // End of variables declaration//GEN-END:variables
 }

@@ -544,6 +544,19 @@ public class PedidosView extends javax.swing.JFrame {
 
     private void orderEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderEditActionPerformed
         // TODO add your handling code here:
+        if(quantity.getText() != null && orderID.getText() != null){
+            boolean success = DatabaseManager.updateOrderNotebooks(Integer.parseInt(
+                    quantity.getText()), status.getSelectedItem().toString(),Integer.parseInt(orderID.getText()));
+            if(success){
+                JOptionPane.showMessageDialog(null, "Base de datos actualizada");
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Ha ocurrido un error");
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Verifique que todos los campos estén llenos");
+        }
     }//GEN-LAST:event_orderEditActionPerformed
 
 
@@ -611,10 +624,11 @@ public class PedidosView extends javax.swing.JFrame {
                 return currentON[i].toString();
             }
         });
-        int idorder = OrderList.getSelectedIndex();
-        orderID.setText(Integer.toString(currentON[idorder].getId_Order()));
-        quantity.setText(Integer.toString(currentON[idorder].getQuantity()));
-        switch (currentON[idorder].getStatus()) {
+        int idorder = Integer.parseInt(OrderList.getSelectedValue());
+        OrderNotebooks [] order = DatabaseManager.getOrderNotebookBasicView(idorder);
+        orderID.setText(Integer.toString(idorder));
+        quantity.setText(Integer.toString(order[0].getQuantity()));
+        switch (order[0].getStatus()) {
             case "Diseño":
                 status.setSelectedIndex(0);
                 break;

@@ -14,15 +14,20 @@ package BasicElements;
  *
  * @author a01334390
  */
+import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
+
 public class User {
     private String username,email,privilege,first_name,second_name,image,password;
-
+    private SecretKey key;
+    
     public String getPassword() {
         return password;
     }
-
+    
     public void setPassword(String password) {
-        this.password = password;
+        this.password = encrypt(password,key);
     }
 
     public User(String username, String privilege,String email, String first_name, String second_name, String image) {
@@ -32,6 +37,7 @@ public class User {
         this.first_name = first_name;
         this.second_name = second_name;
         this.image = image;
+        key = getKey();
     }
 
     public String getUsername() {
@@ -86,5 +92,45 @@ public class User {
     public String toString(){
         return username;
     }
- 
+    private SecretKey getKey(){
+        try{
+            KeyGenerator keygenerator = KeyGenerator.getInstance("DES");
+            SecretKey key = keygenerator.generateKey();
+            return key;
+        }catch(Exception e){
+        }
+        return null;
+    }
+
+    public String encrypt(String toDecipher, SecretKey key) {
+        try{
+            Cipher desCipher;
+            desCipher = Cipher.getInstance("DES");
+
+            byte[] text = toDecipher.getBytes();
+
+            desCipher.init(Cipher.ENCRYPT_MODE, key);
+            byte[] textEncrypted = desCipher.doFinal(text);
+            return new String(textEncrypted);
+        }catch(Exception e){
+            System.out.println("Exception");
+        }
+        return null;
+    }
+
+    public String decrypt(String toDecrypt, SecretKey key){
+        try{
+                Cipher desCipher;
+                desCipher = Cipher.getInstance("DES");
+
+                byte[] text = toDecrypt.getBytes();
+
+                desCipher.init(Cipher.DECRYPT_MODE, key);
+                byte[] textDecrypted = desCipher.doFinal(text);
+                return new String(textDecrypted);
+        }catch(Exception e){
+                System.out.println("Exception");
+        }
+        return null;
+    }
 }

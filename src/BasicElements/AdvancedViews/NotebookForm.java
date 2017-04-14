@@ -457,13 +457,21 @@ public class NotebookForm extends javax.swing.JFrame {
                 spagetype = "AGENDA";
                 break;
         }
-        int squantity = Integer.parseInt(quantity.getText());
-        //Create a new Order
-        orders.add(new Order(x, sfecha, spriority, DatabaseManager.dateToString(), client.getId()));
-        customization.add(new Customization(y, sribbon, simage, selastic, spagetype));
-        nborder.add(new OrderNotebooks(currentNotebook.getId(), x, squantity, "Diseño", y));
-        x++;
-        y++;
+        if(sfecha == null ||  quantity.getText() == null || 
+                currentNotebook == null || client == null){
+            JOptionPane.showMessageDialog(null, "Verifique que todos los campos "
+                    + "están llenos \nNota: el cliente se selecciona en la "
+                    + "ventana de pedidos");
+        }
+        else{
+            int squantity = Integer.parseInt(quantity.getText());
+            //Create a new Order
+            orders.add(new Order(x, sfecha, spriority, DatabaseManager.dateToString(), client.getId()));
+            customization.add(new Customization(y, sribbon, simage, selastic, spagetype));
+            nborder.add(new OrderNotebooks(currentNotebook.getId(), x, squantity, "Diseño", y));
+            x++;
+            y++;
+        }
         updateView();
     }//GEN-LAST:event_confirmOrderActionPerformed
 
