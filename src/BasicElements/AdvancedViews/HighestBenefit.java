@@ -163,9 +163,10 @@ public class HighestBenefit extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"Verifique que todos los campos estén llenos");
         }
         else{
-            jTextArea1.append("Estos son los cuadernos que generaron más beneficio"
-                    + " entre "+date1+" y "+date2+".\n");
+            
             String [] query = DatabaseManager.getHighestBenefitBetweenDates(date1, date2);
+            jTextArea1.append("Total de beneficio por tipo de cuaderno"
+                    + " entre "+date1+" y "+date2+".\n");            
             for(int i = 0; i < query.length; i++){
                 jTextArea1.append(query[i]+"\n");
             }

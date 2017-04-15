@@ -32,7 +32,8 @@ public class MostNotebooksOrdered extends javax.swing.JFrame {
     MostNotebooksOrdered(Session session) {
         this.session = session;
         initComponents();
-        getMostOrderedNotebooks();
+        textArea1.setEditable(false);
+
         this.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
@@ -53,20 +54,59 @@ public class MostNotebooksOrdered extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         textArea1 = new java.awt.TextArea();
+        jRadioButtonPriority = new javax.swing.JRadioButton();
+        jRadioButtonStatus = new javax.swing.JRadioButton();
+        jRadioButtonQuantity = new javax.swing.JRadioButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        buttonGroup1.add(jRadioButtonPriority);
+        jRadioButtonPriority.setText("Ordenar por prioridad");
+
+        buttonGroup1.add(jRadioButtonStatus);
+        jRadioButtonStatus.setText("Ordenar por status");
+
+        buttonGroup1.add(jRadioButtonQuantity);
+        jRadioButtonQuantity.setText("Ordenar por cantidad");
+
+        jButton1.setText("Revisar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(textArea1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(textArea1, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(44, 44, 44)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jRadioButtonPriority)
+                    .addComponent(jRadioButtonStatus)
+                    .addComponent(jRadioButtonQuantity)
+                    .addComponent(jButton1))
+                .addGap(0, 48, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(textArea1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(82, 82, 82)
+                .addComponent(jRadioButtonPriority)
+                .addGap(30, 30, 30)
+                .addComponent(jRadioButtonStatus)
+                .addGap(31, 31, 31)
+                .addComponent(jRadioButtonQuantity)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(25, 25, 25))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -83,17 +123,51 @@ public class MostNotebooksOrdered extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        if(jRadioButtonQuantity.isSelected()){
+            getMostOrderedNotebooks();
+        }
+        if(jRadioButtonStatus.isSelected()){
+            getNotebooksByStatus();
+        }
+        if(jRadioButtonPriority.isSelected()){
+            getNotebooksByPriority();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
     private void getMostOrderedNotebooks(){
-        String [] notebooks =DatabaseManager.getMostOrderedNotebooks();
-        textArea1.setEditable(false);
-        textArea1.append("Pedidos ordenados por cliente con mayor cantidad de cuadernos a menor\n");
+        textArea1.setText("");
+        String [] notebooks = DatabaseManager.getMostOrderedNotebooks();
+        textArea1.append("Pedidos ordenados por cliente con mayor cantidad de cuadernos a menor\n"
+                + "ID \t Nombre \t Status \t Prioridad \t Cantidad \n");
         for(int i = 0;i < notebooks.length; i++){
             textArea1.append(notebooks[i]+"\n");
         }
     }
+    
+    private void getNotebooksByPriority(){
+        textArea1.setText("");
+        String [] notebooks = DatabaseManager.getMostOrderedNotebooksWithPriority();
+        textArea1.append("Pedidos ordenados por prioridad\n"
+                + "ID \t Nombre \t Cantidad \t Status \t Prioridad\n");
+        for(int i = 0; i < notebooks.length; i++){
+            textArea1.append(notebooks[i]+"\n");
+        }
+    }
+    
+    private void getNotebooksByStatus(){
+        textArea1.setText("");
+        String [] notebooks = DatabaseManager.getMostOrderedNotebooksWithStatus();
+        textArea1.append("Pedidos ordenados por status\n"
+                + "ID \t Nombre \t Cantidad \t Prioridad \t Status\n");
+        for(int i = 0; i < notebooks.length; i++){
+            textArea1.append(notebooks[i]+"\n");
+        }        
+    }    
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -128,7 +202,12 @@ public class MostNotebooksOrdered extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JRadioButton jRadioButtonPriority;
+    private javax.swing.JRadioButton jRadioButtonQuantity;
+    private javax.swing.JRadioButton jRadioButtonStatus;
     private java.awt.TextArea textArea1;
     // End of variables declaration//GEN-END:variables
 }

@@ -11,6 +11,7 @@
 package BasicElements.AdvancedViews;
 
 import BasicViews.MainWindowForm;
+import BasicViews.NotebookView;
 import luna.databaseManager.Session;
 
 /**
@@ -46,6 +47,11 @@ public class AdvancedViewsMenu extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         NotebookView.setText("Cuadernos");
+        NotebookView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NotebookViewActionPerformed(evt);
+            }
+        });
 
         Orders.setText("Pedidos por fecha y prioridad");
         Orders.addActionListener(new java.awt.event.ActionListener() {
@@ -132,6 +138,13 @@ public class AdvancedViewsMenu extends javax.swing.JFrame {
         HighestBenefit hb = new HighestBenefit(session);
         hb.setVisible(true);
     }//GEN-LAST:event_HighestBenefitActionPerformed
+
+    private void NotebookViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NotebookViewActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        NotebookView nv = new NotebookView(session);
+        nv.setVisible(true);
+    }//GEN-LAST:event_NotebookViewActionPerformed
 
     /**
      * @param args the command line arguments
