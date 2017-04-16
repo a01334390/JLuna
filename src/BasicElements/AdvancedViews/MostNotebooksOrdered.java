@@ -62,7 +62,7 @@ public class MostNotebooksOrdered extends javax.swing.JFrame {
         jRadioButtonQuantity = new javax.swing.JRadioButton();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         buttonGroup1.add(jRadioButtonPriority);
         jRadioButtonPriority.setText("Ordenar por prioridad");
@@ -91,7 +91,9 @@ public class MostNotebooksOrdered extends javax.swing.JFrame {
                     .addComponent(jRadioButtonPriority)
                     .addComponent(jRadioButtonStatus)
                     .addComponent(jRadioButtonQuantity)
-                    .addComponent(jButton1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(jButton1)))
                 .addGap(0, 48, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(

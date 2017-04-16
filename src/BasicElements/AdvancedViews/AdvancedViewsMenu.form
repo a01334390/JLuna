@@ -45,7 +45,10 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="NotebookView" min="-2" pref="183" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="Orders" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="Orders" max="32767" attributes="0"/>
+                      <Component id="MacroView" max="32767" attributes="0"/>
+                  </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="HighestBenefit" max="32767" attributes="0"/>
@@ -65,7 +68,10 @@
                       <Component id="MostNotebooks" alignment="3" min="-2" pref="87" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
-                  <Component id="HighestBenefit" min="-2" pref="79" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="HighestBenefit" pref="79" max="32767" attributes="0"/>
+                      <Component id="MacroView" max="32767" attributes="0"/>
+                  </Group>
                   <EmptySpace pref="98" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -102,6 +108,14 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="HighestBenefitActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="MacroView">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Macro vista"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MacroViewActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

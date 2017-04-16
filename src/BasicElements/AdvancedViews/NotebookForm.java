@@ -11,6 +11,7 @@
 package BasicElements.AdvancedViews;
 
 import BasicElements.*;
+import BasicViews.MainWindowForm;
 import java.util.*;
 import javax.swing.JOptionPane;
 import luna.databaseManager.*;
@@ -303,7 +304,7 @@ public class NotebookForm extends javax.swing.JFrame {
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(dateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(386, Short.MAX_VALUE))
         );
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Pedidos Confirmados"));
