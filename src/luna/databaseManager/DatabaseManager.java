@@ -715,7 +715,7 @@ private static String hpassword = "superuser123";
             Connection connection = DriverManager.getConnection(host,huser,hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT *" +
-            "FROM Notebook JOIN Inventory ON Notebook.idNotebook = Inventory.id_Notebook\n" +//quitar este \n mata el codigo
+            "FROM Notebook JOIN Inventory ON Notebook.idNotebook = Inventory.id_Notebook " +
             "WHERE ammount <200;");
             while(resultset.next()){
                 array.add(resultset.getString("type")+ " "+resultset.getInt("ammount"));//+ " "+Integer.toString(resultset.getInt("ammount")));
@@ -733,7 +733,7 @@ private static String hpassword = "superuser123";
             Connection connection = DriverManager.getConnection(host,huser,hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT * " +
-            "FROM Pola.Order\n" +//mata el codigo quitar el \n
+            "FROM Pola.Order " +
             "JOIN Client ON Pola.Order.client_id = Client.idClient ORDER BY date;");
             while(resultset.next()){
                 array.add(resultset.getString("date")+" "+resultset.getString("priority")+
@@ -752,7 +752,7 @@ private static String hpassword = "superuser123";
             Connection connection = DriverManager.getConnection(host,huser,hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT * " +
-            "FROM Pola.Order\n" +//mata el codigo quitar el \n
+            "FROM Pola.Order " +
             "JOIN Client ON Pola.Order.client_id = Client.idClient ORDER BY priority DESC;");
             while(resultset.next()){
                 array.add(resultset.getString("date")+" "+resultset.getString("priority")+
@@ -772,9 +772,9 @@ private static String hpassword = "superuser123";
             Connection connection = DriverManager.getConnection(host,huser,hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT idOrder, first_name, second_name, status, priority, quantity " +
-                "FROM Pola.Order\n" +//mata el codigo quitar el \n
-                "JOIN Notebook_Order ON Pola.Order.idOrder = Notebook_Order.id_Order\n" +//mata el codigo quitar el \n
-                "JOIN Client ON Pola.Order.client_id = Client.idClient\n" +//mata el codigo quitar el \n
+                "FROM Pola.Order " +
+                "JOIN Notebook_Order ON Pola.Order.idOrder = Notebook_Order.id_Order " +
+                "JOIN Client ON Pola.Order.client_id = Client.idClient " +
                 "ORDER BY quantity DESC;");
             while(resultset.next()){
                 array.add(resultset.getString("idOrder")+"\t"+resultset.getString("first_name")+" "+resultset.getString("second_name")+
@@ -792,10 +792,10 @@ private static String hpassword = "superuser123";
         try{
             Connection connection = DriverManager.getConnection(host,huser,hpassword);
             Statement statement = connection.createStatement();
-            ResultSet resultset = statement.executeQuery("SELECT idOrder, first_name,  second_name, quantity, status, priority \n" +
-                "FROM Pola.Order\n" +
-                "JOIN Notebook_Order ON Pola.Order.idOrder = Notebook_Order.id_Order\n" +
-                "JOIN Client ON Pola.Order.client_id = Client.idClient\n" +
+            ResultSet resultset = statement.executeQuery("SELECT idOrder, first_name,  second_name, quantity, status, priority  " +
+                "FROM Pola.Order " +
+                "JOIN Notebook_Order ON Pola.Order.idOrder = Notebook_Order.id_Order " +
+                "JOIN Client ON Pola.Order.client_id = Client.idClient " +
                 "ORDER BY priority DESC;");
             while(resultset.next()){
                 array.add(resultset.getString("idOrder")+"\t"+resultset.getString("first_name")+" "+resultset.getString("second_name")+
@@ -813,10 +813,10 @@ private static String hpassword = "superuser123";
         try{
             Connection connection = DriverManager.getConnection(host,huser,hpassword);
             Statement statement = connection.createStatement();
-            ResultSet resultset = statement.executeQuery("SELECT idOrder, first_name,  second_name, quantity, priority, status\n" +
-                "FROM Pola.Order\n" +
-                "JOIN Notebook_Order ON Pola.Order.idOrder = Notebook_Order.id_Order\n" +
-                "JOIN Client ON Pola.Order.client_id = Client.idClient\n" +
+            ResultSet resultset = statement.executeQuery("SELECT idOrder, first_name,  second_name, quantity, priority, status " +
+                "FROM Pola.Order " +
+                "JOIN Notebook_Order ON Pola.Order.idOrder = Notebook_Order.id_Order " +
+                "JOIN Client ON Pola.Order.client_id = Client.idClient " +
                 "ORDER BY status DESC;");
             while(resultset.next()){
                 array.add(resultset.getString("idOrder")+"\t"+resultset.getString("first_name")+" "+resultset.getString("second_name")+
@@ -856,10 +856,10 @@ private static String hpassword = "superuser123";
         try{
             Connection connection = DriverManager.getConnection(host,huser,hpassword);
             Statement statement = connection.createStatement();
-            ResultSet resultset = statement.executeQuery("SELECT type, benefit*quantity\n" +
-                "FROM Pola.Notebook_Order\n" +
-                "JOIN Notebook ON Notebook_Order.id_Notebook = Notebook.idNotebook\n" +
-                "JOIN Pola.Order ON Notebook_Order.id_Order = Pola.Order.idOrder\n" +
+            ResultSet resultset = statement.executeQuery("SELECT type, benefit*quantity " +
+                "FROM Pola.Notebook_Order " +
+                "JOIN Notebook ON Notebook_Order.id_Notebook = Notebook.idNotebook " +
+                "JOIN Pola.Order ON Notebook_Order.id_Order = Pola.Order.idOrder " +
                 "WHERE Pola.Order.date >= '"+date1+"' AND Pola.Order.date <= '"+date2+"';");
             while(resultset.next()){
                 array.add(resultset.getString("type"));
@@ -896,9 +896,9 @@ private static String hpassword = "superuser123";
         try{
             Connection connection = DriverManager.getConnection(host,huser,hpassword);
             Statement statement = connection.createStatement();
-            ResultSet resultset = statement.executeQuery("select distinct(type)\n" +
-                "FROM Notebook_Order\n" +
-                "JOIN Notebook ON Notebook_Order.id_Notebook = Notebook.idNotebook\n" +
+            ResultSet resultset = statement.executeQuery("select distinct(type) " +
+                "FROM Notebook_Order " +
+                "JOIN Notebook ON Notebook_Order.id_Notebook = Notebook.idNotebook " +
                 "JOIN Pola.Order ON Notebook_Order.id_Order = Pola.Order.idOrder;");
             while(resultset.next()){
                 array.add(resultset.getString("type"));
