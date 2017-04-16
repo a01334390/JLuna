@@ -976,4 +976,14 @@ public class DatabaseManager {
         }
         return null;
     }
+
+    public static void addAllNotebookMaterials(NotebookMaterial get) {
+        try {
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
+            Statement statement = connection.createStatement();
+            int rowsaffected = statement.executeUpdate("INSERT INTO Notebook_Material VALUES (" + get.getNotebook_id() + " , " + get.getMaterial_id() + " , " + get.getAmmount() + ") ;");
+        } catch (SQLException e) {
+            System.out.println(e.getSQLState()); //Must be a JPopup or something
+        }
+    }
 }

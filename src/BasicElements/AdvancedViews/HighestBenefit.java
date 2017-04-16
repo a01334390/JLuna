@@ -44,10 +44,9 @@ public class HighestBenefit extends javax.swing.JFrame {
         this.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-                
-                    MainWindowForm mwf = new MainWindowForm(session);
-                    mwf.setVisible(true);
-                
+                   dispose();
+                   AdvancedViewsMenu avm = new AdvancedViewsMenu();
+                   avm.setVisible(true);
             }
         });  
     }
@@ -75,6 +74,7 @@ public class HighestBenefit extends javax.swing.JFrame {
         jLabel3.setText("jLabel3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Beneficio entre fechas");
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Mayor beneficio entre fechas"));
 
@@ -163,7 +163,7 @@ public class HighestBenefit extends javax.swing.JFrame {
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 58, Short.MAX_VALUE)))
+                        .addGap(0, 21, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 

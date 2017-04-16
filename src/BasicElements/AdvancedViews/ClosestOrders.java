@@ -27,6 +27,14 @@ public class ClosestOrders extends javax.swing.JFrame {
      */
     public ClosestOrders() {
         initComponents();
+        this.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                   dispose();
+                   AdvancedViewsMenu avm = new AdvancedViewsMenu();
+                   avm.setVisible(true);
+            }
+        }); 
     }
 
     public ClosestOrders(Session session) {
