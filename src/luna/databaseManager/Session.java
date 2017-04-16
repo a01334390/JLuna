@@ -19,6 +19,15 @@ public class Session {
     private String username, email, firstname, secondname, privilege, imagepath;
     private boolean isValidated;
 
+    /**
+     *
+     * @param username
+     * @param email
+     * @param firstname
+     * @param secondname
+     * @param privilege
+     * @param imagepath
+     */
     public Session(String username, String email, String firstname, String secondname, String privilege, String imagepath) {
         this.username = username;
         this.firstname = firstname;

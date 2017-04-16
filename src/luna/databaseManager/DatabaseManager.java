@@ -16,15 +16,18 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
  * @author a01334390
  */
 public class DatabaseManager {
-private static String host = "jdbc:mysql://35.188.87.36/Pola";
-private static String huser = "superuser";
-private static String hpassword = "superuser123";
+
+    private static String host = "jdbc:mysql://35.188.87.36/Pola";
+    private static String huser = "superuser";
+    private static String hpassword = "superuser123";
+
     /**
      * This method validates if the user exit, however, it does so without ever
      * touching the password
@@ -37,7 +40,7 @@ private static String hpassword = "superuser123";
         String pass = new String(password);
         int count = 0;
         try {
-            Connection connection = DriverManager.getConnection(host,huser,hpassword);
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT username FROM User WHERE username='" + username + "' AND password='" + pass + "'");
             //if there is no data on the data set, the session return will be false
@@ -63,7 +66,7 @@ private static String hpassword = "superuser123";
      */
     public static Session userSessionCreation(String username) {
         try {
-            Connection connection = DriverManager.getConnection(host,huser,hpassword);
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT * FROM User WHERE username='" + username + "';");
             while (resultset.next()) {
@@ -83,7 +86,7 @@ private static String hpassword = "superuser123";
      */
     public static User searchUsername(String username) {
         try {
-            Connection connection = DriverManager.getConnection(host,huser,hpassword);
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT * FROM User WHERE username='" + username + "';");
             while (resultset.next()) {
@@ -103,7 +106,7 @@ private static String hpassword = "superuser123";
      */
     public static boolean addUserToDatabase(User user) {
         try {
-           Connection connection = DriverManager.getConnection(host,huser,hpassword);
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             int rowsaffected = statement.executeUpdate("INSERT INTO User VALUES ('" + user.getUsername() + "' , '" + user.getEmail() + "' , '" + user.getPassword() + "' , '" + user.getPrivilege() + "' , '" + user.getFirst_name() + "' , '" + user.getSecond_name() + "' , '" + user.getImage() + "' , '" + dateToString() + "') ;");
             return rowsaffected > 0;
@@ -121,7 +124,7 @@ private static String hpassword = "superuser123";
      */
     public static boolean editUserInDatase(User user) {
         try {
-            Connection connection = DriverManager.getConnection(host,huser,hpassword);
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             int rowsaffected = statement.executeUpdate(
                     "UPDATE User"
@@ -143,7 +146,7 @@ private static String hpassword = "superuser123";
 
     public static boolean deleteUserInDatabase(String usname) {
         try {
-            Connection connection = DriverManager.getConnection(host,huser,hpassword);
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             int rowsaffected = statement.executeUpdate("DELETE FROM User WHERE username='" + usname + "';");
             return rowsaffected > 0;
@@ -161,7 +164,7 @@ private static String hpassword = "superuser123";
     public static User[] getAllUsers() {
         ArrayList<User> array = new ArrayList<>();
         try {
-            Connection connection = DriverManager.getConnection(host,huser,hpassword);
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT * FROM User;");
             while (resultset.next()) {
@@ -182,7 +185,7 @@ private static String hpassword = "superuser123";
     public static Material[] getAllMaterials() {
         ArrayList<Material> array = new ArrayList<>();
         try {
-            Connection connection = DriverManager.getConnection(host,huser,hpassword);
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT * FROM Material;");
             while (resultset.next()) {
@@ -202,7 +205,7 @@ private static String hpassword = "superuser123";
      */
     public static boolean deleteMaterialInDatabase(String matname) {
         try {
-            Connection connection = DriverManager.getConnection(host,huser,hpassword);
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             int rowsaffected = statement.executeUpdate("DELETE FROM Material WHERE name='" + matname + "';");
             return rowsaffected > 0;
@@ -219,7 +222,7 @@ private static String hpassword = "superuser123";
      */
     public static boolean addMaterialToDatabase(Material mat) {
         try {
-            Connection connection = DriverManager.getConnection(host,huser,hpassword);
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             int rowsaffected = statement.executeUpdate("INSERT INTO Material(name,quantity,cost) VALUES ('" + mat.getName() + "' , '" + mat.getQuantity() + "' , '" + mat.getCost() + "') ;");
             return rowsaffected > 0;
@@ -236,7 +239,7 @@ private static String hpassword = "superuser123";
      */
     public static boolean editMaterialInDatabase(Material mat) {
         try {
-            Connection connection = DriverManager.getConnection(host,huser,hpassword);
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             int rowsaffected = statement.executeUpdate("UPDATE Material SET name='" + mat.getName() + "' , quantity='" + mat.getQuantity() + "' , cost='" + mat.getCost() + "' WHERE idMaterial=" + mat.getId() + " ;");
             return rowsaffected > 0;
@@ -253,7 +256,7 @@ private static String hpassword = "superuser123";
      */
     public static Material searchMaterial(String searname) {
         try {
-            Connection connection = DriverManager.getConnection(host,huser,hpassword);
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT * FROM Material WHERE name='" + searname + "';");
             while (resultset.next()) {
@@ -273,7 +276,7 @@ private static String hpassword = "superuser123";
      */
     public static boolean deleteClient(int id) {
         try {
-            Connection connection = DriverManager.getConnection(host,huser,hpassword);
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             int rowsaffected = statement.executeUpdate("DELETE FROM Client WHERE idClient='" + Integer.toString(id) + "';");
             return rowsaffected > 0;
@@ -290,7 +293,7 @@ private static String hpassword = "superuser123";
      */
     public static Cliente searchClientByID(String id) {
         try {
-            Connection connection = DriverManager.getConnection(host,huser,hpassword);
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT * FROM Client WHERE idClient='" + id + "';");
             while (resultset.next()) {
@@ -309,7 +312,7 @@ private static String hpassword = "superuser123";
      */
     public static Cliente searchClientByName(String name) {
         try {
-            Connection connection = DriverManager.getConnection(host,huser,hpassword);
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT * FROM Client WHERE first_name='" + name + "' OR second_name='" + name + "';");
             while (resultset.next()) {
@@ -328,7 +331,7 @@ private static String hpassword = "superuser123";
      */
     public static boolean addClientToDatabase(Cliente cli) {
         try {
-            Connection connection = DriverManager.getConnection(host,huser,hpassword);
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             int rowsaffected = statement.executeUpdate("INSERT INTO Client(first_name,second_name,address,isPhysical) VALUES ('" + cli.getFirst_name() + "' , '" + cli.getSecond_name() + "' , '" + cli.getAddress() + "','" + cli.getIsPhysical() + "') ;");
             return rowsaffected > 0;
@@ -345,7 +348,7 @@ private static String hpassword = "superuser123";
      */
     public static boolean editClientInDatabase(Cliente cli) {
         try {
-            Connection connection = DriverManager.getConnection(host,huser,hpassword);
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             int rowsaffected = statement.executeUpdate("UPDATE Client SET first_name='" + cli.getFirst_name() + "' , second_name='" + cli.getSecond_name() + "' , address='" + cli.getAddress() + "',isPhysical='" + cli.getIsPhysical() + "' WHERE idClient=" + cli.getId() + " ;");
             return rowsaffected > 0;
@@ -362,7 +365,7 @@ private static String hpassword = "superuser123";
     public static Cliente[] getAllClients() {
         ArrayList<Cliente> array = new ArrayList<>();
         try {
-            Connection connection = DriverManager.getConnection(host,huser,hpassword);
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT * FROM Client;");
             while (resultset.next()) {
@@ -383,7 +386,7 @@ private static String hpassword = "superuser123";
     public static Order[] getOrdersFromClient(int clientID) {
         ArrayList<Order> array = new ArrayList<>();
         try {
-            Connection connection = DriverManager.getConnection(host,huser,hpassword);
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT * FROM Pola.Order WHERE client_id= " + Integer.toString(clientID) + ";");
             while (resultset.next()) {
@@ -403,7 +406,7 @@ private static String hpassword = "superuser123";
      */
     public static Order searchOrderByID(String orderID) {
         try {
-            Connection connection = DriverManager.getConnection(host,huser,hpassword);
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT * FROM Pola.Order WHERE idOrder= " + orderID + ";");
             while (resultset.next()) {
@@ -423,7 +426,7 @@ private static String hpassword = "superuser123";
     public static OrderNotebooks[] getOrderNotebookBasicView(int id) {
         ArrayList<OrderNotebooks> array = new ArrayList<>();
         try {
-            Connection connection = DriverManager.getConnection(host,huser,hpassword);
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT * FROM Notebook_Order WHERE id_Order= '" + Integer.toString(id) + "';");
             while (resultset.next()) {
@@ -435,14 +438,14 @@ private static String hpassword = "superuser123";
         }
         return null;
     }
-    
-    public static boolean updateOrderNotebooks(int quantity, String status, int idOrder){
-        try{
-            Connection connection = DriverManager.getConnection(host,huser,hpassword);
+
+    public static boolean updateOrderNotebooks(int quantity, String status, int idOrder) {
+        try {
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
-            int rowsaffected = statement.executeUpdate("UPDATE Notebook_Order SET quantity='"+ quantity+ "',status='"+status+"'WHERE id_Order='"+idOrder+"';");
+            int rowsaffected = statement.executeUpdate("UPDATE Notebook_Order SET quantity='" + quantity + "',status='" + status + "'WHERE id_Order='" + idOrder + "';");
             return rowsaffected > 0;
-        }catch(SQLException e){
+        } catch (SQLException e) {
             System.out.println(e.getSQLState());
         }
         return false;
@@ -456,7 +459,7 @@ private static String hpassword = "superuser123";
      */
     public static AVOrderNotebook searchNotebookON(String idNotebook, int idOrder) {
         try {
-           Connection connection = DriverManager.getConnection(host,huser,hpassword);
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT Notebook.type,Customization.ribbon,Customization.elastic,Customization.pageType,Customization.image "
                     + "FROM ((Notebook_Order INNER JOIN Notebook ON Notebook_Order.id_Notebook = Notebook.idNotebook) "
@@ -473,7 +476,7 @@ private static String hpassword = "superuser123";
 
     public static AVOrderNotebook searchNotebookON(int idOrder) {
         try {
-            Connection connection = DriverManager.getConnection(host,huser,hpassword);
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT Notebook.type,Customization.ribbon,Customization.elastic,Customization.pageType,Customization.image "
                     + "FROM ((Notebook_Order INNER JOIN Notebook ON Notebook_Order.id_Notebook = Notebook.idNotebook) "
@@ -495,7 +498,7 @@ private static String hpassword = "superuser123";
      */
     public static boolean deleteOrder(int orderid) {
         try {
-            Connection connection = DriverManager.getConnection(host,huser,hpassword);
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             int rowsaffected = statement.executeUpdate("DELETE FROM Pola.Order WHERE idOrder=" + Integer.toString(orderid) + ";");
             return rowsaffected > 0;
@@ -512,7 +515,7 @@ private static String hpassword = "superuser123";
     public static Notebook[] getAllNotebooks() {
         ArrayList<Notebook> array = new ArrayList<>();
         try {
-            Connection connection = DriverManager.getConnection(host,huser,hpassword);
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT * FROM Notebook;");
             while (resultset.next()) {
@@ -532,7 +535,7 @@ private static String hpassword = "superuser123";
      */
     public static Notebook searchNotebookByType(String ntype) {
         try {
-            Connection connection = DriverManager.getConnection(host,huser,hpassword);
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT * FROM Notebook WHERE type='" + ntype + "';");
             while (resultset.next()) {
@@ -550,7 +553,7 @@ private static String hpassword = "superuser123";
      */
     public static void addOrderToDatabase(Order ord) {
         try {
-            Connection connection = DriverManager.getConnection(host,huser,hpassword);
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             int rowsaffected = statement.executeUpdate("INSERT INTO Pola.Order(date,priority,create_time,client_id) VALUES ('" + ord.getDate() + "' , '" + ord.getPriority() + "' , '" + dateToString() + "'," + ord.getClient_id() + ") ;");
         } catch (SQLException e) {
@@ -564,7 +567,7 @@ private static String hpassword = "superuser123";
      */
     public static int getLastOrderGenerated() {
         try {
-            Connection connection = DriverManager.getConnection(host,huser,hpassword);
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT MAX(idOrder) FROM Pola.Order;");
             while (resultset.next()) {
@@ -582,7 +585,7 @@ private static String hpassword = "superuser123";
      */
     public static void addCustomizationInDatabase(Customization cust) {
         try {
-            Connection connection = DriverManager.getConnection(host,huser,hpassword);
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             int rowsaffected = statement.executeUpdate("INSERT INTO Customization(ribbon,image,elastic,pageType) VALUES ('" + cust.getRibbon() + "' , '" + cust.getImage() + "' , '" + cust.getElastic() + "','" + cust.getPagetype() + "') ;");
         } catch (SQLException e) {
@@ -596,7 +599,7 @@ private static String hpassword = "superuser123";
      */
     public static int getLastCustomizationGenerated() {
         try {
-            Connection connection = DriverManager.getConnection(host,huser,hpassword);
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT MAX(idCustomization) FROM Customization;");
             while (resultset.next()) {
@@ -614,7 +617,7 @@ private static String hpassword = "superuser123";
      */
     public static void addOrderNotebookToDatabase(OrderNotebooks nbo) {
         try {
-           Connection connection = DriverManager.getConnection(host,huser,hpassword);
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             int rowsaffected = statement.executeUpdate("INSERT INTO Notebook_Order (id_Notebook,id_Order,quantity,status,id_Customization) VALUES (" + nbo.getId_Notebook() + " , " + nbo.getId_Order() + " , " + nbo.getQuantity() + ",'" + nbo.getStatus() + "'," + nbo.getId_Customization() + ") ;");
         } catch (SQLException e) {
@@ -623,12 +626,12 @@ private static String hpassword = "superuser123";
     }
 
     public static Inventory getInventoryByNotebookID(int id) {
-         try {
-            Connection connection = DriverManager.getConnection(host,huser,hpassword);
+        try {
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
-            ResultSet resultset = statement.executeQuery("SELECT * FROM Inventory WHERE id_Notebook="+Integer.toString(id)+";");
+            ResultSet resultset = statement.executeQuery("SELECT * FROM Inventory WHERE id_Notebook=" + Integer.toString(id) + ";");
             while (resultset.next()) {
-                return new Inventory(resultset.getInt("ammount"),resultset.getInt("id_Notebook"));
+                return new Inventory(resultset.getInt("ammount"), resultset.getInt("id_Notebook"));
             }
         } catch (SQLException e) {
             System.out.println(e.getSQLState()); //Must be a JPopup or something
@@ -638,12 +641,12 @@ private static String hpassword = "superuser123";
 
     public static boolean editInventoryInDatabase(int idNotebook, int ammounty) {
         try {
-            Connection connection = DriverManager.getConnection(host,huser,hpassword);
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             int rowsaffected = statement.executeUpdate(
                     "UPDATE Inventory"
-                    + " SET ammount="+Integer.toString(ammounty)
-                    + " WHERE id_Notebook="+Integer.toString(idNotebook)+";");
+                    + " SET ammount=" + Integer.toString(ammounty)
+                    + " WHERE id_Notebook=" + Integer.toString(idNotebook) + ";");
             return rowsaffected > 0;
         } catch (SQLException e) {
             System.out.println(e.getSQLState() + "," + e.getLocalizedMessage()); //Must be a JPopup or something
@@ -653,10 +656,10 @@ private static String hpassword = "superuser123";
     }
 
     public static boolean addNotebookToDatabase(Notebook currentNotebook) {
-       try {
-            Connection connection = DriverManager.getConnection(host,huser,hpassword);
+        try {
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
-            int rowsaffected = statement.executeUpdate("INSERT INTO Notebook(average_time,type,benefit) VALUES ('" + currentNotebook.getAverage_time() + "' , '" + currentNotebook.getType() + "' , " + currentNotebook.getBenefit() +") ;");
+            int rowsaffected = statement.executeUpdate("INSERT INTO Notebook(average_time,type,benefit) VALUES ('" + currentNotebook.getAverage_time() + "' , '" + currentNotebook.getType() + "' , " + currentNotebook.getBenefit() + ") ;");
             return rowsaffected > 0;
         } catch (SQLException e) {
             System.out.println(e.getSQLState()); //Must be a JPopup or something
@@ -666,12 +669,12 @@ private static String hpassword = "superuser123";
 
     public static boolean editNotebookInDatabase(Notebook currentNotebook) {
         try {
-            Connection connection = DriverManager.getConnection(host,huser,hpassword);
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             int rowsaffected = statement.executeUpdate(
                     "UPDATE Notebook"
-                    + " SET average_time='"+currentNotebook.getAverage_time()+"',type='"+currentNotebook.getType()+"',benefit="+currentNotebook.getBenefit()
-                    + " WHERE idNotebook="+Integer.toString(currentNotebook.getId())+";");
+                    + " SET average_time='" + currentNotebook.getAverage_time() + "',type='" + currentNotebook.getType() + "',benefit=" + currentNotebook.getBenefit()
+                    + " WHERE idNotebook=" + Integer.toString(currentNotebook.getId()) + ";");
             return rowsaffected > 0;
         } catch (SQLException e) {
             System.out.println(e.getSQLState() + "," + e.getLocalizedMessage()); //Must be a JPopup or something
@@ -681,8 +684,8 @@ private static String hpassword = "superuser123";
     }
 
     public static boolean deleteNotebookInDatabase(Notebook currentNotebook) {
-         try {
-            Connection connection = DriverManager.getConnection(host,huser,hpassword);
+        try {
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             int rowsaffected = statement.executeUpdate("DELETE FROM Notebook WHERE idNotebook=" + Integer.toString(currentNotebook.getId()) + ";");
             return rowsaffected > 0;
@@ -691,222 +694,286 @@ private static String hpassword = "superuser123";
         }
         return false;
     }
+
     //nuevos metodos
-    public static Material[] getShortageOfMaterial(){
-        
+    public static Material[] getShortageOfMaterial() {
+
         ArrayList<Material> array = new ArrayList<>();
         try {
-            Connection connection = DriverManager.getConnection(host,huser,hpassword);
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
-            ResultSet resultset = statement.executeQuery("SELECT * FROM Material WHERE quantity < "+100+";");            
-            while (resultset.next()) {                
-                array.add(new Material(resultset.getString("name"), resultset.getInt("quantity")));                                
+            ResultSet resultset = statement.executeQuery("SELECT * FROM Material WHERE quantity < " + 100 + ";");
+            while (resultset.next()) {
+                array.add(new Material(resultset.getString("name"), resultset.getInt("quantity")));
             }
             return array.toArray(new Material[array.size()]);
-        }catch (SQLException e) {
-            JOptionPane.showMessageDialog(null,"Error "+e.getSQLState());
-        }
-        return null;
-    }
-    
-    public static String [] getShortageOfNotebooks(){
-        ArrayList<String> array = new ArrayList<>();
-        try{
-            Connection connection = DriverManager.getConnection(host,huser,hpassword);
-            Statement statement = connection.createStatement();
-            ResultSet resultset = statement.executeQuery("SELECT *" +
-            "FROM Notebook JOIN Inventory ON Notebook.idNotebook = Inventory.id_Notebook " +
-            "WHERE ammount <200;");
-            while(resultset.next()){
-                array.add(resultset.getString("type")+ " "+resultset.getInt("ammount"));//+ " "+Integer.toString(resultset.getInt("ammount")));
-            }
-            return array.toArray(new String[array.size()]);
-        }catch(SQLException e){
-            JOptionPane.showMessageDialog(null,"Error "+e.getSQLState());
-        }
-        return null;
-    }
-    
-    public static String [] getOrdersByDate(){
-        ArrayList<String> array = new ArrayList<>();
-        try{
-            Connection connection = DriverManager.getConnection(host,huser,hpassword);
-            Statement statement = connection.createStatement();
-            ResultSet resultset = statement.executeQuery("SELECT * " +
-            "FROM Pola.Order " +
-            "JOIN Client ON Pola.Order.client_id = Client.idClient ORDER BY date;");
-            while(resultset.next()){
-                array.add(resultset.getString("date")+" "+resultset.getString("priority")+
-                        " "+resultset.getString("first_name")+
-                        " "+resultset.getString("second_name"));
-            }
-            return array.toArray(new String[array.size()]);
-        }catch(SQLException e){
-            JOptionPane.showMessageDialog(null,"Error "+e.getSQLState());
-        }
-        return null;
-    }
-    public static String [] getOrdersByPriority(){
-        ArrayList<String> array = new ArrayList<>();
-        try{
-            Connection connection = DriverManager.getConnection(host,huser,hpassword);
-            Statement statement = connection.createStatement();
-            ResultSet resultset = statement.executeQuery("SELECT * " +
-            "FROM Pola.Order " +
-            "JOIN Client ON Pola.Order.client_id = Client.idClient ORDER BY priority DESC;");
-            while(resultset.next()){
-                array.add(resultset.getString("date")+" "+resultset.getString("priority")+
-                        " "+resultset.getString("first_name")+
-                        " "+resultset.getString("second_name"));
-            }
-            return array.toArray(new String[array.size()]);
-        }catch(SQLException e){
-            JOptionPane.showMessageDialog(null,"Error "+e.getSQLState());
-        }
-        return null;
-    }
-    
-    public static String [] getMostOrderedNotebooks(){
-        ArrayList<String> array = new ArrayList<>();
-        try{
-            Connection connection = DriverManager.getConnection(host,huser,hpassword);
-            Statement statement = connection.createStatement();
-            ResultSet resultset = statement.executeQuery("SELECT idOrder, first_name, second_name, status, priority, quantity " +
-                "FROM Pola.Order " +
-                "JOIN Notebook_Order ON Pola.Order.idOrder = Notebook_Order.id_Order " +
-                "JOIN Client ON Pola.Order.client_id = Client.idClient " +
-                "ORDER BY quantity DESC;");
-            while(resultset.next()){
-                array.add(resultset.getString("idOrder")+"\t"+resultset.getString("first_name")+" "+resultset.getString("second_name")+
-                        "\t"+resultset.getString("status")+"\t"+resultset.getString("priority")+"\t"+resultset.getString("quantity"));
-            }
-            return array.toArray(new String[array.size()]);
-        }catch(SQLException e){
-            JOptionPane.showMessageDialog(null,"Error "+e.getSQLState());
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error " + e.getSQLState());
         }
         return null;
     }
 
-    public static String [] getMostOrderedNotebooksWithPriority(){
+    public static String[] getShortageOfNotebooks() {
         ArrayList<String> array = new ArrayList<>();
-        try{
-            Connection connection = DriverManager.getConnection(host,huser,hpassword);
+        try {
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
-            ResultSet resultset = statement.executeQuery("SELECT idOrder, first_name,  second_name, quantity, status, priority  " +
-                "FROM Pola.Order " +
-                "JOIN Notebook_Order ON Pola.Order.idOrder = Notebook_Order.id_Order " +
-                "JOIN Client ON Pola.Order.client_id = Client.idClient " +
-                "ORDER BY priority DESC;");
-            while(resultset.next()){
-                array.add(resultset.getString("idOrder")+"\t"+resultset.getString("first_name")+" "+resultset.getString("second_name")+
-                        "\t"+resultset.getString("quantity")+"\t"+resultset.getString("status")+"\t"+resultset.getString("priority"));
+            ResultSet resultset = statement.executeQuery("SELECT *"
+                    + "FROM Notebook JOIN Inventory ON Notebook.idNotebook = Inventory.id_Notebook "
+                    + "WHERE ammount <200;");
+            while (resultset.next()) {
+                array.add(resultset.getString("type") + " " + resultset.getInt("ammount"));//+ " "+Integer.toString(resultset.getInt("ammount")));
             }
             return array.toArray(new String[array.size()]);
-        }catch(SQLException e){
-            JOptionPane.showMessageDialog(null,"Error "+e.getSQLState());
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error " + e.getSQLState());
         }
         return null;
     }
 
-    public static String [] getMostOrderedNotebooksWithStatus(){
+    public static String[] getOrdersByDate() {
         ArrayList<String> array = new ArrayList<>();
-        try{
-            Connection connection = DriverManager.getConnection(host,huser,hpassword);
+        try {
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
-            ResultSet resultset = statement.executeQuery("SELECT idOrder, first_name,  second_name, quantity, priority, status " +
-                "FROM Pola.Order " +
-                "JOIN Notebook_Order ON Pola.Order.idOrder = Notebook_Order.id_Order " +
-                "JOIN Client ON Pola.Order.client_id = Client.idClient " +
-                "ORDER BY status DESC;");
-            while(resultset.next()){
-                array.add(resultset.getString("idOrder")+"\t"+resultset.getString("first_name")+" "+resultset.getString("second_name")+
-                        "\t"+resultset.getString("quantity")+"\t"+resultset.getString("priority")+"\t\t"+resultset.getString("status"));
+            ResultSet resultset = statement.executeQuery("SELECT * "
+                    + "FROM Pola.Order "
+                    + "JOIN Client ON Pola.Order.client_id = Client.idClient ORDER BY date;");
+            while (resultset.next()) {
+                array.add(resultset.getString("date") + " " + resultset.getString("priority")
+                        + " " + resultset.getString("first_name")
+                        + " " + resultset.getString("second_name"));
             }
             return array.toArray(new String[array.size()]);
-        }catch(SQLException e){
-            JOptionPane.showMessageDialog(null,"Error "+e.getSQLState());
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error " + e.getSQLState());
         }
         return null;
     }
-    public static String [] getOrdersUnfinished(){
+
+    public static String[] getOrdersByPriority() {
         ArrayList<String> array = new ArrayList<>();
-        try{
-            Connection connection = DriverManager.getConnection(host,huser,hpassword);
+        try {
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
-            ResultSet resultset = statement.executeQuery("SELECT Pola.Order.idOrder,Pola.Order.client_id, status, first_name, second_name "+
-                "FROM Notebook_Order "+
-                "JOIN Pola.Order ON Notebook_Order.id_Order=Pola.Order.idOrder "+
-                "JOIN Client ON Pola.Order.client_id = Client.idClient " +
-                "WHERE status!='Entrega';");
-            while(resultset.next()){
-                array.add("id: "+Integer.toString(resultset.getInt("client_id")));
+            ResultSet resultset = statement.executeQuery("SELECT * "
+                    + "FROM Pola.Order "
+                    + "JOIN Client ON Pola.Order.client_id = Client.idClient ORDER BY priority DESC;");
+            while (resultset.next()) {
+                array.add(resultset.getString("date") + " " + resultset.getString("priority")
+                        + " " + resultset.getString("first_name")
+                        + " " + resultset.getString("second_name"));
+            }
+            return array.toArray(new String[array.size()]);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error " + e.getSQLState());
+        }
+        return null;
+    }
+
+    public static String[] getMostOrderedNotebooks() {
+        ArrayList<String> array = new ArrayList<>();
+        try {
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
+            Statement statement = connection.createStatement();
+            ResultSet resultset = statement.executeQuery("SELECT idOrder, first_name, second_name, status, priority, quantity "
+                    + "FROM Pola.Order "
+                    + "JOIN Notebook_Order ON Pola.Order.idOrder = Notebook_Order.id_Order "
+                    + "JOIN Client ON Pola.Order.client_id = Client.idClient "
+                    + "ORDER BY quantity DESC;");
+            while (resultset.next()) {
+                array.add(resultset.getString("idOrder") + "\t" + resultset.getString("first_name") + " " + resultset.getString("second_name")
+                        + "\t" + resultset.getString("status") + "\t" + resultset.getString("priority") + "\t" + resultset.getString("quantity"));
+            }
+            return array.toArray(new String[array.size()]);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error " + e.getSQLState());
+        }
+        return null;
+    }
+
+    public static String[] getMostOrderedNotebooksWithPriority() {
+        ArrayList<String> array = new ArrayList<>();
+        try {
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
+            Statement statement = connection.createStatement();
+            ResultSet resultset = statement.executeQuery("SELECT idOrder, first_name,  second_name, quantity, status, priority  "
+                    + "FROM Pola.Order "
+                    + "JOIN Notebook_Order ON Pola.Order.idOrder = Notebook_Order.id_Order "
+                    + "JOIN Client ON Pola.Order.client_id = Client.idClient "
+                    + "ORDER BY priority DESC;");
+            while (resultset.next()) {
+                array.add(resultset.getString("idOrder") + "\t" + resultset.getString("first_name") + " " + resultset.getString("second_name")
+                        + "\t" + resultset.getString("quantity") + "\t" + resultset.getString("status") + "\t" + resultset.getString("priority"));
+            }
+            return array.toArray(new String[array.size()]);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error " + e.getSQLState());
+        }
+        return null;
+    }
+
+    public static String[] getMostOrderedNotebooksWithStatus() {
+        ArrayList<String> array = new ArrayList<>();
+        try {
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
+            Statement statement = connection.createStatement();
+            ResultSet resultset = statement.executeQuery("SELECT idOrder, first_name,  second_name, quantity, priority, status "
+                    + "FROM Pola.Order "
+                    + "JOIN Notebook_Order ON Pola.Order.idOrder = Notebook_Order.id_Order "
+                    + "JOIN Client ON Pola.Order.client_id = Client.idClient "
+                    + "ORDER BY status DESC;");
+            while (resultset.next()) {
+                array.add(resultset.getString("idOrder") + "\t" + resultset.getString("first_name") + " " + resultset.getString("second_name")
+                        + "\t" + resultset.getString("quantity") + "\t" + resultset.getString("priority") + "\t\t" + resultset.getString("status"));
+            }
+            return array.toArray(new String[array.size()]);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error " + e.getSQLState());
+        }
+        return null;
+    }
+
+    public static String[] getOrdersUnfinished() {
+        ArrayList<String> array = new ArrayList<>();
+        try {
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
+            Statement statement = connection.createStatement();
+            ResultSet resultset = statement.executeQuery("SELECT Pola.Order.idOrder,Pola.Order.client_id, status, first_name, second_name "
+                    + "FROM Notebook_Order "
+                    + "JOIN Pola.Order ON Notebook_Order.id_Order=Pola.Order.idOrder "
+                    + "JOIN Client ON Pola.Order.client_id = Client.idClient "
+                    + "WHERE status!='Entrega';");
+            while (resultset.next()) {
+                array.add("id: " + Integer.toString(resultset.getInt("client_id")));
                 array.add(resultset.getString("first_name"));
                 array.add(resultset.getString("second_name"));
                 array.add(resultset.getString("status"));
             }
             return array.toArray(new String[array.size()]);
-        }catch(SQLException e){
-            System.out.println("Error "+e.getSQLState());
-            JOptionPane.showMessageDialog(null,"Error "+e.getSQLState());
+        } catch (SQLException e) {
+            System.out.println("Error " + e.getSQLState());
+            JOptionPane.showMessageDialog(null, "Error " + e.getSQLState());
         }
-        return null;      
-    }  
-    public static String [] getOrdersBetweenDates(String date1, String date2){
+        return null;
+    }
+
+    public static String[] getOrdersBetweenDates(String date1, String date2) {
         ArrayList<String> array = new ArrayList<>();
-        try{
-            Connection connection = DriverManager.getConnection(host,huser,hpassword);
+        try {
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
-            ResultSet resultset = statement.executeQuery("SELECT type, benefit*quantity " +
-                "FROM Pola.Notebook_Order " +
-                "JOIN Notebook ON Notebook_Order.id_Notebook = Notebook.idNotebook " +
-                "JOIN Pola.Order ON Notebook_Order.id_Order = Pola.Order.idOrder " +
-                "WHERE Pola.Order.date >= '"+date1+"' AND Pola.Order.date <= '"+date2+"';");
-            while(resultset.next()){
+            ResultSet resultset = statement.executeQuery("SELECT type, benefit*quantity "
+                    + "FROM Pola.Notebook_Order "
+                    + "JOIN Notebook ON Notebook_Order.id_Notebook = Notebook.idNotebook "
+                    + "JOIN Pola.Order ON Notebook_Order.id_Order = Pola.Order.idOrder "
+                    + "WHERE Pola.Order.date >= '" + date1 + "' AND Pola.Order.date <= '" + date2 + "';");
+            while (resultset.next()) {
                 array.add(resultset.getString("type"));
                 array.add(resultset.getString("benefit*quantity"));
             }
             return array.toArray(new String[array.size()]);
-        }catch(SQLException e){
-            JOptionPane.showMessageDialog(null,"Error "+e.getSQLState());
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error " + e.getSQLState());
         }
-        return null;        
-    }    
-    public static String [] getHighestBenefitBetweenDates(String date1, String date2){
+        return null;
+    }
+
+    public static String[] getHighestBenefitBetweenDates(String date1, String date2) {
         ArrayList<String> array = new ArrayList<>();
-        try{
-            Connection connection = DriverManager.getConnection(host,huser,hpassword);
+        try {
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT type, SUM(benefit * quantity)"
-                + "FROM Notebook_Order JOIN Notebook ON Notebook_Order.id_Notebook = Notebook.idNotebook "
-                + "JOIN Pola.Order ON Notebook_Order.id_Order = Pola.Order.idOrder "
-                + "WHERE Pola.Order.date >= '"+date1+"' AND Pola.Order.date <= '"+date2+"'"
-                + " GROUP BY (type) ORDER BY (SUM(benefit*quantity)) DESC;");
-            while(resultset.next()){
-                array.add(resultset.getString("type")+" $"+resultset.getString("SUM(benefit * quantity)"));
+                    + "FROM Notebook_Order JOIN Notebook ON Notebook_Order.id_Notebook = Notebook.idNotebook "
+                    + "JOIN Pola.Order ON Notebook_Order.id_Order = Pola.Order.idOrder "
+                    + "WHERE Pola.Order.date >= '" + date1 + "' AND Pola.Order.date <= '" + date2 + "'"
+                    + " GROUP BY (type) ORDER BY (SUM(benefit*quantity)) DESC;");
+            while (resultset.next()) {
+                array.add(resultset.getString("type") + " $" + resultset.getString("SUM(benefit * quantity)"));
             }
             return array.toArray(new String[array.size()]);
-        }catch(SQLException e){
-            JOptionPane.showMessageDialog(null,"Error "+e.getSQLState());
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error " + e.getSQLState());
         }
-        return null;        
+        return null;
     }
-    
-    public static String [] getDistinctTypeOfNotebooks(){
+
+    public static String[] getDistinctTypeOfNotebooks() {
         ArrayList<String> array = new ArrayList<>();
-        try{
-            Connection connection = DriverManager.getConnection(host,huser,hpassword);
+        try {
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
-            ResultSet resultset = statement.executeQuery("select distinct(type) " +
-                "FROM Notebook_Order " +
-                "JOIN Notebook ON Notebook_Order.id_Notebook = Notebook.idNotebook " +
-                "JOIN Pola.Order ON Notebook_Order.id_Order = Pola.Order.idOrder;");
-            while(resultset.next()){
+            ResultSet resultset = statement.executeQuery("select distinct(type) "
+                    + "FROM Notebook_Order "
+                    + "JOIN Notebook ON Notebook_Order.id_Notebook = Notebook.idNotebook "
+                    + "JOIN Pola.Order ON Notebook_Order.id_Order = Pola.Order.idOrder;");
+            while (resultset.next()) {
                 array.add(resultset.getString("type"));
             }
             return array.toArray(new String[array.size()]);
-        }catch(SQLException e){
-            JOptionPane.showMessageDialog(null,"Error "+e.getSQLState());
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error " + e.getSQLState());
         }
-        return null;        
+        return null;
+    }
+
+    public static Order[] getCompleteOrdersByDate(String date1, String date2) {
+        ArrayList<Order> array = new ArrayList<>();
+        try {
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
+            Statement statement = connection.createStatement();
+            ResultSet resultset = statement.executeQuery("SELECT * FROM Pola.Order WHERE date "
+                    + "BETWEEN '" + date1 + "' AND '" + date2 + "';");
+            while (resultset.next()) {
+                array.add(new Order(resultset.getInt("idOrder"), resultset.getDate("date").toString(), resultset.getString("priority"), resultset.getDate("create_time").toString(), resultset.getInt("client_id")));
+            }
+            return array.toArray(new Order[array.size()]);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error " + e.getSQLState());
+        }
+        return null;
+    }
+
+    public static String getOldestUser() {
+        try {
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
+            Statement statement = connection.createStatement();
+            ResultSet resultset = statement.executeQuery("SELECT username,MIN(create_time) FROM User GROUP BY username DESC;");
+            while(resultset.next()){
+                return resultset.getString("username");
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error " + e.getSQLState());
+        }
+        return null;
+    }
+
+    public static String getNumberOfWorkers() {
+        try {
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
+            Statement statement = connection.createStatement();
+            ResultSet resultset = statement.executeQuery("SELECT count(username) FROM User WHERE privilege='worker' ;");
+            while(resultset.next()){
+                return resultset.getString("count(username)");
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error " + e.getSQLState());
+        }
+        return null;
+    }
+
+    public static String getNumberOfImageOrders() {
+       try {
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
+            Statement statement = connection.createStatement();
+            ResultSet resultset = statement.executeQuery("SELECT COUNT(id_Order) FROM Notebook_Order JOIN Customization ON Notebook_Order.id_Customization = Customization.idCustomization WHERE image IS NOT NULL;");
+            while(resultset.next()){
+                return Integer.toString(resultset.getInt("COUNT(id_Order)"));
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error " + e.getSQLState());
+        }
+        return null;
     }
 }
