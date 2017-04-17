@@ -1,2 +1,6 @@
 /build/
 /dist/
+/JarLuna/build/
+/JarLuna/dist/
+/JarLuna/nbproject/private/
+/WebLuna/nbproject/private/
