@@ -18,7 +18,7 @@
         <title>Bienvenid@ <%=session.getAttribute("currentSessionName")%></title>
         <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel='stylesheet' type='text/css'>
-
+        <link href="customStyling" rel="stylesheet" type="text/css">
     </head>
     <body>
         <script>
@@ -41,6 +41,7 @@
             ga('foundation.send', 'pageview');
 
         </script>
+        
         <div class="off-canvas-wrapper">
             <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
                 <div class="off-canvas position-left reveal-for-large" id="my-info" data-off-canvas data-position="left">
@@ -66,26 +67,26 @@
                     </div>
 
                     <div class="row small-up-2 medium-up-3 large-up-4">
-                        <div class="column" type="left-rightpadd" >
+                        <div class="column" type="left-rightpadd" type="left-rightpadd">
                             <form action="login"  method="GET">
                                 <input type="image" src="https://placehold.it/300x400" name="action" value="order"/>
                             </form>
                             <h5 align="center">Ordenes</h5>
                         </div>
-                        <div class="column" type="left-rightpadd">
+                        <div class="column" type="left-rightpadd" type="left-rightpadd">
                             <form action="login" method="GET">
                                 <input type="image" src="https://placehold.it/300x400" name="action" value="inventory" />
                             </form>
                             <h5 align="center">Inventario</h5>
                         </div>
                         <%if (session.getAttribute("currentPrivilegeLevel").equals("admin") || session.getAttribute("currentPrivilegeLevel").equals("manager")) { %>
-                        <div class="column" type="left-rightpadd">
+                        <div class="column" type="left-rightpadd" type="left-rightpadd">
                             <form action="login" method="GET">
                                 <input type="image" src="https://placehold.it/300x400" name="action" value="client"/>
                             </form>
                             <h5 align="center">Clientes</h5>
                         </div>
-                        <div class="column" type="left-rightpadd" value="material">
+                        <div class="column" type="left-rightpadd" value="material" type="left-rightpadd">
                             <form action="login" method="GET">
                                 <input type="image" src="https://placehold.it/300x400" name="action" value="material"/>
                             </form>
@@ -93,19 +94,19 @@
                         </div>
                         <% } %>
                         <%if (session.getAttribute("currentPrivilegeLevel").equals("admin")) {%>
-                        <div class="column" type="left-rightpadd" value="user">
+                        <div class="column" type="left-rightpadd" value="user" type="left-rightpadd">
                             <form action="login" method="GET">
                                 <input type="image" src="https://placehold.it/300x400" name="action" value="user"/>
                             </form>
                             <h5 align="center">Usuarios</h5>
                         </div>
-                        <div class="column" type="left-rightpadd" value="advanced">
+                        <div class="column" type="left-rightpadd" value="advanced" type="left-rightpadd">
                             <form action="login" method="GET">
                                 <input type="image" src="https://placehold.it/300x400" name="action" value="advanced"/>
                             </form>
                             <h5 align="center">Vistas Avanzadas</h5>
                         </div>
-                        <div class="column" type="left-rightpadd">
+                        <div class="column" type="left-rightpadd" type="left-rightpadd">
                             <form action="login"   method="GET">
                                 <input type="image" src="https://placehold.it/300x400" name="action" value="notebook"/>
                             </form>
@@ -122,5 +123,8 @@
             $(document).foundation();
         </script>
         <script type="text/javascript" src="https://intercom.zurb.com/scripts/zcom.js"></script>
+        <footer>
+            Hey!
+        </footer>
     </body>
 </html>

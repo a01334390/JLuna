@@ -12,7 +12,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <title>imakenotebooks | Welcome</title>
         <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
-        <link rel="stylesheet" href="customStyling.css">
+        <link rel="stylesheet" href="customStyling.css" rel='stylesheet' type='text/css'>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel='stylesheet' type='text/css'>
     <body>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
@@ -35,7 +35,7 @@
                 </div>
             </div>
         </div>
-        <br>
+   
         <br>
         <div class ="row">
             <div class ="small-6 large-4 columns">
@@ -63,6 +63,25 @@
                 </form>
             </div>
         </div>
+        <section class="marketing-site-three-up">
+  <h2 class="marketing-site-three-up-headline">Furry, Reliable, Cuddly</h2>
+  <div class="row medium-unstack">
+    <div class="columns">
+      <i class="fa fa-gg" aria-hidden="true"></i>
+      <h4 class="marketing-site-three-up-title">Keyless Entry</h4>
+      <p class="marketing-site-three-up-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi sint, voluptatibus eaque natus ad eius.</p>
+    </div>
+    <div class="columns">
+      <i class="fa fa-user-o" aria-hidden="true"></i>
+      <h4 class="marketing-site-three-up-title">Invincible Igloo</h4>
+      <p class="marketing-site-three-up-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi sint, voluptatibus eaque natus ad eius.</p>
+    </div>
+    <div class="columns">
+      <i class="fa fa-check-square-o" aria-hidden="true"></i>
+      <h4 class="marketing-site-three-up-title">Stereo System</h4>
+      <p class="marketing-site-three-up-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi sint, voluptatibus eaque natus ad eius.</p>
+    </div>
+  </div>
+</section>
     </body>
-    
 </html>
