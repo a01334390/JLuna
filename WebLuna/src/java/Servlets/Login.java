@@ -101,7 +101,10 @@ public class Login extends HttpServlet {
                 System.out.println("advanced");
             }
             if (request.getParameter("action").equals("notebook")) {
-                System.out.println("notebook");
+                RequestDispatcher disp = getServletContext().getRequestDispatcher("/BasicViews/notebook/notebookindex.jsp");
+                if (disp != null) {
+                    disp.include(request, response);
+                }
             }
         }
     }

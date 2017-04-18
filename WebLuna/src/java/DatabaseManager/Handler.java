@@ -506,6 +506,11 @@ public class Handler {
      * @return
      */
     public static Notebook[] getAllNotebooks() {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
         ArrayList<Notebook> array = new ArrayList<>();
         try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
@@ -576,33 +581,6 @@ public class Handler {
      *
      * @param cust
      */
-    public static void addCustomizationInDatabase(Customization cust) {
-        try {
-            Connection connection = DriverManager.getConnection(host, huser, hpassword);
-            Statement statement = connection.createStatement();
-            int rowsaffected = statement.executeUpdate("INSERT INTO Customization(ribbon,image,elastic,pageType) VALUES ('" + cust.getRibbon() + "' , '" + cust.getImage() + "' , '" + cust.getElastic() + "','" + cust.getPagetype() + "') ;");
-        } catch (SQLException e) {
-            System.out.println(e.getSQLState()); //Must be a JPopup or something
-        }
-    }
-
-    /**
-     *
-     * @return
-     */
-    public static int getLastCustomizationGenerated() {
-        try {
-            Connection connection = DriverManager.getConnection(host, huser, hpassword);
-            Statement statement = connection.createStatement();
-            ResultSet resultset = statement.executeQuery("SELECT MAX(idCustomization) FROM Customization;");
-            while (resultset.next()) {
-                return resultset.getInt("MAX(idCustomization)");
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getSQLState()); //Must be a JPopup or something
-        }
-        return -1;
-    }
 
     /**
      *
@@ -662,6 +640,11 @@ public class Handler {
 
     public static boolean editNotebookInDatabase(Notebook currentNotebook) {
         try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             int rowsaffected = statement.executeUpdate(
@@ -676,11 +659,11 @@ public class Handler {
         return false;
     }
 
-    public static boolean deleteNotebookInDatabase(Notebook currentNotebook) {
+    public static boolean deleteNotebookInDatabase(String currentNotebook) {
         try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
-            int rowsaffected = statement.executeUpdate("DELETE FROM Notebook WHERE idNotebook=" + Integer.toString(currentNotebook.getId()) + ";");
+            int rowsaffected = statement.executeUpdate("DELETE FROM Notebook WHERE idNotebook=" + currentNotebook + ";");
             return rowsaffected > 0;
         } catch (SQLException e) {
             System.out.println(e.getSQLState()); //Must be a JPopup or something
@@ -1029,6 +1012,29 @@ public class Handler {
             System.out.println(e.getSQLState()); //Must be a JPopup or something
         }
         return false;
+    }
+
+    public static Notebook searchNotebookByID(int notebookID) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
+            Statement statement = connection.createStatement();
+            ResultSet resultset = statement.executeQuery("SELECT * FROM Notebook WHERE idNotebook=" + notebookID + " ;");
+            //if there is no data on the data set, the session return will be false
+            while (resultset.next()) {
+                return new Notebook(resultset.getInt("idNotebook"), resultset.getTime("average_time").toString(), resultset.getString("type"), resultset.getFloat("benefit"));
+            }
+            statement.close();
+            connection.close();
+            //return session;
+        } catch (SQLException e) {
+            System.out.println(e.getSQLState()); //Must be a JPopup or something
+        }
+        return null;
     }
 
 }
