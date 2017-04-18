@@ -1,23 +1,18 @@
 <%-- 
-    Document   : clients
-    Created on : Apr 18, 2017, 1:02:22 PM
+    Document   : userindex
+    Created on : Apr 18, 2017, 3:23:48 PM
     Author     : a01334390
 --%>
 
-<%@page import="BasicElements.Cliente"%>
+<%@page import="BasicElements.DBUser"%>
 <%@page import="DatabaseManager.Handler"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%
-    if (session.getAttribute("currentSessionName") == null) {
-        response.sendRedirect("/index.jsp");
-    }
-%>
 <html>
     <head>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <title>Clientes</title>
+        <title>Usuarios</title>
         <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel='stylesheet' type='text/css'>
         <link href="customStyling" rel="stylesheet" type="text/css">
@@ -45,34 +40,40 @@
         </script>
 
                     <h1>Showing available ones</h1>
-                    <p><a href="Client?action=add">Añadir Usuario</a></p>
-                    <form action="Client" method="GET">
+                    <p><a href="User?action=add">Añadir Usuario</a></p>
+                    <form action="User" method="GET">
                         <table border="1">
                             <thead>
                                 <tr>
-                                    <th>ID del Cliente</th>
+                                    <th>Nombre de Usuario</th>
+                                    <th>Correo Electronico</th>
+                                    <th>Clave Secreta</th>
+                                    <th>Nivel de privilegio</th>
                                     <th>Primer Nombre</th>
                                     <th>Segundo Nombre</th>
-                                    <th>Direccion</th>
-                                    <th>Es cliente fisico</th>
+                                    <th>Imagen</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <%Cliente[] clients = Handler.getAllClients();%>
-                                <%for (int i = 0; i < clients.length; i++) {%>
+                                <%DBUser[] users = Handler.getAllUsers();%>
+                                <%for (int i = 0; i < users.length; i++) {%>
                                 <tr>
-                                    <td><%=clients[i].getId()%></td>
-                                    <td><%=clients[i].getFirst_name()%></td>
-                                    <td><%=clients[i].getSecond_name()%></td>
-                                    <td><%=clients[i].getAddress()%></td>
-                                    <%if (clients[i].getIsPhysical() == 1) {%>
-                                    <td>Si</td>
-                                    <% } else {%>
-                                    <td>No</td>
-                                    <% }%>
-                                    <td><a href="Client?action=edit&userID=<%=clients[i].getId()%>">Editar</a> 
-                                        <a href="Client?action=erase&userID=<%=clients[i].getId()%>">Eliminar</a> </td>
+                                    <td><%=users[i].getUsername()%></td>
+                                    <td><%=users[i].getEmail()%></td>
+                                    <td>[REDACTED]</td>
+                                    <%if(users[i].getPrivilege().equals("admin")){%>
+                                    <td>Administrador</td>
+                                    <% }else if(users[i].getPrivilege().equals("manager")){ %>
+                                    <td>Manager</td>
+                                    <%}else{%>
+                                    <td>Encuadernador</td>
+                                    <%}%>
+                                    <td><%=users[i].getFirst_name()%></td>
+                                    <td><%=users[i].getSecond_name()%></td>
+                                    <td><%=users[i].getImage()%></td>
+                                    <td><a href="User?action=edit&username=<%=users[i].getUsername()%>">Editar</a> 
+                                    <a href="User?action=erase&username=<%=users[i].getUsername()%>">Eliminar</a> </td>
                                 </tr>
                                 <% } %>
                             </tbody>

@@ -5,7 +5,7 @@
  */
 package Servlets;
 
-import BasicElements.User;
+import BasicElements.DBUser;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -85,7 +85,10 @@ public class Login extends HttpServlet {
                 System.out.println("material");
             }
             if (request.getParameter("action").equals("user")) {
-
+                RequestDispatcher disp = getServletContext().getRequestDispatcher("/BasicViews/user/userindex.jsp");
+                if (disp != null) {
+                    disp.include(request, response);
+                }
             }
             if (request.getParameter("action").equals("client")) {
                 RequestDispatcher disp = getServletContext().getRequestDispatcher("/BasicViews/client/clientindex.jsp");
@@ -117,7 +120,7 @@ public class Login extends HttpServlet {
         String password = request.getParameter("password");
 
         if (Handler.userValidation(username, password)) {
-            User us = Handler.searchUsername(username);
+            DBUser us = Handler.searchUsername(username);
             request.getSession().setAttribute("currentSessionName", us.getFirst_name());
             request.getSession().setAttribute("currentPrivilegeLevel", us.getPrivilege());
             RequestDispatcher disp = getServletContext().getRequestDispatcher("/home.jsp");

@@ -18,7 +18,7 @@ import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 
-public class User {
+public class DBUser {
     private String username,email,privilege,first_name,second_name,image,password;
     private SecretKey key;
     
@@ -30,7 +30,7 @@ public class User {
         this.password = encrypt(password,key);
     }
 
-    public User(String username, String privilege,String email, String first_name, String second_name, String image) {
+    public DBUser(String username, String privilege,String email, String first_name, String second_name, String image) {
         this.username = username;
         this.email = email;
         this.privilege = privilege;

@@ -5,16 +5,7 @@
  */
 package DatabaseManager;
 
-import BasicElements.AVOrderNotebook;
-import BasicElements.Cliente;
-import BasicElements.Customization;
-import BasicElements.Inventory;
-import BasicElements.Material;
-import BasicElements.Notebook;
-import BasicElements.NotebookMaterial;
-import BasicElements.Order;
-import BasicElements.OrderNotebooks;
-import BasicElements.User;
+import BasicElements.*;
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -69,9 +60,9 @@ public class Handler {
      * This method returns the username the user looked for
      *
      * @param username, as a string
-     * @return an object User
+     * @return an object DBUser
      */
-    public static User searchUsername(String username) {
+    public static DBUser searchUsername(String username) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException ex) {
@@ -82,7 +73,7 @@ public class Handler {
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT * FROM User WHERE username='" + username + "';");
             while (resultset.next()) {
-                return new User(resultset.getString("username"), resultset.getString("privilege"), resultset.getString("email"), resultset.getString("first_name"), resultset.getString("second_name"), resultset.getString("image"));
+                return new DBUser(resultset.getString("username"), resultset.getString("privilege"), resultset.getString("email"), resultset.getString("first_name"), resultset.getString("second_name"), resultset.getString("image"));
             }
         } catch (SQLException e) {
             System.out.println(e.getSQLState()); //Must be a JPopup or something
@@ -93,10 +84,15 @@ public class Handler {
     /**
      * Adds a new user to the database
      *
-     * @param user, as an User in the database
+     * @param user, as an DBUser in the database
      * @return a boolean if it was possible or not
      */
-    public static boolean addUserToDatabase(User user) {
+    public static boolean addUserToDatabase(DBUser user) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
         try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
@@ -114,7 +110,12 @@ public class Handler {
      * @param user, based on an user element
      * @return a boolean if it was possible
      */
-    public static boolean editUserInDatase(User user) {
+    public static boolean editUserInDatase(DBUser user) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
         try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
@@ -153,16 +154,16 @@ public class Handler {
      *
      * @return all users in an ArrayList
      */
-    public static User[] getAllUsers() {
-        ArrayList<User> array = new ArrayList<>();
+    public static DBUser[] getAllUsers() {
+        ArrayList<DBUser> array = new ArrayList<>();
         try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT * FROM User;");
             while (resultset.next()) {
-                array.add(new User(resultset.getString("username"), resultset.getString("privilege"), resultset.getString("email"), resultset.getString("first_name"), resultset.getString("second_name"), resultset.getString("image")));
+                array.add(new DBUser(resultset.getString("username"), resultset.getString("privilege"), resultset.getString("email"), resultset.getString("first_name"), resultset.getString("second_name"), resultset.getString("image")));
             }
-            return array.toArray(new User[array.size()]);
+            return array.toArray(new DBUser[array.size()]);
         } catch (SQLException e) {
             System.out.println(e.getSQLState()); //Must be a JPopup or something
         }
@@ -965,20 +966,20 @@ public class Handler {
         }
     }
 
-    public static User getUserData(String username) {
+    public static DBUser getUserData(String username) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
         }
-        int count = 0;
         try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
-            ResultSet resultset = statement.executeQuery("SELECT * FROM User WHERE username='" + username + "' ");
+            ResultSet resultset = statement.executeQuery("SELECT * FROM User WHERE username='" + username + "';");
             //if there is no data on the data set, the session return will be false
-            return new User(resultset.getString("username"), resultset.getString("privilege"), resultset.getString("email"), resultset.getString("first_name"), resultset.getString("second_name"), resultset.getString("image"));
-            //return session;
+            while (resultset.next()) {
+                return new DBUser(resultset.getString("username"), resultset.getString("privilege"), resultset.getString("email"), resultset.getString("first_name"), resultset.getString("second_name"), resultset.getString("image"));
+            }//return session;
         } catch (SQLException e) {
             System.out.println(e.getSQLState()); //Must be a JPopup or something
         }
@@ -1004,4 +1005,30 @@ public class Handler {
             System.out.println(e.getSQLState()); //Must be a JPopup or something
         }
     }
+
+    public static boolean userExists(String username) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        int count = 0;
+        try {
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
+            Statement statement = connection.createStatement();
+            ResultSet resultset = statement.executeQuery("SELECT username FROM User WHERE username='" + username + "' ;");
+            //if there is no data on the data set, the session return will be false
+            while (resultset.next()) {
+                count++;
+            }
+            statement.close();
+            connection.close();
+            return count != 0;
+            //return session;
+        } catch (SQLException e) {
+            System.out.println(e.getSQLState()); //Must be a JPopup or something
+        }
+        return false;
+    }
+
 }

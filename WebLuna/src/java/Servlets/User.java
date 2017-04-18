@@ -6,6 +6,7 @@
 package Servlets;
 
 import BasicElements.Cliente;
+import BasicElements.DBUser;
 import DatabaseManager.Handler;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -19,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author a01334390
  */
-public class Client extends HttpServlet {
+public class User extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,10 +39,10 @@ public class Client extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Client</title>");            
+            out.println("<title>Servlet User</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Client at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet User at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -57,33 +58,33 @@ public class Client extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-         if(request.getParameter("action").equalsIgnoreCase("erase")){
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+        if(request.getParameter("action").equalsIgnoreCase("erase")){
             System.out.println(request.getParameter("erase"));
-            int clientID = Integer.parseInt(request.getParameter("userID"));
-            Handler.deleteClient(clientID);
-            RequestDispatcher req = request.getRequestDispatcher("/BasicViews/client/clientindex.jsp");
+            String username = request.getParameter("username");
+            Handler.deleteUserInDatabase(username);
+            RequestDispatcher req = request.getRequestDispatcher("/BasicViews/user/userindex.jsp");
             req.forward(request, response);
         }
         if(request.getParameter("action").equalsIgnoreCase("edit")){
-            String clientID = request.getParameter("userID");
-            Cliente client = Handler.searchClientByID(clientID);
-            request.setAttribute("client", client);
-            RequestDispatcher req = request.getRequestDispatcher("/BasicViews/client/clientform.jsp");
+            System.out.println(request.getParameter("edit"));
+            String username = request.getParameter("username");
+            DBUser user = Handler.getUserData(username);
+            request.setAttribute("user", user);
+            RequestDispatcher req = request.getRequestDispatcher("/BasicViews/user/userform.jsp");
             req.forward(request, response);
         }
         if(request.getParameter("action").equalsIgnoreCase("add")){
              System.out.println(request.getParameter("add"));
-             String clientID = request.getParameter("userID");
-             Cliente client = Handler.searchClientByID(clientID);
-             request.setAttribute("client", client);
-             RequestDispatcher req = request.getRequestDispatcher("/BasicViews/client/clientform.jsp");
+             String username = request.getParameter("username");
+             DBUser user = Handler.getUserData(username);
+            request.setAttribute("user", user);
+             RequestDispatcher req = request.getRequestDispatcher("/BasicViews/user/userform.jsp");
              req.forward(request, response);
         }
         if(request.getParameter("show")!=null){
             
         }
-        
     }
 
     /**
@@ -96,15 +97,17 @@ public class Client extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String id=request.getParameter("idClient");
-        if(id==null || id.isEmpty()){
-            Cliente user = new Cliente(1000,request.getParameter("first_name"),request.getParameter("second_name"),request.getParameter("address"),Integer.parseInt(request.getParameter("isPhysical")));
-            Handler.addClientToDatabase(user);
+        String username=request.getParameter("username");
+        if(!Handler.userExists(username)){
+            DBUser user = new DBUser(username,request.getParameter("privilege"),request.getParameter("email"),request.getParameter("first_name"),request.getParameter("second_name"),request.getParameter("image"));
+            user.setPassword(request.getParameter("password"));
+            Handler.addUserToDatabase(user);
         }else{
-            Cliente user = new Cliente(Integer.parseInt(request.getParameter("idClient")),request.getParameter("first_name"),request.getParameter("second_name"),request.getParameter("address"),Integer.parseInt(request.getParameter("isPhysical")));
-            Handler.updateClientInDatabase(user);
+            DBUser user = new DBUser(username,request.getParameter("privilege"),request.getParameter("email"),request.getParameter("first_name"),request.getParameter("second_name"),request.getParameter("image"));
+            user.setPassword(request.getParameter("password"));
+            Handler.editUserInDatase(user);
         }
-        RequestDispatcher req = request.getRequestDispatcher("/BasicViews/client/clientindex.jsp");
+        RequestDispatcher req = request.getRequestDispatcher("/BasicViews/user/userindex.jsp");
         req.forward(request, response);
     }
 
