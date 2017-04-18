@@ -28,6 +28,7 @@ import javax.servlet.http.HttpSession;
  * @author a01334390
  */
 public class Login extends HttpServlet {
+
     private static String host = "jdbc:mysql://35.188.87.36/Pola";
     private static String huser = "superuser";
     private static String hpassword = "superuser123";
@@ -50,7 +51,7 @@ public class Login extends HttpServlet {
             out.println("<html>");
             out.println("<head>");
             out.println("<link rel=\"stylesheet\" href=\"https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css\">");
-            out.println("<title>Procesando Login</title>");            
+            out.println("<title>Procesando Login</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<div align = \"center\">");
@@ -73,15 +74,25 @@ public class Login extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        processRequest(request, response);
-        if(Handler.userValidation(request.getParameter("username"), request.getParameter("password"))){
-           HttpSession session = request.getSession();
-           User us = Handler.getUserData(request.getParameter("username"));
-           session.setAttribute("currentSessionName", us.getFirst_name());
-           session.setAttribute("currentPrivilegeLevel", us.getPrivilege());
-           response.sendRedirect("home.jsp");
-        }else{
-           response.sendRedirect("invalidlogin.jsp");
+        if (request.getParameter("action") != null) {
+            if (request.getParameter("action").equals("inventory")) {
+                System.out.println("inventory");
+            }
+            if (request.getParameter("action").equals("order")) {
+                System.out.println("order");
+            }
+            if (request.getParameter("action").equals("material")) {
+                System.out.println("material");
+            }
+            if (request.getParameter("action").equals("user")) {
+                System.out.println("user");
+            }
+            if (request.getParameter("action").equals("advanced")) {
+                System.out.println("advanced");
+            }
+            if (request.getParameter("action").equals("notebook")) {
+                System.out.println("notebook");
+            }
         }
     }
 
@@ -95,8 +106,24 @@ public class Login extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        processRequest(request, response);
-        
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+
+        if (Handler.userValidation(username, password)) {
+            User us = Handler.searchUsername(username);
+            request.getSession().setAttribute("currentSessionName", us.getFirst_name());
+            request.getSession().setAttribute("currentPrivilegeLevel", us.getPrivilege());
+            RequestDispatcher disp = getServletContext().getRequestDispatcher("/home.jsp");
+            if (disp != null) {
+                disp.include(request, response);
+            }
+        } else {
+            response.sendRedirect("invalidlogin.jsp");
+            RequestDispatcher disp = getServletContext().getRequestDispatcher("/invalidlogin.jsp");
+            if (disp != null) {
+                disp.include(request, response);
+            }
+        }
     }
 
     /**
@@ -108,7 +135,5 @@ public class Login extends HttpServlet {
     public String getServletInfo() {
         return "This processes everything that handles the user's interaction with the database";
     }// </editor-fold>
-   
-
 
 }

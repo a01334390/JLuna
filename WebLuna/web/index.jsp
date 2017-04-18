@@ -39,7 +39,7 @@
         <br>
         <div class ="row">
             <div class ="small-6 large-4 columns">
-                <form name="login" action="login" method="GET">
+                <form name="login" action="login" method="POST">
                     <div class="form-icons">
                         <h4>Iniciar Sesion</h4>
                     </div>
