@@ -16,7 +16,7 @@ package BasicElements;
  */
 public class Cliente {
     private int id;
-    private String first_name,second_name,address;
+    private  String first_name,second_name,address;
     private int isPhysical;
 
     public Cliente(int id, String first_name, String second_name, String address, int isPhysical) {

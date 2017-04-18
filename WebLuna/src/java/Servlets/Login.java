@@ -85,8 +85,15 @@ public class Login extends HttpServlet {
                 System.out.println("material");
             }
             if (request.getParameter("action").equals("user")) {
-                System.out.println("user");
+
             }
+            if (request.getParameter("action").equals("client")) {
+                RequestDispatcher disp = getServletContext().getRequestDispatcher("/BasicViews/client/clientindex.jsp");
+                if (disp != null) {
+                    disp.include(request, response);
+                }
+            }
+
             if (request.getParameter("action").equals("advanced")) {
                 System.out.println("advanced");
             }

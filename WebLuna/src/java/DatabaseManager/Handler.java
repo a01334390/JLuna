@@ -27,6 +27,7 @@ import java.util.logging.Logger;
  * @author a01334390
  */
 public class Handler {
+
     private static String host = "jdbc:mysql://35.188.87.36/Pola";
     private static String huser = "superuser";
     private static String hpassword = "superuser123";
@@ -920,7 +921,7 @@ public class Handler {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT username,MIN(create_time) FROM User GROUP BY username DESC;");
-            while(resultset.next()){
+            while (resultset.next()) {
                 return resultset.getString("username");
             }
         } catch (SQLException e) {
@@ -933,7 +934,7 @@ public class Handler {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT count(username) FROM User WHERE privilege='worker' ;");
-            while(resultset.next()){
+            while (resultset.next()) {
                 return resultset.getString("count(username)");
             }
         } catch (SQLException e) {
@@ -942,11 +943,11 @@ public class Handler {
     }
 
     public static String getNumberOfImageOrders() {
-       try {
+        try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT COUNT(id_Order) FROM Notebook_Order JOIN Customization ON Notebook_Order.id_Customization = Customization.idCustomization WHERE image IS NOT NULL;");
-            while(resultset.next()){
+            while (resultset.next()) {
                 return Integer.toString(resultset.getInt("COUNT(id_Order)"));
             }
         } catch (SQLException e) {
@@ -976,11 +977,31 @@ public class Handler {
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT * FROM User WHERE username='" + username + "' ");
             //if there is no data on the data set, the session return will be false
-            return new User(resultset.getString("username"),resultset.getString("privilege"),resultset.getString("email"),resultset.getString("first_name"),resultset.getString("second_name"),resultset.getString("image"));
+            return new User(resultset.getString("username"), resultset.getString("privilege"), resultset.getString("email"), resultset.getString("first_name"), resultset.getString("second_name"), resultset.getString("image"));
             //return session;
         } catch (SQLException e) {
             System.out.println(e.getSQLState()); //Must be a JPopup or something
         }
         return null;
+    }
+
+    public static void updateClientInDatabase(Cliente client) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        int count = 0;
+        try {
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
+            Statement statement = connection.createStatement();
+            statement.executeUpdate("UPDATE Client "
+                    + "SET first_name='" + client.getFirst_name() + "', second_name='" + client.getSecond_name() + "', address='" + client.getAddress() + "', isPhysical=" + client.getIsPhysical() + " "
+                    + "WHERE idClient=" + client.getId() + ";");
+            //if there is no data on the data set, the session return will be false
+
+        } catch (SQLException e) {
+            System.out.println(e.getSQLState()); //Must be a JPopup or something
+        }
     }
 }
