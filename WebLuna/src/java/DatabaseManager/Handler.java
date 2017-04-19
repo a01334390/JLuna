@@ -497,20 +497,6 @@ public class Handler {
 
     /**
      *
-     * @param ord
-     */
-    public static void addOrderToDatabase(Order ord) {
-        try {
-            Connection connection = DriverManager.getConnection(host, huser, hpassword);
-            Statement statement = connection.createStatement();
-            int rowsaffected = statement.executeUpdate("INSERT INTO Pola.Order(date,priority,create_time,client_id) VALUES ('" + ord.getDate() + "' , '" + ord.getPriority() + "' , '" + dateToString() + "'," + ord.getClient_id() + ") ;");
-        } catch (SQLException e) {
-            System.out.println(e.getSQLState()); //Must be a JPopup or something
-        }
-    }
-
-    /**
-     *
      * @return
      */
     public static int getLastOrderGenerated() {
@@ -1024,5 +1010,100 @@ public class Handler {
         }
         return false;
     }
+
+    public static void editOrderInDatabase(Order order) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
+            Statement statement = connection.createStatement();
+            statement.executeUpdate("UPDATE Pola.Order "
+                    + "SET date='" + order.getDate() + "', priority='" + order.getPriority() + "', create_time='" + order.getCreate_time() + "'  "
+                    + "WHERE idOrder=" + order.getId() + ";");
+            //if there is no data on the data set, the session return will be false
+
+        } catch (SQLException e) {
+            System.out.println(e.getSQLState()); //Must be a JPopup or something
+        }
+    }
+ 
+    public static void addOrderToDatabase(Order ord) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
+            Statement statement = connection.createStatement();
+            int rowsaffected = statement.executeUpdate("INSERT INTO Pola.Order(date,priority,create_time,client_id) VALUES ('" + ord.getDate() + "' , '" + ord.getPriority() + "' , '" + dateToString() + "'," + ord.getClient_id() + ") ;");
+        } catch (SQLException e) {
+            System.out.println(e.getSQLState()); //Must be a JPopup or something
+        }
+    }
+
+    public static OrderNotebooks getNotebookOrder(String orderID, String notebookID) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
+            Statement statement = connection.createStatement();
+            ResultSet resultset = statement.executeQuery("SELECT * FROM Notebook_Order where id_Order=" + orderID + " AND id_Notebook="+notebookID+";");
+            //if there is no data on the data set, the session return will be false
+            while (resultset.next()) {
+                return new OrderNotebooks(resultset.getInt("id_Notebook"), resultset.getInt("id_Order"), resultset.getInt("quantity"), resultset.getString("status"), resultset.getString("ribbon"), resultset.getString("image"), resultset.getString("elastic"), resultset.getString("pageType"));
+            }
+            statement.close();
+            connection.close();
+            //return session;
+        } catch (SQLException e) {
+            System.out.println(e.getSQLState()); //Must be a JPopup or something
+        }
+        return null;
+    }
+    
+    public static void editNotebookOrder(OrderNotebooks on) {
+       try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       try {
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
+            Statement statement = connection.createStatement();
+            statement.executeUpdate("UPDATE Notebook_Order "
+                    + "SET quantity=" + on.getQuantity() + ", status='" + on.getStatus() + "', ribbon='" + on.getRibbon() + "', image='"+on.getImage()+"', pageType='"+on.getPageType()+"'  "
+                    + "WHERE id_Order=" + on.getId_Order() + " AND id_Notebook="+on.getId_Notebook()+";");
+            //if there is no data on the data set, the session return will be false
+
+        } catch (SQLException e) {
+            System.out.println(e.getSQLState()); //Must be a JPopup or something
+        }
+       
+    }
+    
+    public static void addNotebookOrder(OrderNotebooks on) {
+         try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
+            Statement statement = connection.createStatement();
+            int rowsaffected = statement.executeUpdate("INSERT INTO Notebook_Order(idNotebook,id_Order,quantity,status,ribbon,image,elastic,pageType) "
+                    + "VALUES (" + on.getId_Notebook() + " , " + on.getId_Order() + " , " + on.getQuantity() + ",'" + on.getStatus() + "','"+on.getRibbon()+"', '"+on.getImage()+"','"+on.getElastic()+"','"+on.getPageType()+"' ) ;");
+        } catch (SQLException e) {
+            System.out.println(e.getSQLState()); //Must be a JPopup or something
+        }
+    }
+    
+
 
 }

@@ -21,8 +21,8 @@
         <servlet-class>Servlets.Order</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Cart</servlet-name>
-        <servlet-class>Servlets.Cart</servlet-class>
+        <servlet-name>ONotebook</servlet-name>
+        <servlet-class>Servlets.ONotebook</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
@@ -45,8 +45,8 @@
         <url-pattern>/Order</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Cart</servlet-name>
-        <url-pattern>/Cart</url-pattern>
+        <servlet-name>ONotebook</servlet-name>
+        <url-pattern>/ONotebook</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

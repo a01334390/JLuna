@@ -72,9 +72,9 @@
                                 </div>
                                 <div class="small-8 medium-10 columns">
                                     <h6 class="travel-feature-card-title">Caracteristicas del pedido</h6>
-                                    <%if (order[i].getPriority() == "HIGH") {%>
+                                    <%if (order[i].getPriority().equals("HIGH")) {%>
                                     <p>Prioridad del pedido: Alta</p>
-                                    <%} else if (order[i].getPriority() == "MEDIUM") {%>
+                                    <%} else if (order[i].getPriority().equals("MEDIUM")) {%>
                                     <p>Prioridad del pedido: Media</p>
                                     <%} else {%>
                                     <p>Prioridad del pedido: Baja</p>
@@ -84,6 +84,15 @@
                                     <%
                                         OrderNotebooks[] on = Handler.getAllNotebooksFromOrders(order[i].getId());
                                     %>
+                                    <div class="product-card">
+                                        <div class="product-card-thumbnail">
+                                            <a href="Order?action=addnewone&OrderID=<%=order[i].getId()%>&clientID=<%=client.getId()%>"><img src="http://placehold.it/180x180"/></a>
+                                        </div>
+                                        <h2 class="product-card-title"><a href="ONotebook?action=add&OrderID=<%=order[i].getId()%>&clientID=<%=client.getId()%>">Aunar set de cuadernos</a></h2>
+                                        <div class="product-card-colors">
+
+                                        </div>
+                                    </div>
                                     <%if (on != null) {
                                             for (int x = 0; x < on.length; x++) {%>
                                     <div class="product-card">
@@ -98,7 +107,8 @@
                                             <p>Elastico: <%=on[x].getElastic()%></p>
                                             <p>Imagen: <%=on[x].getImage()%></p>
                                             <p>Tipo de Hojas: <%=on[x].getPageType()%></p>
-                                            <a href="Order?action=deleteON&OrderID=<%=order[i].getId()%>&NotebookID=<%=on[x].getId_Notebook()%>&clientID=<%=client.getId()%>">Eliminar</a>
+                                            <a href="ONotebook?action=delete&OrderID=<%=order[i].getId()%>&NotebookID=<%=on[x].getId_Notebook()%>&clientID=<%=client.getId()%>">Eliminar</a>
+                                            <a href="ONotebook?action=add&OrderID=<%=order[i].getId()%>&NotebookID=<%=on[x].getId_Notebook()%>&clientID=<%=client.getId()%>">Eliminar</a>
                                         </div>
                                     </div>
                                     <%}

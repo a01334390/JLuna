@@ -74,25 +74,24 @@ public class Order extends HttpServlet {
             RequestDispatcher req = request.getRequestDispatcher("/BasicViews/order/orderAll.jsp");
             req.forward(request, response);
         }
-        if (request.getParameter("action").equalsIgnoreCase("deleteON")) {
-            String orderID = request.getParameter("OrderID");
-            String notebookID = request.getParameter("NotebookID");
-            Handler.DeleteNotebookOrderInDatabase(orderID, notebookID);
+        if (request.getParameter("action").equalsIgnoreCase("edit")) {
             String userID = request.getParameter("clientID");
+            String orderID = request.getParameter("OrderID");
+            BasicElements.Order order = Handler.searchOrderByID(orderID);
             Cliente client = Handler.searchClientByID(userID);
             request.setAttribute("client", client);
-            RequestDispatcher req = request.getRequestDispatcher("/BasicViews/order/orderAll.jsp");
+            request.setAttribute("order", order);
+            RequestDispatcher req = request.getRequestDispatcher("/BasicViews/order/newOrderForm.jsp");
             req.forward(request, response);
         }
-        if (request.getParameter("action").equalsIgnoreCase("edit")) {
-
-        }
-        if(request.getParameter("action").equalsIgnoreCase("add")){
+        if (request.getParameter("action").equalsIgnoreCase("add")) {
             String userID = request.getParameter("clientID");
+            String orderID = request.getParameter("OrderID");
+            BasicElements.Order order = Handler.searchOrderByID(orderID);
             Cliente client = Handler.searchClientByID(userID);
             request.setAttribute("client", client);
-            request.setAttribute("cart",new BasicElements.Cart(client.getId()));
-             RequestDispatcher req = request.getRequestDispatcher("/BasicViews/order/newOrder.jsp");
+            request.setAttribute("order", order);
+            RequestDispatcher req = request.getRequestDispatcher("/BasicViews/order/newOrderForm.jsp");
             req.forward(request, response);
         }
     }
@@ -107,7 +106,19 @@ public class Order extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        String Orderid = request.getParameter("idOrder");
+        String ClientID = request.getParameter("idClient");
+        if (!"".equals(Orderid)) {
+            BasicElements.Order order = new BasicElements.Order(Integer.parseInt(Orderid), request.getParameter("date"), request.getParameter("priority"), request.getParameter("create_time"), Integer.parseInt(ClientID));
+            Handler.editOrderInDatabase(order);
+        } else {
+            BasicElements.Order order = new BasicElements.Order(1000, request.getParameter("date"), request.getParameter("priority"), request.getParameter("create_time"), Integer.parseInt(ClientID));
+            Handler.addOrderToDatabase(order);
+        }
+        Cliente client = Handler.searchClientByID(ClientID);
+        request.setAttribute("client", client);
+        RequestDispatcher req = request.getRequestDispatcher("/BasicViews/order/orderAll.jsp");
+        req.forward(request, response);
     }
 
     /**

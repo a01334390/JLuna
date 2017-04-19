@@ -35,6 +35,10 @@ public class OrderNotebooks {
         this.elastic = elastic;
         this.pageType = pageType;
     }
+    
+    public OrderNotebooks(){
+        
+    }
 
     public int getQuantity() {
         return quantity;
