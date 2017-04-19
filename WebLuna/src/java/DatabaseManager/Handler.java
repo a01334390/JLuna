@@ -410,40 +410,6 @@ public class Handler {
         }
         return null;
     }
-
-    /**
-     *
-     * @param id
-     * @return
-     */
-    public static OrderNotebooks[] getOrderNotebookBasicView(int id) {
-        ArrayList<OrderNotebooks> array = new ArrayList<>();
-        try {
-            Connection connection = DriverManager.getConnection(host, huser, hpassword);
-            Statement statement = connection.createStatement();
-            ResultSet resultset = statement.executeQuery("SELECT * FROM Notebook_Order WHERE id_Order= '" + Integer.toString(id) + "';");
-            while (resultset.next()) {
-                array.add(new OrderNotebooks(resultset.getInt("id_Notebook"), resultset.getInt("id_Order"), resultset.getInt("quantity"), resultset.getString("status"), resultset.getInt("id_Customization")));
-            }
-            return array.toArray(new OrderNotebooks[array.size()]);
-        } catch (SQLException e) {
-            System.out.println(e.getSQLState()); //Must be a JPopup or something
-        }
-        return null;
-    }
-
-    public static boolean updateOrderNotebooks(int quantity, String status, int idOrder) {
-        try {
-            Connection connection = DriverManager.getConnection(host, huser, hpassword);
-            Statement statement = connection.createStatement();
-            int rowsaffected = statement.executeUpdate("UPDATE Notebook_Order SET quantity='" + quantity + "',status='" + status + "'WHERE id_Order='" + idOrder + "';");
-            return rowsaffected > 0;
-        } catch (SQLException e) {
-            System.out.println(e.getSQLState());
-        }
-        return false;
-    }
-
     /**
      *
      * @param idNotebook
@@ -575,25 +541,6 @@ public class Handler {
             System.out.println(e.getSQLState()); //Must be a JPopup or something
         }
         return -1;
-    }
-
-    /**
-     *
-     * @param cust
-     */
-
-    /**
-     *
-     * @param nbo
-     */
-    public static void addOrderNotebookToDatabase(OrderNotebooks nbo) {
-        try {
-            Connection connection = DriverManager.getConnection(host, huser, hpassword);
-            Statement statement = connection.createStatement();
-            int rowsaffected = statement.executeUpdate("INSERT INTO Notebook_Order (id_Notebook,id_Order,quantity,status,id_Customization) VALUES (" + nbo.getId_Notebook() + " , " + nbo.getId_Order() + " , " + nbo.getQuantity() + ",'" + nbo.getStatus() + "'," + nbo.getId_Customization() + ") ;");
-        } catch (SQLException e) {
-            System.out.println(e.getSQLState()); //Must be a JPopup or something
-        }
     }
 
     public static Inventory getInventoryByNotebookID(int id) {
@@ -1030,6 +977,31 @@ public class Handler {
             }
             statement.close();
             connection.close();
+            //return session;
+        } catch (SQLException e) {
+            System.out.println(e.getSQLState()); //Must be a JPopup or something
+        }
+        return null;
+    }
+    
+    public static OrderNotebooks[] getAllNotebooksFromOrders(int orderID){
+        ArrayList<OrderNotebooks> on = new ArrayList<>();
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         try {
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
+            Statement statement = connection.createStatement();
+            ResultSet resultset = statement.executeQuery("SELECT * FROM Notebook_Order where id_Order="+orderID+";");
+            //if there is no data on the data set, the session return will be false
+            while (resultset.next()) {
+                on.add(new OrderNotebooks(resultset.getInt("id_Notebook"),resultset.getInt("id_Order"),resultset.getInt("quantity"),resultset.getString("status"),resultset.getString("ribbon"),resultset.getString("image"),resultset.getString("elastic"),resultset.getString("pageType")));
+            }
+            statement.close();
+            connection.close();
+            return on.toArray(new OrderNotebooks[on.size()]);
             //return session;
         } catch (SQLException e) {
             System.out.println(e.getSQLState()); //Must be a JPopup or something

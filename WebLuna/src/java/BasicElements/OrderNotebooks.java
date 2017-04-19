@@ -20,22 +20,28 @@ public class OrderNotebooks {
     private int id_Notebook;
     private int id_Order;
     private String status;
-    private int id_Customization;
-    
-    public OrderNotebooks(int id_Notebook, int id_Order, int quantity, String status, int id_Customization) {
+    private String ribbon;
+    private String image;
+    private String elastic;
+    private String pageType;
+
+    public OrderNotebooks(int id_Notebook, int id_Order,int quantity, String status, String ribbon, String image, String elastic, String pageType) {
+        this.quantity = quantity;
         this.id_Notebook = id_Notebook;
         this.id_Order = id_Order;
+        this.status = status;
+        this.ribbon = ribbon;
+        this.image = image;
+        this.elastic = elastic;
+        this.pageType = pageType;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
-        this.id_Customization = id_Customization;
-        this.status = status;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public int getId_Notebook() {
@@ -54,26 +60,48 @@ public class OrderNotebooks {
         this.id_Order = id_Order;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public String getStatus() {
+        return status;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public int getId_Customization() {
-        return id_Customization;
+    public String getRibbon() {
+        return ribbon;
     }
 
-    public void setId_Customization(int id_Customization) {
-        this.id_Customization = id_Customization;
+    public void setRibbon(String ribbon) {
+        this.ribbon = ribbon;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getElastic() {
+        return elastic;
+    }
+
+    public void setElastic(String elastic) {
+        this.elastic = elastic;
+    }
+
+    public String getPageType() {
+        return pageType;
+    }
+
+    public void setPageType(String pageType) {
+        this.pageType = pageType;
     }
     
-    @Override
-    public String toString(){
-        return Integer.toString(id_Notebook);
-    }
     
+    
+  
 
 }

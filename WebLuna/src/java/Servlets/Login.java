@@ -79,7 +79,10 @@ public class Login extends HttpServlet {
                 System.out.println("inventory");
             }
             if (request.getParameter("action").equals("order")) {
-                System.out.println("order");
+                RequestDispatcher disp = getServletContext().getRequestDispatcher("/BasicViews/order/orderHome.jsp");
+                if (disp != null) {
+                    disp.include(request, response);
+                }
             }
             if (request.getParameter("action").equals("material")) {
                 System.out.println("material");
