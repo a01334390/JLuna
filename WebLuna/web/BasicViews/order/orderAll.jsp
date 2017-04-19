@@ -86,7 +86,7 @@
                                     %>
                                     <div class="product-card">
                                         <div class="product-card-thumbnail">
-                                            <a href="Order?action=addnewone&OrderID=<%=order[i].getId()%>&clientID=<%=client.getId()%>"><img src="http://placehold.it/180x180"/></a>
+                                            <a href="ONotebook?action=add&OrderID=<%=order[i].getId()%>&clientID=<%=client.getId()%>"><img src="http://placehold.it/180x180"/></a>
                                         </div>
                                         <h2 class="product-card-title"><a href="ONotebook?action=add&OrderID=<%=order[i].getId()%>&clientID=<%=client.getId()%>">Aunar set de cuadernos</a></h2>
                                         <div class="product-card-colors">
@@ -108,7 +108,7 @@
                                             <p>Imagen: <%=on[x].getImage()%></p>
                                             <p>Tipo de Hojas: <%=on[x].getPageType()%></p>
                                             <a href="ONotebook?action=delete&OrderID=<%=order[i].getId()%>&NotebookID=<%=on[x].getId_Notebook()%>&clientID=<%=client.getId()%>">Eliminar</a>
-                                            <a href="ONotebook?action=add&OrderID=<%=order[i].getId()%>&NotebookID=<%=on[x].getId_Notebook()%>&clientID=<%=client.getId()%>">Eliminar</a>
+                                            <a href="ONotebook?action=edit&OrderID=<%=order[i].getId()%>&NotebookID=<%=on[x].getId_Notebook()%>&clientID=<%=client.getId()%>">editar</a>
                                         </div>
                                     </div>
                                     <%}

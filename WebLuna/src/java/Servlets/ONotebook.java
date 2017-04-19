@@ -6,6 +6,7 @@
 package Servlets;
 
 import BasicElements.Cliente;
+import BasicElements.OrderNotebooks;
 import DatabaseManager.Handler;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -72,9 +73,11 @@ public class ONotebook extends HttpServlet {
             String orderID = request.getParameter("OrderID");
             String clientID = request.getParameter("clientID");
             String notebookID = request.getParameter("NotebookID");
-            Cliente client = Handler.searchClientByID(clientID);
-            request.setAttribute("client", client);
+            request.setAttribute("client", clientID);
+            request.setAttribute("orderNumber", orderID);
+            request.setAttribute("nb", Handler.getAllNotebooks());
             request.setAttribute("on", Handler.getNotebookOrder(orderID, notebookID));
+            request.setAttribute("action", "Editando");
             RequestDispatcher req = request.getRequestDispatcher("/BasicViews/order/newOrderNotebook.jsp");
             req.forward(request, response);
 
@@ -83,9 +86,11 @@ public class ONotebook extends HttpServlet {
             String orderID = request.getParameter("OrderID");
             String clientID = request.getParameter("clientID");
             String notebookID = request.getParameter("NotebookID");
-            Cliente client = Handler.searchClientByID(clientID);
-            request.setAttribute("client", client);
+            request.setAttribute("client", clientID);
             request.setAttribute("on", Handler.getNotebookOrder(orderID, notebookID));
+            request.setAttribute("orderNumber", orderID);
+            request.setAttribute("nb", Handler.getAllNotebooks());
+            request.setAttribute("action", "Aunando");
             RequestDispatcher req = request.getRequestDispatcher("/BasicViews/order/newOrderNotebook.jsp");
             req.forward(request, response);
         }
@@ -101,7 +106,25 @@ public class ONotebook extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        String action = request.getParameter("action");
+        String idOrder = request.getParameter("idOrder");
+        String id_Notebook = request.getParameter("id_Notebook");
+        String quantity = request.getParameter("quantity");
+        String status = request.getParameter("status");
+        String ribbon = request.getParameter("ribbon");
+        String elastic = request.getParameter("elastic");
+        String pageType = request.getParameter("pageType");
+        String image = request.getParameter("image");
+        String clientID = request.getParameter("clientID");
+        if (action.equalsIgnoreCase("Editando")) {
+           Handler.editNotebookOrder(new OrderNotebooks(Integer.parseInt(id_Notebook),Integer.parseInt(idOrder),Integer.parseInt(quantity),status,ribbon,image,elastic,pageType));
+        } else {
+           Handler.addNotebookOrder(new OrderNotebooks(Integer.parseInt(id_Notebook),Integer.parseInt(idOrder),Integer.parseInt(quantity),status,ribbon,image,elastic,pageType));
+        }
+        Cliente client = Handler.searchClientByID(clientID);
+        request.setAttribute("client", client);
+        RequestDispatcher req = request.getRequestDispatcher("/BasicViews/order/orderAll.jsp");
+        req.forward(request, response);
     }
 
     /**

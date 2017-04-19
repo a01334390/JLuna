@@ -1039,7 +1039,7 @@ public class Handler {
         try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
-            int rowsaffected = statement.executeUpdate("INSERT INTO Pola.Order(date,priority,create_time,client_id) VALUES ('" + ord.getDate() + "' , '" + ord.getPriority() + "' , '" + dateToString() + "'," + ord.getClient_id() + ") ;");
+            int rowsaffected = statement.executeUpdate("INSERT INTO Pola.Order(date,priority,create_time,client_id) VALUES ('" + ord.getDate() + "' , '" + ord.getPriority() + "' , '" + dateToString() + "', " + ord.getClient_id() + ") ;");
         } catch (SQLException e) {
             System.out.println(e.getSQLState()); //Must be a JPopup or something
         }
@@ -1097,7 +1097,7 @@ public class Handler {
         try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
-            int rowsaffected = statement.executeUpdate("INSERT INTO Notebook_Order(idNotebook,id_Order,quantity,status,ribbon,image,elastic,pageType) "
+            int rowsaffected = statement.executeUpdate("INSERT INTO Notebook_Order(id_Notebook,id_Order,quantity,status,ribbon,image,elastic,pageType) "
                     + "VALUES (" + on.getId_Notebook() + " , " + on.getId_Order() + " , " + on.getQuantity() + ",'" + on.getStatus() + "','"+on.getRibbon()+"', '"+on.getImage()+"','"+on.getElastic()+"','"+on.getPageType()+"' ) ;");
         } catch (SQLException e) {
             System.out.println(e.getSQLState()); //Must be a JPopup or something

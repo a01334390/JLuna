@@ -25,19 +25,23 @@
             <form action="ONotebook" method="POST" name="OrderForm">
                 <h3>Aunar un nuevo set de cuadernos al pedido</h3>
                 <div class="row columns">
+                        <input type="text" readonly="readonly" name="action" value="<c:out value="${action}"/>"/>
+                </div>
+                <div class="row columns">
+                        <input type="text" readonly="readonly" name="clientID" value="<c:out value="${client}"/>"/>
+                </div>
+                <div class="row columns">
                     <label>Clave de la Orden
-                        <input type="text" readonly="readonly" name="idOrder" value="<c:out value="${on.getID_Order()}"/>"/>
+                        <input type="text" readonly="readonly" name="idOrder" value="<c:out value="${orderNumber}"/>"/>
                     </label>
                 </div>
                 <div class="row columns">
                     <label> Cuadernos
-                    <select name="id_Notebook">
-                        <% Notebook[] nb = Handler.getAllNotebooks();
-                        for(int i=0;i<nb.length;i++){
-                            %>
-                            <option value="${nb[i].getId()}" ${on.getId_Notebook() == nb[i].getId() ? 'selected="selected"' : ''}>${nb[i].getType()}<%=nb[i].getType()%></option>
-                       <% } %>
-                    </select>
+                            <select name="id_Notebook">
+                                <c:forEach var="item" items="${nb}">
+                                    <option value="${item.getId()}" ${item.getId() == on.getId_Notebook() ? 'selected="selected"' : ''}>${item.getType()}</option>
+                                </c:forEach>
+                            </select>
                     </label>
                 </div>
                 <div class="row columns">
@@ -48,7 +52,7 @@
 
                 <div class="row columns">
                     <label> Status de la orden
-                        <select name="priority" type="text">
+                        <select name="status" type="text">
                             <option value="Diseño" value="Diseño" ${on.getStatus() == "Diseño" ? 'selected="selected"' : ''}> Diseño</option>
                             <option value="Preview" ${on.getStatus() == "Diseño" ? 'selected="selected"' : ''}>Preview</option>
                             <option value="Laminado" ${on.getStatus() == "Laminado" ? 'selected="selected"' : ''}>Laminado</option>
@@ -88,7 +92,7 @@
                 </div>
                 <div class="row columns">
                     <label>Link de la imagen
-                        <input type="text"  name="image" vvalue="<c:out value="${on.getImage()}"/>"/>
+                        <input type="text"  name="image" value="<c:out value="${on.getImage()}"/>"/>
                     </label>
                 </div>
                 <input type="submit" class="primary button expanded search-button" value="Modificar"/>
