@@ -410,6 +410,7 @@ public class Handler {
         }
         return null;
     }
+
     /**
      *
      * @param idNotebook
@@ -448,23 +449,6 @@ public class Handler {
             System.out.println(e.getSQLState()); //Must be a JPopup or something
         }
         return null;
-    }
-
-    /**
-     *
-     * @param orderid
-     * @return
-     */
-    public static boolean deleteOrder(int orderid) {
-        try {
-            Connection connection = DriverManager.getConnection(host, huser, hpassword);
-            Statement statement = connection.createStatement();
-            int rowsaffected = statement.executeUpdate("DELETE FROM Pola.Order WHERE idOrder=" + Integer.toString(orderid) + ";");
-            return rowsaffected > 0;
-        } catch (SQLException e) {
-            System.out.println(e.getSQLState()); //Must be a JPopup or something
-        }
-        return false;
     }
 
     /**
@@ -983,21 +967,21 @@ public class Handler {
         }
         return null;
     }
-    
-    public static OrderNotebooks[] getAllNotebooksFromOrders(int orderID){
+
+    public static OrderNotebooks[] getAllNotebooksFromOrders(int orderID) {
         ArrayList<OrderNotebooks> on = new ArrayList<>();
         try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
         }
-         try {
+        try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
-            ResultSet resultset = statement.executeQuery("SELECT * FROM Notebook_Order where id_Order="+orderID+";");
+            ResultSet resultset = statement.executeQuery("SELECT * FROM Notebook_Order where id_Order=" + orderID + ";");
             //if there is no data on the data set, the session return will be false
             while (resultset.next()) {
-                on.add(new OrderNotebooks(resultset.getInt("id_Notebook"),resultset.getInt("id_Order"),resultset.getInt("quantity"),resultset.getString("status"),resultset.getString("ribbon"),resultset.getString("image"),resultset.getString("elastic"),resultset.getString("pageType")));
+                on.add(new OrderNotebooks(resultset.getInt("id_Notebook"), resultset.getInt("id_Order"), resultset.getInt("quantity"), resultset.getString("status"), resultset.getString("ribbon"), resultset.getString("image"), resultset.getString("elastic"), resultset.getString("pageType")));
             }
             statement.close();
             connection.close();
@@ -1007,6 +991,38 @@ public class Handler {
             System.out.println(e.getSQLState()); //Must be a JPopup or something
         }
         return null;
+    }
+
+    public static void DeleteNotebookOrderInDatabase(String orderID, String notebookID) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
+            Statement statement = connection.createStatement();
+            int rowsaffected = statement.executeUpdate("DELETE FROM Notebook_Order WHERE id_Order=" + Integer.parseInt(orderID) + " AND id_Notebook="+Integer.parseInt(notebookID)+";");
+        } catch (SQLException e) {
+            System.out.println(e.getSQLState()); //Must be a JPopup or something
+        }
+    }
+
+    public static boolean deleteOrder(int orderid) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
+            Statement statement = connection.createStatement();
+            int rowsaffected = statement.executeUpdate("DELETE FROM Pola.Order WHERE idOrder=" + Integer.toString(orderid) + ";");
+            return rowsaffected > 0;
+        } catch (SQLException e) {
+            System.out.println(e.getSQLState()); //Must be a JPopup or something
+        }
+        return false;
     }
 
 }

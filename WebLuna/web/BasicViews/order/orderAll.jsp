@@ -44,6 +44,7 @@
             Cliente client = (Cliente) request.getAttribute("client");
             Order[] order = Handler.getOrdersFromClient(client.getId());
         %>
+        <a href="Order?action=add&clientID=<%=client.getId()%>">Aunar un nuevo pedido</a>
         <%for (int i = 0; i < order.length; i++) {%>
         <div>
             <div class="travel-feature-card">
@@ -83,8 +84,8 @@
                                     <%
                                         OrderNotebooks[] on = Handler.getAllNotebooksFromOrders(order[i].getId());
                                     %>
-                                    <%if(on!=null){
-                                        for(int x=0;x<on.length;x++){%>
+                                    <%if (on != null) {
+                                            for (int x = 0; x < on.length; x++) {%>
                                     <div class="product-card">
                                         <div class="product-card-thumbnail">
                                             <a href="#"><img src="http://placehold.it/180x180"/></a>
@@ -97,18 +98,19 @@
                                             <p>Elastico: <%=on[x].getElastic()%></p>
                                             <p>Imagen: <%=on[x].getImage()%></p>
                                             <p>Tipo de Hojas: <%=on[x].getPageType()%></p>
+                                            <a href="Order?action=deleteON&OrderID=<%=order[i].getId()%>&NotebookID=<%=on[x].getId_Notebook()%>&clientID=<%=client.getId()%>">Eliminar</a>
                                         </div>
                                     </div>
                                     <%}
-                                    }%>
+                                        }%>
                                 </div>
                             </div> 
                         </div>
 
                         <div class="small-12 medium-3 columns travel-feature-card-price">
                             <h6>Acciones</h6>
-                            <a href="Order?action=delete&OrderID=<%=order[i].getId()%>">Eliminar</a>
-                            <a href="Order?action=edit&OrderID=<%=order[i].getId()%>">Editar</a>
+                            <a href="Order?action=delete&OrderID=<%=order[i].getId()%>&clientID=<%=client.getId()%>">Eliminar</a>
+                            <a href="Order?action=edit&OrderID=<%=order[i].getId()%>&clientID=<%=client.getId()%>">Aunar mas cuadernos a la orden</a>
                         </div>
                     </div> 
                 </div>

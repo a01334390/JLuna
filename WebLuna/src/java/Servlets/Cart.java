@@ -5,11 +5,8 @@
  */
 package Servlets;
 
-import BasicElements.*;
-import DatabaseManager.Handler;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author a01334390
  */
-public class Order extends HttpServlet {
+public class Cart extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,10 +35,10 @@ public class Order extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Order</title>");
+            out.println("<title>Servlet Cart</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Order at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Cart at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,43 +55,6 @@ public class Order extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (request.getParameter("action").equalsIgnoreCase("see")) {
-            String userID = request.getParameter("userID");
-            Cliente client = Handler.searchClientByID(userID);
-            request.setAttribute("client", client);
-            RequestDispatcher req = request.getRequestDispatcher("/BasicViews/order/orderAll.jsp");
-            req.forward(request, response);
-        }
-        if (request.getParameter("action").equalsIgnoreCase("delete")) {
-            String orderID = request.getParameter("OrderID");
-            Handler.deleteOrder(Integer.parseInt(orderID));
-            String userID = request.getParameter("clientID");
-            Cliente client = Handler.searchClientByID(userID);
-            request.setAttribute("client", client);
-            RequestDispatcher req = request.getRequestDispatcher("/BasicViews/order/orderAll.jsp");
-            req.forward(request, response);
-        }
-        if (request.getParameter("action").equalsIgnoreCase("deleteON")) {
-            String orderID = request.getParameter("OrderID");
-            String notebookID = request.getParameter("NotebookID");
-            Handler.DeleteNotebookOrderInDatabase(orderID, notebookID);
-            String userID = request.getParameter("clientID");
-            Cliente client = Handler.searchClientByID(userID);
-            request.setAttribute("client", client);
-            RequestDispatcher req = request.getRequestDispatcher("/BasicViews/order/orderAll.jsp");
-            req.forward(request, response);
-        }
-        if (request.getParameter("action").equalsIgnoreCase("edit")) {
-
-        }
-        if(request.getParameter("action").equalsIgnoreCase("add")){
-            String userID = request.getParameter("clientID");
-            Cliente client = Handler.searchClientByID(userID);
-            request.setAttribute("client", client);
-            request.setAttribute("cart",new BasicElements.Cart(client.getId()));
-             RequestDispatcher req = request.getRequestDispatcher("/BasicViews/order/newOrder.jsp");
-            req.forward(request, response);
-        }
     }
 
     /**
@@ -107,7 +67,6 @@ public class Order extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 
     /**
