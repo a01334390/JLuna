@@ -80,26 +80,26 @@
                     <div class="row small-up-2 medium-up-3 large-up-4">
                         <div class="column" type="left-rightpadd" type="left-rightpadd">
                             <form action="login"  method="GET">
-                                <input type="image" src="https://placehold.it/300x400" name="action" value="order"/>
+                                <input type="image" src="images/pedidos.png" name="action" value="order"/>
                             </form>
                             <h5 align="center">Ordenes</h5>
                         </div>
                         <div class="column" type="left-rightpadd" type="left-rightpadd">
                             <form action="login" method="GET">
-                                <input type="image" src="https://placehold.it/300x400" name="action" value="inventory" />
+                                <input type="image" src="images/inventario.png" name="action" value="inventory" />
                             </form>
                             <h5 align="center">Inventario</h5>
                         </div>
                         <%if (session.getAttribute("currentPrivilegeLevel").equals("admin") || session.getAttribute("currentPrivilegeLevel").equals("manager")) { %>
                         <div class="column" type="left-rightpadd" type="left-rightpadd">
                             <form action="login" method="GET">
-                                <input type="image" src="https://placehold.it/300x400" name="action" value="client"/>
+                                <input type="image" src="images/clientes.png" name="action" value="client"/>
                             </form>
                             <h5 align="center">Clientes</h5>
                         </div>
                         <div class="column" type="left-rightpadd" value="material" type="left-rightpadd">
                             <form action="login" method="GET">
-                                <input type="image" src="https://placehold.it/300x400" name="action" value="material"/>
+                                <input type="image" src="images/materiales.png" name="action" value="material"/>
                             </form>
                             <h5 align="center">Materiales</h5>
                         </div>
@@ -107,19 +107,19 @@
                         <%if (session.getAttribute("currentPrivilegeLevel").equals("admin")) {%>
                         <div class="column" type="left-rightpadd" value="user" type="left-rightpadd">
                             <form action="login" method="GET">
-                                <input type="image" src="https://placehold.it/300x400" name="action" value="user"/>
+                                <input type="image" src="images/usuarios.png" name="action" value="user"/>
                             </form>
                             <h5 align="center">Usuarios</h5>
                         </div>
                         <div class="column" type="left-rightpadd" value="advanced" type="left-rightpadd">
                             <form action="login" method="GET">
-                                <input type="image" src="https://placehold.it/300x400" name="action" value="advanced"/>
+                                <input type="image" src="images/avanzadas.png" name="action" value="advanced"/>
                             </form>
                             <h5 align="center">Vistas Avanzadas</h5>
                         </div>
                         <div class="column" type="left-rightpadd" type="left-rightpadd">
                             <form action="login"   method="GET">
-                                <input type="image" src="https://placehold.it/300x400" name="action" value="notebook"/>
+                                <input type="image" src="images/cuadernos.png" name="action" value="notebook"/>
                             </form>
                             <h5 align="center">Cuadernos</h5>
                         </div>
