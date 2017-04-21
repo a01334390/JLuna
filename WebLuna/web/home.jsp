@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="DatabaseManager.Handler"%>
+<%@page import="BasicElements.Material"%>
 <!DOCTYPE html>
 <%
     if (session.getAttribute("currentSessionName") == null) {
@@ -50,6 +52,15 @@
                         <img class="thumbnail" src="https://placehold.it/550x350">
                         <h5><%=session.getAttribute("currentSessionName")%></h5>
                         <p>Bienvenida a la base de datos</p>
+                        <%
+                            Material [] material = Handler.getShortageOfMaterial();
+                        %>
+                        <% if (material.length > 0 ){%>
+                        <h5><strong>Hay escasez de los siguientes materiales:</strong></h5>
+                            <% for (int i = 0; i < material.length; i++){%>
+                                <p><%=material[i].getQuantity()+" "+material[i].getName()%></p>
+                            <%}%>
+                        <%}%>
                     </div>
                 </div>
                 <div class="off-canvas-content" data-off-canvas-content>

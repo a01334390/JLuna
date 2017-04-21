@@ -193,14 +193,14 @@ public class Handler {
 
     /**
      *
-     * @param matname
+     * @param id
      * @return
      */
-    public static boolean deleteMaterialInDatabase(String matname) {
+    public static boolean deleteMaterialInDatabase(int id) {
         try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
-            int rowsaffected = statement.executeUpdate("DELETE FROM Material WHERE name='" + matname + "';");
+            int rowsaffected = statement.executeUpdate("DELETE FROM Material WHERE idMaterial='" + id + "';");
             return rowsaffected > 0;
         } catch (SQLException e) {
             System.out.println(e.getSQLState()); //Must be a JPopup or something
@@ -258,6 +258,26 @@ public class Handler {
             return null;
         } catch (SQLException e) {
             System.out.println(e.getSQLState()); //Must be a JPopup or something
+        }
+        return null;
+    }
+    
+    /**
+     *
+     * @param id
+     * @return
+     */
+    public static Material searchMaterialByID(int id){
+        try {
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
+            Statement statement = connection.createStatement();
+            ResultSet resultset = statement.executeQuery("SELECT * FROM Material WHERE idMaterial='" + id + "';");
+            while (resultset.next()) {
+                return new Material(resultset.getInt("idMaterial"), resultset.getString("name"), resultset.getInt("quantity"), resultset.getFloat("cost"));
+            }
+            return null;
+        } catch (SQLException e) {
+            System.out.println(e.getSQLState());
         }
         return null;
     }
@@ -534,11 +554,24 @@ public class Handler {
             int rowsaffected = statement.executeUpdate(
                     "UPDATE Inventory"
                     + " SET ammount=" + Integer.toString(ammounty)
-                    + " WHERE id_Notebook=" + Integer.toString(idNotebook) + ";");
+                    + " WHERE id_Notebook='" + Integer.toString(idNotebook) + "';");
             return rowsaffected > 0;
         } catch (SQLException e) {
             System.out.println(e.getSQLState() + "," + e.getLocalizedMessage()); //Must be a JPopup or something
 
+        }
+        return false;
+    }
+    
+        public static boolean editInventoryInDatabase(Inventory inventory) {
+        try {
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
+            Statement statement = connection.createStatement();
+            int rowsaffected = statement.executeUpdate(
+                    "UPDATE Inventory SET ammount= '"+inventory.getAmmount()+"WHERE Inventory.id_Notebook ='"+inventory.getId_Notebook()+"';");                    
+            return rowsaffected > 0;
+        } catch (SQLException e) {
+            System.out.println(e.getSQLState() + "," + e.getLocalizedMessage()); //Must be a JPopup or something
         }
         return false;
     }

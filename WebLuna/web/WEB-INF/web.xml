@@ -24,6 +24,34 @@
         <servlet-name>ONotebook</servlet-name>
         <servlet-class>Servlets.ONotebook</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Material</servlet-name>
+        <servlet-class>Servlets.Material</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Inventory</servlet-name>
+        <servlet-class>Servlets.Inventory</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdvancedHome</servlet-name>
+        <servlet-class>Servlets.AdvancedHome</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PriorityOrders</servlet-name>
+        <servlet-class>Servlets.PriorityOrders</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>HighestOrders</servlet-name>
+        <servlet-class>Servlets.HighestOrders</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>HighestBenefit</servlet-name>
+        <servlet-class>Servlets.HighestBenefit</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MaterialsToNotebooks</servlet-name>
+        <servlet-class>Servlets.MaterialsToNotebooks</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -47,6 +75,34 @@
     <servlet-mapping>
         <servlet-name>ONotebook</servlet-name>
         <url-pattern>/ONotebook</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Material</servlet-name>
+        <url-pattern>/Material</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Inventory</servlet-name>
+        <url-pattern>/Inventory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdvancedHome</servlet-name>
+        <url-pattern>/AdvancedHome</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PriorityOrders</servlet-name>
+        <url-pattern>/PriorityOrders</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HighestOrders</servlet-name>
+        <url-pattern>/HighestOrders</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HighestBenefit</servlet-name>
+        <url-pattern>/HighestBenefit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MaterialsToNotebooks</servlet-name>
+        <url-pattern>/MaterialsToNotebooks</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

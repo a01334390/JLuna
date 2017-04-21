@@ -76,7 +76,10 @@ public class Login extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (request.getParameter("action") != null) {
             if (request.getParameter("action").equals("inventory")) {
-                System.out.println("inventory");
+                RequestDispatcher disp = getServletContext().getRequestDispatcher("/BasicViews/inventory/inventoryindex.jsp");
+                if (disp != null) {
+                    disp.include(request, response);
+                }
             }
             if (request.getParameter("action").equals("order")) {
                 RequestDispatcher disp = getServletContext().getRequestDispatcher("/BasicViews/order/orderHome.jsp");
@@ -84,8 +87,17 @@ public class Login extends HttpServlet {
                     disp.include(request, response);
                 }
             }
+            if (request.getParameter("action").equals("advanced")) {
+                RequestDispatcher disp = getServletContext().getRequestDispatcher("/AdvancedViews/advancedhome.jsp");
+            if (disp != null) {
+                    disp.include(request, response);
+                }                
+            }
             if (request.getParameter("action").equals("material")) {
-                System.out.println("material");
+                RequestDispatcher disp = getServletContext().getRequestDispatcher("/BasicViews/material/materialindex.jsp");
+            if (disp != null) {
+                    disp.include(request, response);
+                }                
             }
             if (request.getParameter("action").equals("user")) {
                 RequestDispatcher disp = getServletContext().getRequestDispatcher("/BasicViews/user/userindex.jsp");
