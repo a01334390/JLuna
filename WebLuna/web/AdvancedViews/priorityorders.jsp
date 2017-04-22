@@ -4,6 +4,7 @@
     Author     : Alex
 --%>
 
+<%@page import="AdvancedElements.OrderOrders"%>
 <%@page import="AdvancedElements.OrderClients"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -20,100 +21,62 @@
         <h1>Priority orders</h1>
     </body>
     
-    <h3>Clientes por cantidad de cuadernos pedidos</h3>
-        <form action="MacroView">
-            <table border="1">
+    <h3>Pedidos por fecha</h3>
+    <form>
+    <table border="1">
                 <thead>
                     <tr>
-                        <th>id</th>
+                        <th>Fecha</th>
+                        <th>Prioridad</th>
                         <th>Primer nombre</th>
                         <th>Segundo nombre</th>
-                        <th>Status</th>
-                        <th>Prioridad</th>
-                        <th>Cantidad</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <% OrderClients order= new OrderClients();%>
-                    <%String semana[] = order.getMostOrderedNotebooks();%>
+                    <% OrderOrders order= new OrderOrders();%>
+                    <%String semana[] = order.orderDate();%>
                     <%for (int i = 0; i < semana.length; i++) {%>
                     <tr>
                         <%--
-                            cortar string id, 1nombre, 2nombre, cantidad, status, prioridad
+                            cortar string date, priority, 1name, 2name
                         --%>
                         <% String tabla[]= semana[i].split(", "); %>
                         <td><%=tabla[0] %></td>
                         <td><%=tabla[1] %></td>
                         <td><%=tabla[2] %></td>
                         <td><%=tabla[3] %></td>
-                        <td><%=tabla[4] %></td>
-                        <td><%=tabla[5] %></td>
 
                     </tr>
                     <% } %>
                 </tbody>
             </table>
-                <h3>Clientes por prioridad</h3>
-                <table border="1">
+                <h3>Pedidos por prioridad</h3>
+            <table border="1">
                 <thead>
                     <tr>
-                        <th>id</th>
+                        <th>Fecha</th>
+                        <th>Prioridad</th>
                         <th>Primer nombre</th>
                         <th>Segundo nombre</th>
-                        <th>Cantidad</th>
-                        <th>Status</th>
-                        <th>Prioridad</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <%String prioridad[] = order.getNotebooksByPriority();%>
-                    <%for (int i = 0; i < prioridad.length; i++) {%>
+                    <%String priority[] = order.orderPriority();%>
+                    <%for (int i = 0; i < priority.length; i++) {%>
                     <tr>
                         <%--
-                            cortar string id, 1nombre, 2nombre, cantidad, status, prioridad
+                            cortar string date, priority, 1name, 2name
                         --%>
-                        <% String tabla[]= prioridad[i].split(", "); %>
+                        <% String tabla[]= priority[i].split(", "); %>
                         <td><%=tabla[0] %></td>
                         <td><%=tabla[1] %></td>
                         <td><%=tabla[2] %></td>
                         <td><%=tabla[3] %></td>
-                        <td><%=tabla[4] %></td>
-                        <td><%=tabla[5] %></td>
-
-                    </tr>
-                    <% } %>
-                </tbody>
-            </table>
-            <h3>Clientes por stauts</h3>
-                <table border="1">
-                <thead>
-                    <tr>
-                        <th>id</th>
-                        <th>Primer nombre</th>
-                        <th>Segundo nombre</th>
-                        <th>Cantidad</th>
-                        <th>Prioridad</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <%String status[] = order.getNotebooksByStatus();%>
-                    <%for (int i = 0; i < status.length; i++) {%>
-                    <tr>
-                        <%--
-                            cortar string id, 1nombre, 2nombre, cantidad, status, prioridad
-                        --%>
-                        <% String tabla[]= status[i].split(", "); %>
-                        <td><%=tabla[0] %></td>
-                        <td><%=tabla[1] %></td>
-                        <td><%=tabla[2] %></td>
-                        <td><%=tabla[3] %></td>
-                        <td><%=tabla[4] %></td>
-                        <td><%=tabla[5] %></td>
 
                     </tr>
                     <% } %>
                 </tbody>
             </table>    
-        </form>
+    </form>
+        
 </html>

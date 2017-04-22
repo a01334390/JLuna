@@ -684,9 +684,10 @@ public class Handler {
                     + "FROM Pola.Order "
                     + "JOIN Client ON Pola.Order.client_id = Client.idClient ORDER BY priority DESC;");
             while (resultset.next()) {
-                array.add(resultset.getString("date") + " " + resultset.getString("priority")
-                        + " " + resultset.getString("first_name")
-                        + " " + resultset.getString("second_name"));
+                array.add(resultset.getString("date") 
+                        + ", " + resultset.getString("priority")
+                        + ", " + resultset.getString("first_name")
+                        + ", " + resultset.getString("second_name"));
             }
             return array.toArray(new String[array.size()]);
         } catch (SQLException e) {
@@ -808,7 +809,7 @@ public class Handler {
                     + "WHERE Pola.Order.date >= '" + date1 + "' AND Pola.Order.date <= '" + date2 + "'"
                     + " GROUP BY (type) ORDER BY (SUM(benefit*quantity)) DESC;");
             while (resultset.next()) {
-                array.add(resultset.getString("type") + " $" + resultset.getString("SUM(benefit * quantity)"));
+                array.add(" "+resultset.getString("type") + ", $" + resultset.getString("SUM(benefit * quantity)"));
             }
             return array.toArray(new String[array.size()]);
         } catch (SQLException e) {
