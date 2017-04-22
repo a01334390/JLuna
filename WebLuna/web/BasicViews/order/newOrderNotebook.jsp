@@ -23,7 +23,7 @@
     <body>
         <div class="translucent-form-overlay">
             <form action="ONotebook" method="POST" name="OrderForm">
-                <h3>Aunar un nuevo set de cuadernos al pedido</h3>
+                <h3>A&#241adir un nuevo set de cuadernos al pedido</h3>
                 <div class="row columns">
                         <input type="text" readonly="readonly" name="action" value="<c:out value="${action}"/>"/>
                 </div>

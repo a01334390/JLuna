@@ -19,7 +19,7 @@
     <body>
         <div class="translucent-form-overlay">
             <form action="Order" method="POST" name="OrderForm">
-                <h3>Aunar un nuevo pedido</h3>
+                <h3>A&#241adir un nuevo pedido</h3>
                 <div class="row columns">
                     <label>Clave del Cliente
                         <input type="text" readonly="readonly" name="idClient" value="<c:out value="${client.getId()}"/>"/>

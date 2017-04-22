@@ -74,6 +74,10 @@ public class AdvancedHome extends HttpServlet {
             RequestDispatcher req = request.getRequestDispatcher("/AdvancedViews/materialstonotebooks.jsp");
             req.forward(request, response);
         }
+        if(request.getParameter("action").equalsIgnoreCase("macro")){
+            RequestDispatcher req = request.getRequestDispatcher("/AdvancedViews/Macro.jsp");
+            req.forward(request, response);
+        }
     }
 
     /**

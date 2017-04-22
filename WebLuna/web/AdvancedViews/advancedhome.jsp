@@ -86,6 +86,12 @@
                             </form>
                             <h5 align="center">Asignar materiales a cuadernos</h5>
                         </div>
+                        <div class="column" type="left-rightpadd" value="macro" type="left-rightpadd">
+                            <form action="AdvancedHome" method="GET">
+                                <input type="image" src="https://placehold.it/300x400" name="action" value="macro"/>
+                            </form>
+                            <h5 align="center">Macro Vista</h5>
+                        </div>
                         <% } %>                       
                     </div>
                 </div>

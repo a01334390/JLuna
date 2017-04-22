@@ -630,7 +630,7 @@ public class Handler {
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT * FROM Material WHERE quantity < " + 100 + ";");
             while (resultset.next()) {
-                array.add(new Material(resultset.getString("name"), resultset.getInt("quantity")));
+                array.add(new Material(resultset.getString("name")+", ", resultset.getInt("quantity")));
             }
             return array.toArray(new Material[array.size()]);
         } catch (SQLException e) {
@@ -647,7 +647,7 @@ public class Handler {
                     + "FROM Notebook JOIN Inventory ON Notebook.idNotebook = Inventory.id_Notebook "
                     + "WHERE ammount <200;");
             while (resultset.next()) {
-                array.add(resultset.getString("type") + " " + resultset.getInt("ammount"));//+ " "+Integer.toString(resultset.getInt("ammount")));
+                array.add(resultset.getString("type") + ", " + resultset.getInt("ammount"));//+ " "+Integer.toString(resultset.getInt("ammount")));
             }
             return array.toArray(new String[array.size()]);
         } catch (SQLException e) {
@@ -664,9 +664,10 @@ public class Handler {
                     + "FROM Pola.Order "
                     + "JOIN Client ON Pola.Order.client_id = Client.idClient ORDER BY date;");
             while (resultset.next()) {
-                array.add(resultset.getString("date") + " " + resultset.getString("priority")
-                        + " " + resultset.getString("first_name")
-                        + " " + resultset.getString("second_name"));
+                array.add(resultset.getString("date") 
+                        + ", " + resultset.getString("priority")
+                        + ", " + resultset.getString("first_name")
+                        + ", " + resultset.getString("second_name"));
             }
             return array.toArray(new String[array.size()]);
         } catch (SQLException e) {
@@ -704,8 +705,8 @@ public class Handler {
                     + "JOIN Client ON Pola.Order.client_id = Client.idClient "
                     + "ORDER BY quantity DESC;");
             while (resultset.next()) {
-                array.add(resultset.getString("idOrder") + "\t" + resultset.getString("first_name") + " " + resultset.getString("second_name")
-                        + "\t" + resultset.getString("status") + "\t" + resultset.getString("priority") + "\t" + resultset.getString("quantity"));
+                array.add(resultset.getString("idOrder") + ", " + resultset.getString("first_name") + ", " + resultset.getString("second_name")
+                        + ", " + resultset.getString("status") + ", " + resultset.getString("priority") + ", " + resultset.getString("quantity"));
             }
             return array.toArray(new String[array.size()]);
         } catch (SQLException e) {
@@ -724,8 +725,8 @@ public class Handler {
                     + "JOIN Client ON Pola.Order.client_id = Client.idClient "
                     + "ORDER BY priority DESC;");
             while (resultset.next()) {
-                array.add(resultset.getString("idOrder") + "\t" + resultset.getString("first_name") + " " + resultset.getString("second_name")
-                        + "\t" + resultset.getString("quantity") + "\t" + resultset.getString("status") + "\t" + resultset.getString("priority"));
+                array.add(resultset.getString("idOrder") + ", " + resultset.getString("first_name") + ", " + resultset.getString("second_name")
+                        + ", " + resultset.getString("quantity") + ", " + resultset.getString("status") + ", " + resultset.getString("priority"));
             }
             return array.toArray(new String[array.size()]);
         } catch (SQLException e) {
@@ -764,10 +765,10 @@ public class Handler {
                     + "JOIN Client ON Pola.Order.client_id = Client.idClient "
                     + "WHERE status!='Entrega';");
             while (resultset.next()) {
-                array.add("id: " + Integer.toString(resultset.getInt("client_id")));
-                array.add(resultset.getString("first_name"));
-                array.add(resultset.getString("second_name"));
-                array.add(resultset.getString("status"));
+                array.add(Integer.toString(resultset.getInt("client_id"))+", "+
+                (resultset.getString("first_name")+", ")+
+                (resultset.getString("second_name")+", ")+
+                (resultset.getString("status")));
             }
             return array.toArray(new String[array.size()]);
         } catch (SQLException e) {
