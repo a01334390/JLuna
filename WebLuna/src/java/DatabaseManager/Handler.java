@@ -890,6 +890,7 @@ public class Handler {
         }
         return null;
     }
+   
 
     public static void addAllNotebookMaterials(NotebookMaterial get) {
         try {
@@ -920,6 +921,7 @@ public class Handler {
         }
         return null;
     }
+    
 
     public static void updateClientInDatabase(Cliente client) {
         try {
@@ -983,6 +985,35 @@ public class Handler {
             statement.close();
             connection.close();
             //return session;
+        } catch (SQLException e) {
+            System.out.println(e.getSQLState()); //Must be a JPopup or something
+        }
+        return null;
+    }
+    
+    public static NotebookMaterial[] getMaterialsofNotebook(int notebookID) {
+        ArrayList<NotebookMaterial> on = new ArrayList<>();
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
+            Statement statement = connection.createStatement();
+            ResultSet resultset = statement.executeQuery("SELECT notebook_id, pola.material.idMaterial, quantity "
+                    //+"FROM Notebook "+""
+                    + "FROM pola.notebook join pola.notebook_material ON pola.notebook.idNotebook=pola.notebook_material.notebook_id "
+                    + "JOIN pola.material ON pola.notebook_material.material_id=pola.material.idMaterial "
+                    + " WHERE idNotebook=" + notebookID + " ;");
+            //if there is no data on the data set, the session return will be false
+            while (resultset.next()) {
+                on.add( new NotebookMaterial(resultset.getInt("idNotebook"), resultset.getInt("idMaterial"), resultset.getInt("quantity")));
+            }
+            statement.close();
+            connection.close();
+            //return session;
+            return on.toArray(new NotebookMaterial[on.size()]);
         } catch (SQLException e) {
             System.out.println(e.getSQLState()); //Must be a JPopup or something
         }
