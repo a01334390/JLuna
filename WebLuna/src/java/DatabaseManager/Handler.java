@@ -745,8 +745,8 @@ public class Handler {
                     + "JOIN Client ON Pola.Order.client_id = Client.idClient "
                     + "ORDER BY status DESC;");
             while (resultset.next()) {
-                array.add(resultset.getString("idOrder") + "\t" + resultset.getString("first_name") + " " + resultset.getString("second_name")
-                        + "\t" + resultset.getString("quantity") + "\t" + resultset.getString("priority") + "\t\t" + resultset.getString("status"));
+                array.add(resultset.getString("idOrder") + ", " + resultset.getString("first_name") + ", " + resultset.getString("second_name")
+                        + ", " + resultset.getString("quantity") + ", " + resultset.getString("priority") + ", " + resultset.getString("status"));
             }
             return array.toArray(new String[array.size()]);
         } catch (SQLException e) {
