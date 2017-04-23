@@ -20,9 +20,10 @@
         <title>Clientes</title>
         <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel='stylesheet' type='text/css'>
-        <link href="customStyling" rel="stylesheet" type="text/css">
+        <link href="clientStyling.css" rel="stylesheet" type="text/css">
     </head>
     <body>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
         <script>
             (function (i, s, o, g, r, a, m) {
                 i['GoogleAnalyticsObject'] = r;
@@ -43,40 +44,46 @@
             ga('foundation.send', 'pageview');
 
         </script>
-
-                    <h1>Showing available ones</h1>
-                    <p><a href="Client?action=add">Añadir Usuario</a></p>
-                    <form action="Client" method="GET">
+                    
+        <br>
+        <br>
+        <div class="notebookhd"><h1>clientes</h1></div>
+        <br>
+        <p class="centeredform"><a href="Client?action=add" class="nonblue"><i class="fa fa-plus adduser"></i>Añadir Usuario</a></p>
+                    
+                    <div class="formm">
+                        <form action="Client" method="GET">
                         <table border="1">
                             <thead>
                                 <tr>
-                                    <th>ID del Cliente</th>
-                                    <th>Primer Nombre</th>
-                                    <th>Segundo Nombre</th>
-                                    <th>Direccion</th>
-                                    <th>Es cliente fisico</th>
-                                    <th>Acciones</th>
+                                    <th class="centeredform">ID del Cliente</th>
+                                    <th class="centeredform">Primer Nombre</th>
+                                    <th class="centeredform">Segundo Nombre</th>
+                                    <th class="centeredform">Direccion</th>
+                                    <th class="centeredform">Es cliente fisico</th>
+                                    <th class="centeredform">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <%Cliente[] clients = Handler.getAllClients();%>
                                 <%for (int i = 0; i < clients.length; i++) {%>
                                 <tr>
-                                    <td><%=clients[i].getId()%></td>
-                                    <td><%=clients[i].getFirst_name()%></td>
-                                    <td><%=clients[i].getSecond_name()%></td>
+                                    <td class="centeredform"><%=clients[i].getId()%></td>
+                                    <td class="centeredform"><%=clients[i].getFirst_name()%></td>
+                                    <td class="centeredform"><%=clients[i].getSecond_name()%></td>
                                     <td><%=clients[i].getAddress()%></td>
                                     <%if (clients[i].getIsPhysical() == 1) {%>
-                                    <td>Si</td>
+                                    <td class="centeredform">Si</td>
                                     <% } else {%>
-                                    <td>No</td>
+                                    <td class="centeredform">No</td>
                                     <% }%>
-                                    <td><a href="Client?action=edit&userID=<%=clients[i].getId()%>">Editar</a> 
-                                        <a href="Client?action=erase&userID=<%=clients[i].getId()%>">Eliminar</a> </td>
+                                    <td class="centeredform"><a href="Client?action=edit&userID=<%=clients[i].getId()%>"><i class="fa fa-pencil nonblue"></i></a>     
+                                        <a href="Client?action=erase&userID=<%=clients[i].getId()%>"><i class="fa fa-trash nonblue"></i></a> </td>
                                 </tr>
                                 <% } %>
                             </tbody>
                         </table>
                     </form>
+                    </div>
                     </body>
                     </html>
