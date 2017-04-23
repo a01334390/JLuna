@@ -16,9 +16,10 @@
         <title>Inventario</title>
         <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel='stylesheet' type='text/css'>
-        <link href="customStyling" rel="stylesheet" type="text/css">
+        <link href="inventoryStyling.css" rel="stylesheet" type="text/css">
     </head>
     <body>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
         <script>
             (function (i, s, o, g, r, a, m) {
                 i['GoogleAnalyticsObject'] = r;
@@ -39,14 +40,20 @@
             ga('foundation.send', 'pageview');
 
         </script>
-        <h1>Inventario</h1>
+        <br>
+        <br>
+        <div class="notebookhd"><h1>inventario</h1></div>
+        <br>
+        <br>
+        <div class="formm">
         <form action="Inventory" method='GET'>
             <table border="1">
                 <thead>
                     <tr>
-                        <th>ID</th>                    
-                        <th>Name</th>
-                        <th>Quantity</th>    
+                        <th class="centeredform">ID</th>                    
+                        <th class="centeredform">Nombre</th>
+                        <th class="centeredform">Cantidad</th>
+                        <th class="centeredform">Acciones</th>
                     </tr>                    
                 </thead>
                 <tbody>
@@ -58,17 +65,18 @@
                         }
                         for(int i = 0; i < nb.length; i++){
                     %>
-                    <tr>
+                    <tr class="centeredform">
                         <td><%=nb[i].getId()%></td>
                         <td><%=nb[i].getType()%></td>
                         <td><%=inventory[i].getAmmount()%></td>
                         <td>
-                            <a href="Inventory?action=edit&id_Notebook=<%=inventory[i].getId_Notebook()%>">Editar</a>                             
+                            <a href="Inventory?action=edit&id_Notebook=<%=inventory[i].getId_Notebook()%>" class="nonblue"> <i class="fa fa-edit "></i>Editar</a>                             
                         </td>
                     </tr>
                     <%}%>
                 </tbody>
             </table>
-        </form>        
+        </form>
+        </div>
     </body>
 </html>

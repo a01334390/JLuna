@@ -1,0 +1,67 @@
+body{
+    background-color: #a58855;
+}
+
+.notebookhd{
+    background-color: white;
+    width: 100%;
+    padding-top: 0.6em;
+    padding-bottom: 0.6em;
+}
+
+tr:hover{
+    background-color: #C9F188;
+    -webkit-transition: background-color 400ms linear;
+    -ms-transition: background-color 400ms linear;
+    transition: background-color 400ms linear;
+}
+
+th{
+    background-color: #c9b188;
+}
+
+.nonblue{
+    color: black;
+    text-decoration: none;
+    padding-left: 0.3em;   
+    padding-right: 0.3em;
+}
+
+.nonblue:hover{
+    color: white;
+    -webkit-transition: color 400ms linear;
+    -ms-transition: color 400ms linear;
+    transition: color 400ms linear;
+    text-decoration: none;
+    padding-left: 0.3em;   
+    padding-right: 0.3em;
+}
+
+.adduser{
+    padding-left: 0.5em;
+    padding-right: 0.3em;
+}
+
+.centeredform{
+    text-align: center;
+    text-decoration: none;
+    color: black;
+}
+
+div.formm{
+    display: block;
+    text-align: center; 
+}
+
+form
+{
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+
+h1{
+    text-align: center;
+    color: dimgray;
+}
