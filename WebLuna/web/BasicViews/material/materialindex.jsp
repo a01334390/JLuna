@@ -15,9 +15,10 @@
         <title>Material</title>
         <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel='stylesheet' type='text/css'>
-        <link href="customStyling" rel="stylesheet" type="text/css">
+        <link href="materialStyling.css" rel="stylesheet" type="text/css">
     </head>
     <body>
+         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
         <script>
             (function (i, s, o, g, r, a, m) {
                 i['GoogleAnalyticsObject'] = r;
@@ -38,16 +39,21 @@
             ga('foundation.send', 'pageview');
 
         </script>
-        <h1>Showing available ones</h1>
-        <p><a href="Material?action=add">Añadir Material</a></p>
+        <br>
+        <br>
+        <div class="notebookhd"><h1>material</h1></div>
+        <br>
+        <p class="centeredform"><a href="Material?action=add" class="nonblue"><i class="fa fa-plus adduser"></i>Añadir Material</a></p>
+        <div class="formm">
         <form action="Material" method='GET'>
             <table border="1">
                 <thead>
-                    <tr>
+                    <tr class="centeredform">
                         <th>ID</th>                    
-                        <th>Name</th>
-                        <th>Cost</th>
-                        <th>Quantity</th>    
+                        <th>Nombre</th>
+                        <th>Costo</th>
+                        <th>Cantidad</th> 
+                        <th>Acciones</th>
                     </tr>                    
                 </thead>
                 <tbody>
@@ -55,19 +61,20 @@
                         Material [] material = Handler.getAllMaterials();
                         for (int i = 0; i < material.length; i++){                           
                     %>
-                    <tr>
+                    <tr class="centeredform">
                         <td><%=material[i].getId()%></td>
                         <td><%=material[i].getName()%></td>
                         <td><%=material[i].getCost()%></td>
                         <td><%=material[i].getQuantity()%></td>
                         <td>
-                            <a href="Material?action=edit&materialID=<%=material[i].getId()%>">Editar</a> 
-                            <a href="Material?action=erase&materialID=<%=material[i].getId()%>">Eliminar</a>
+                            <a href="Material?action=edit&materialID=<%=material[i].getId()%>"><i class="fa fa-pencil nonblue"></i></a> 
+                            <a href="Material?action=erase&materialID=<%=material[i].getId()%>"><i class="fa fa-trash nonblue"></i></a>
                         </td>
                     </tr>
                     <%}%>
                 </tbody>
             </table>
         </form>
+        </div>
     </body>
 </html>
