@@ -15,9 +15,10 @@
         <title>Clientes</title>
         <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel='stylesheet' type='text/css'>
-        <link href="customStyling.css" rel="stylesheet" type="text/css">
+        <link href="orderStyling.css" rel="stylesheet" type="text/css">
     </head>
     <body>
+         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
         <script>
             (function (i, s, o, g, r, a, m) {
                 i['GoogleAnalyticsObject'] = r;
@@ -38,8 +39,11 @@
             ga('foundation.send', 'pageview');
 
         </script>
-
-        <h1>Showing available ones</h1>
+        <br>
+        <br>
+        <div class="notebookhd"><h1>orders</h1></div>
+        <br>
+        <div class="formm">
         <form action="Order" method="GET">
             <table border="1">
                 <thead>
@@ -57,11 +61,12 @@
                         <td><%=clients[i].getId()%></td>
                         <td><%=clients[i].getFirst_name()%></td>
                         <td><%=clients[i].getSecond_name()%></td>
-                        <td><a href="Order?action=see&userID=<%=clients[i].getId()%>">Ver sus pedidos</a></td>
+                        <td><a href="Order?action=see&userID=<%=clients[i].getId()%>" class="nonblue"><i class="fa fa-eye"></i>Ver sus pedidos</a></td>
                     </tr>
                     <% }%>
                 </tbody>
             </table>
         </form>
+        </div>
     </body>
 </html>
