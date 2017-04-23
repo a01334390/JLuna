@@ -49,7 +49,7 @@
                 <div class="off-canvas position-left reveal-for-large" id="my-info" data-off-canvas data-position="left">
                     <div class="row column">
                         <br>
-                        <img class="thumbnail" src="https://placehold.it/550x350">
+                        <img class="thumbnail" src="images/LunaLogo.png">
                         <h5><%=session.getAttribute("currentSessionName")%></h5>
                         <p>Bienvenida a la base de datos</p>
                         <%
@@ -135,7 +135,7 @@
         </script>
         <script type="text/javascript" src="https://intercom.zurb.com/scripts/zcom.js"></script>
         <footer>
-            Hey!
+           
         </footer>
     </body>
 </html>
