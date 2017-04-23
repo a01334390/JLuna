@@ -15,9 +15,10 @@
         <title>Usuarios</title>
         <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel='stylesheet' type='text/css'>
-        <link href="customStyling" rel="stylesheet" type="text/css">
+        <link href="userStyling.css" rel="stylesheet" type="text/css">
     </head>
     <body>
+         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
         <script>
             (function (i, s, o, g, r, a, m) {
                 i['GoogleAnalyticsObject'] = r;
@@ -38,13 +39,16 @@
             ga('foundation.send', 'pageview');
 
         </script>
-
-                    <h1>Showing available ones</h1>
-                    <p><a href="User?action=add">Añadir Usuario</a></p>
+ <br>
+        <br>
+        <div class="notebookhd"><h1>users</h1></div>
+        <br>
+        <p class="centeredform"><a href="User?action=add" class="nonblue"><i class="fa fa-plus adduser"></i>Añadir Usuario</a></p>
+                    <div class="formm">
                     <form action="User" method="GET">
                         <table border="1">
                             <thead>
-                                <tr>
+                                <tr class="centeredform">
                                     <th>Nombre de Usuario</th>
                                     <th>Correo Electronico</th>
                                     <th>Clave Secreta</th>
@@ -58,7 +62,7 @@
                             <tbody>
                                 <%DBUser[] users = Handler.getAllUsers();%>
                                 <%for (int i = 0; i < users.length; i++) {%>
-                                <tr>
+                                <tr class="centeredform">
                                     <td><%=users[i].getUsername()%></td>
                                     <td><%=users[i].getEmail()%></td>
                                     <td>[REDACTED]</td>
@@ -72,12 +76,13 @@
                                     <td><%=users[i].getFirst_name()%></td>
                                     <td><%=users[i].getSecond_name()%></td>
                                     <td><%=users[i].getImage()%></td>
-                                    <td><a href="User?action=edit&username=<%=users[i].getUsername()%>">Editar</a> 
-                                    <a href="User?action=erase&username=<%=users[i].getUsername()%>">Eliminar</a> </td>
+                                    <td><a href="User?action=edit&username=<%=users[i].getUsername()%>"><i class="fa fa-pencil nonblue"></i></a> 
+                                    <a href="User?action=erase&username=<%=users[i].getUsername()%>"><i class="fa fa-trash nonblue"></i></a> </td>
                                 </tr>
                                 <% } %>
                             </tbody>
                         </table>
                     </form>
+                    </div>
                     </body>
                     </html>
