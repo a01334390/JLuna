@@ -6,6 +6,14 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%
+    if (session.getAttribute("currentSessionName") == null) {
+        response.sendRedirect("/index.jsp");
+    }
+    if (!session.getAttribute("currentPrivilegeLevel").equals("admin")) {
+        response.sendRedirect("/index.jsp");
+    }
+%>
 <html>
     <head>
         <meta charset="utf-8"/>

@@ -11,6 +11,14 @@
 <%@page import="java.time.LocalDate"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
 <!DOCTYPE html>
+<%
+    if (session.getAttribute("currentSessionName") == null) {
+        response.sendRedirect("/index.jsp");
+    }
+    if (!session.getAttribute("currentPrivilegeLevel").equals("admin")) {
+        response.sendRedirect("/index.jsp");
+    }
+%>
 <html>
     
     <head>

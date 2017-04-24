@@ -8,6 +8,14 @@
 <%@page import="AdvancedElements.NotebookMaterials"%>
 <!DOCTYPE html>
 <html>
+<%
+    if (session.getAttribute("currentSessionName") == null) {
+        response.sendRedirect("/index.jsp");
+    }
+    if (!session.getAttribute("currentPrivilegeLevel").equals("admin")) {
+        response.sendRedirect("/index.jsp");
+    }
+%>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Materiales a cuadernos</title>
