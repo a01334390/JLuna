@@ -14,7 +14,7 @@
         <title>Forma de Inventario</title>
         <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel='stylesheet' type='text/css'>
-        <link href="customStyling" rel="stylesheet" type="text/css">
+        <link href="customStyling.css" rel="stylesheet" type="text/css">
     </head>
     <body>
         <script>
@@ -37,28 +37,32 @@
             ga('foundation.send', 'pageview');
 
         </script>
-        <form action="Inventory" method="POST" name="formAddInventory">
-            <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
-            <div class="form-icons">
-                <div class="input-group">
-                    <span class="input-group-label">
-                        <i class="fa fa-user"></i>
-                    </span>
-                    <input class="input-group-field" type="text" readonly="readonly" name="id_Notebook" value="<c:out value="${inventory.getId_Notebook()}"/>"/>
-                </div>
-                
-                <div class="input-group">
-                    <span class="input-group-label">
-                        <i class="fa fa-pencil"></i>
-                    </span>
-                    <input class="input-group-field" type="text" placeholder="Cantidad" name="ammount" value="<c:out value="${inventory.getAmmount()}"/>"/>
-                </div>
-                
-            </div>
+        <div class="translucent-form-overlay">
+            <form action="Inventory" method="POST" name="formAddInventory">
+                <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+                <div class="form-icons">
+                    <div class="input-group">
+                        <label>
+                            ID de cuaderno
+                            <input class="input-group-field" type="text" readonly="readonly" name="id_Notebook" value="<c:out value="${inventory.getId_Notebook()}"/>"/>
+                        </label>
+                        
+                        
+                    </div>
 
-            <button class="button expanded">Hacer Cambios</button>
-            
-        </form>
+                    <div class="input-group">
+                        <span class="input-group-label">
+                            <i class="fa fa-pencil"></i>
+                        </span>
+                        <input class="input-group-field" type="text" placeholder="Cantidad" name="ammount" value="<c:out value="${inventory.getAmmount()}"/>"/>
+                    </div>
+
+                </div>
+
+                <button class="button expanded">Hacer Cambios</button>
+
+            </form>
+        </div>
 
     </body>
 </html>
