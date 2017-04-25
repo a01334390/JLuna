@@ -6,7 +6,7 @@
 
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="AdvancedElements.HighestBenefit"%>
+<%@page import="AdvancedElements.HighestBenefitCC"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <%
@@ -29,46 +29,10 @@
     <body>
         <h1>Orders with the highest benefit</h1>
     </body>
-    <form>
-    <table border="1">
-                <thead>
-                    <tr>
-                        <th>Tipo</th>
-                        <th>Beneficio</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% HighestBenefit order= new HighestBenefit();%>
-                    <% String date1="1991-01-01"; %>
-                    <% String date2="2201-01-01"; %>
-                    <% request.setAttribute("date1", " "); %>
-                    <input id="date1" class="input-group-field" type="text"  name="date1" value="<c:out value="${order.setDate1()}"/>"/>
-                    Date one: <input type="String" placeholder="date1" value="1990-01-01"><br>
-                    Date two: <input type="String" placeholder="date2" value="2200-01-01">
-                    
-                    <% request.getAttribute("date1"); %>
-                    <% System.out.println(date1); %>
-                    
-                    <% order.setDate1(date1); %>
-                    <% order.setDate2(date2); %>
-                    <%String semana[] = order.search();%>
-                    <% if(semana[0].charAt(0)=='V'){ %>
-                    <td><%=semana[0] %></td>
-                    <% } else {%>
-                    <%for (int i = 0; i < semana.length; i++) {%>
-                        <tr>
-                            <%--
-                                cortar string type quantity
-                            --%>
-                            <% String tabla[]= semana[i].split(", "); %>
-                            <td><%=tabla[0] %></td>
-                            <td><%=tabla[1] %></td>
-
-                        </tr>
-                        <% } %>
-                    <% } %>
-                </tbody>
-            </table>   
+    <form action="HighestBenefit" method="POST" name="formGetByCalendar">
+        Fecha uno: <input type="text" value="1990-01-01" name="date1"><br>
+        Fecha dos: <input type="text" value="2200-01-01" name="date2">
+        <input type="submit" value="Submit" />
     </form>
-        
+
 </html>

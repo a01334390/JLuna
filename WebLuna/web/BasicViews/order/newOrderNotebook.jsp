@@ -53,8 +53,8 @@
                 <div class="row columns">
                     <label> Status de la orden
                         <select name="status" type="text">
-                            <option value="Diseño" value="Diseño" ${on.getStatus() == "Diseño" ? 'selected="selected"' : ''}> Diseño</option>
-                            <option value="Preview" ${on.getStatus() == "Diseño" ? 'selected="selected"' : ''}>Preview</option>
+                            <option value="Design" ${on.getStatus() == "Design" ? 'selected="selected"' : ''}> Diseño</option>
+                            <option value="Preview" ${on.getStatus() == "Preview" ? 'selected="selected"' : ''}>Preview</option>
                             <option value="Laminado" ${on.getStatus() == "Laminado" ? 'selected="selected"' : ''}>Laminado</option>
                             <option value="Revision" ${on.getStatus() == "Revision" ? 'selected="selected"' : ''}>Revision</option>
                             <option value="Prensa" ${on.getStatus() == "Prensa" ? 'selected="selected"' : ''}>Prensa</option>
@@ -69,7 +69,12 @@
                         <select name="ribbon" type="text">
                             <option value="B" ${on.getRibbon() == "B" ? 'selected="selected"' : ''}>Negro</option>
                             <option value="W"${on.getRibbon() == "W" ? 'selected="selected"' : ''}>Blanco</option>
-                            <option value="NONE" ${on.getRibbon() == "NONE" ? 'selected="selected"' : ''}>Ninguno</option>
+                             <option value="RED" ${on.getRibbon() == "RED" ? 'selected="selected"' : ''}>Rojo</option>
+                            <option value="BLUE"${on.getRibbon() == "BLUE" ? 'selected="selected"' : ''}>Azul</option>
+                             <option value="GREEN" ${on.getRibbon() == "GREEN" ? 'selected="selected"' : ''}>Verde</option>
+                            <option value="PURPLE"${on.getRibbon() == "PURPLE" ? 'selected="selected"' : ''}>Morado</option>
+                             <option value="ORANGE" ${on.getRibbon() == "ORANGE" ? 'selected="selected"' : ''}>Naranja</option>
+                            <option value="NONE"${on.getRibbon() == "NONE" ? 'selected="selected"' : ''}>Ninguno</option>
                         </select>
                     </label>
                 </div>
@@ -86,6 +91,7 @@
                         <select name="pageType" type="text">
                             <option value="PLAIN"  ${on.getPageType() == "PLAIN" ? 'selected="selected"' : ''}>Plano</option>
                             <option value="LINED"  ${on.getPageType() == "LINED" ? 'selected="selected"' : ''}>Rayado</option>
+                            <option value="DOTTED"  ${on.getPageType() == "LINED" ? 'selected="selected"' : ''}>Punteado</option>
                             <option value="AGENDA"  ${on.getPageType() == "AGENDA" ? 'selected="selected"' : ''}>Agenda</option>
                         </select>
                     </label>

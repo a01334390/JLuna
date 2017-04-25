@@ -5,7 +5,9 @@
  */
 package DatabaseManager;
 
+import AdvancedElements.HighestBenefitCC;
 import BasicElements.*;
+import Servlets.HighestBenefit;
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -261,13 +263,13 @@ public class Handler {
         }
         return null;
     }
-    
+
     /**
      *
      * @param id
      * @return
      */
-    public static Material searchMaterialByID(int id){
+    public static Material searchMaterialByID(int id) {
         try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
@@ -562,13 +564,13 @@ public class Handler {
         }
         return false;
     }
-    
-        public static boolean editInventoryInDatabase(Inventory inventory) {
+
+    public static boolean editInventoryInDatabase(Inventory inventory) {
         try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             int rowsaffected = statement.executeUpdate(
-                    "UPDATE Inventory SET ammount= '"+inventory.getAmmount()+"WHERE Inventory.id_Notebook ='"+inventory.getId_Notebook()+"';");                    
+                    "UPDATE Inventory SET ammount= '" + inventory.getAmmount() + "WHERE Inventory.id_Notebook ='" + inventory.getId_Notebook() + "';");
             return rowsaffected > 0;
         } catch (SQLException e) {
             System.out.println(e.getSQLState() + "," + e.getLocalizedMessage()); //Must be a JPopup or something
@@ -630,7 +632,7 @@ public class Handler {
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT * FROM Material WHERE quantity < " + 100 + ";");
             while (resultset.next()) {
-                array.add(new Material(resultset.getString("name")+", ", resultset.getInt("quantity")));
+                array.add(new Material(resultset.getString("name") + ", ", resultset.getInt("quantity")));
             }
             return array.toArray(new Material[array.size()]);
         } catch (SQLException e) {
@@ -664,7 +666,7 @@ public class Handler {
                     + "FROM Pola.Order "
                     + "JOIN Client ON Pola.Order.client_id = Client.idClient ORDER BY date;");
             while (resultset.next()) {
-                array.add(resultset.getString("date") 
+                array.add(resultset.getString("date")
                         + ", " + resultset.getString("priority")
                         + ", " + resultset.getString("first_name")
                         + ", " + resultset.getString("second_name"));
@@ -684,7 +686,7 @@ public class Handler {
                     + "FROM Pola.Order "
                     + "JOIN Client ON Pola.Order.client_id = Client.idClient ORDER BY priority DESC;");
             while (resultset.next()) {
-                array.add(resultset.getString("date") 
+                array.add(resultset.getString("date")
                         + ", " + resultset.getString("priority")
                         + ", " + resultset.getString("first_name")
                         + ", " + resultset.getString("second_name"));
@@ -766,10 +768,10 @@ public class Handler {
                     + "JOIN Client ON Pola.Order.client_id = Client.idClient "
                     + "WHERE status!='Entrega';");
             while (resultset.next()) {
-                array.add(Integer.toString(resultset.getInt("client_id"))+", "+
-                (resultset.getString("first_name")+", ")+
-                (resultset.getString("second_name")+", ")+
-                (resultset.getString("status")));
+                array.add(Integer.toString(resultset.getInt("client_id")) + ", "
+                        + (resultset.getString("first_name") + ", ")
+                        + (resultset.getString("second_name") + ", ")
+                        + (resultset.getString("status")));
             }
             return array.toArray(new String[array.size()]);
         } catch (SQLException e) {
@@ -791,25 +793,6 @@ public class Handler {
             while (resultset.next()) {
                 array.add(resultset.getString("type"));
                 array.add(resultset.getString("benefit*quantity"));
-            }
-            return array.toArray(new String[array.size()]);
-        } catch (SQLException e) {
-        }
-        return null;
-    }
-
-    public static String[] getHighestBenefitBetweenDates(String date1, String date2) {
-        ArrayList<String> array = new ArrayList<>();
-        try {
-            Connection connection = DriverManager.getConnection(host, huser, hpassword);
-            Statement statement = connection.createStatement();
-            ResultSet resultset = statement.executeQuery("SELECT type, SUM(benefit * quantity)"
-                    + "FROM Notebook_Order JOIN Notebook ON Notebook_Order.id_Notebook = Notebook.idNotebook "
-                    + "JOIN Pola.Order ON Notebook_Order.id_Order = Pola.Order.idOrder "
-                    + "WHERE Pola.Order.date >= '" + date1 + "' AND Pola.Order.date <= '" + date2 + "'"
-                    + " GROUP BY (type) ORDER BY (SUM(benefit*quantity)) DESC;");
-            while (resultset.next()) {
-                array.add(" "+resultset.getString("type") + ", $" + resultset.getString("SUM(benefit * quantity)"));
             }
             return array.toArray(new String[array.size()]);
         } catch (SQLException e) {
@@ -890,7 +873,6 @@ public class Handler {
         }
         return null;
     }
-   
 
     public static void addAllNotebookMaterials(NotebookMaterial get) {
         try {
@@ -921,7 +903,6 @@ public class Handler {
         }
         return null;
     }
-    
 
     public static void updateClientInDatabase(Cliente client) {
         try {
@@ -990,7 +971,7 @@ public class Handler {
         }
         return null;
     }
-    
+
     public static NotebookMaterial[] getMaterialsofNotebook(int notebookID) {
         ArrayList<NotebookMaterial> on = new ArrayList<>();
         try {
@@ -1001,14 +982,10 @@ public class Handler {
         try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
-            ResultSet resultset = statement.executeQuery("SELECT notebook_id, pola.material.idMaterial, quantity "
-                    //+"FROM Notebook "+""
-                    + "FROM pola.notebook join pola.notebook_material ON pola.notebook.idNotebook=pola.notebook_material.notebook_id "
-                    + "JOIN pola.material ON pola.notebook_material.material_id=pola.material.idMaterial "
-                    + " WHERE idNotebook=" + notebookID + " ;");
+            ResultSet resultset = statement.executeQuery("SELECT * FROM Notebook_Material WHERE notebook_id=" + notebookID + ";");
             //if there is no data on the data set, the session return will be false
             while (resultset.next()) {
-                on.add( new NotebookMaterial(resultset.getInt("idNotebook"), resultset.getInt("idMaterial"), resultset.getInt("quantity")));
+                on.add(new NotebookMaterial(resultset.getInt("notebook_id"), resultset.getInt("material_id"), resultset.getInt("ammount")));
             }
             statement.close();
             connection.close();
@@ -1054,7 +1031,7 @@ public class Handler {
         try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
-            int rowsaffected = statement.executeUpdate("DELETE FROM Notebook_Order WHERE id_Order=" + Integer.parseInt(orderID) + " AND id_Notebook="+Integer.parseInt(notebookID)+";");
+            int rowsaffected = statement.executeUpdate("DELETE FROM Notebook_Order WHERE id_Order=" + Integer.parseInt(orderID) + " AND id_Notebook=" + Integer.parseInt(notebookID) + ";");
         } catch (SQLException e) {
             System.out.println(e.getSQLState()); //Must be a JPopup or something
         }
@@ -1095,7 +1072,7 @@ public class Handler {
             System.out.println(e.getSQLState()); //Must be a JPopup or something
         }
     }
- 
+
     public static void addOrderToDatabase(Order ord) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -1120,7 +1097,7 @@ public class Handler {
         try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
-            ResultSet resultset = statement.executeQuery("SELECT * FROM Notebook_Order where id_Order=" + orderID + " AND id_Notebook="+notebookID+";");
+            ResultSet resultset = statement.executeQuery("SELECT * FROM Notebook_Order where id_Order=" + orderID + " AND id_Notebook=" + notebookID + ";");
             //if there is no data on the data set, the session return will be false
             while (resultset.next()) {
                 return new OrderNotebooks(resultset.getInt("id_Notebook"), resultset.getInt("id_Order"), resultset.getInt("quantity"), resultset.getString("status"), resultset.getString("ribbon"), resultset.getString("image"), resultset.getString("elastic"), resultset.getString("pageType"));
@@ -1133,29 +1110,29 @@ public class Handler {
         }
         return null;
     }
-    
+
     public static void editNotebookOrder(OrderNotebooks on) {
-       try {
+        try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
         }
-       try {
+        try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             statement.executeUpdate("UPDATE Notebook_Order "
-                    + "SET quantity=" + on.getQuantity() + ", status='" + on.getStatus() + "', ribbon='" + on.getRibbon() + "', image='"+on.getImage()+"', pageType='"+on.getPageType()+"'  "
-                    + "WHERE id_Order=" + on.getId_Order() + " AND id_Notebook="+on.getId_Notebook()+";");
+                    + "SET quantity=" + on.getQuantity() + ", status='" + on.getStatus() + "', ribbon='" + on.getRibbon() + "', image='" + on.getImage() + "', pageType='" + on.getPageType() + "'  "
+                    + "WHERE id_Order=" + on.getId_Order() + " AND id_Notebook=" + on.getId_Notebook() + ";");
             //if there is no data on the data set, the session return will be false
 
         } catch (SQLException e) {
             System.out.println(e.getSQLState()); //Must be a JPopup or something
         }
-       
+
     }
-    
+
     public static void addNotebookOrder(OrderNotebooks on) {
-         try {
+        try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
@@ -1164,12 +1141,121 @@ public class Handler {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             int rowsaffected = statement.executeUpdate("INSERT INTO Notebook_Order(id_Notebook,id_Order,quantity,status,ribbon,image,elastic,pageType) "
-                    + "VALUES (" + on.getId_Notebook() + " , " + on.getId_Order() + " , " + on.getQuantity() + ",'" + on.getStatus() + "','"+on.getRibbon()+"', '"+on.getImage()+"','"+on.getElastic()+"','"+on.getPageType()+"' ) ;");
+                    + "VALUES (" + on.getId_Notebook() + " , " + on.getId_Order() + " , " + on.getQuantity() + ",'" + on.getStatus() + "','" + on.getRibbon() + "', '" + on.getImage() + "','" + on.getElastic() + "','" + on.getPageType() + "' ) ;");
         } catch (SQLException e) {
             System.out.println(e.getSQLState()); //Must be a JPopup or something
         }
     }
-    
 
+    public static HighestBenefitCC[] getHighestBenefitBetweenDates(String date1, String date2) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ArrayList<HighestBenefitCC> array = new ArrayList<>();
+        try {
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
+            Statement statement = connection.createStatement();
+            ResultSet resultset = statement.executeQuery("SELECT type, SUM(benefit * quantity) "
+                    + "FROM Notebook_Order JOIN Notebook ON Notebook_Order.id_Notebook = Notebook.idNotebook "
+                    + "JOIN Pola.Order ON Notebook_Order.id_Order = Pola.Order.idOrder "
+                    + "WHERE Pola.Order.date >= '" + date1 + "' AND Pola.Order.date <= '" + date2 + "'"
+                    + " GROUP BY (type) ORDER BY (SUM(benefit*quantity)) DESC;");
+            while (resultset.next()) {
+                array.add(new HighestBenefitCC(resultset.getString("type"), resultset.getInt("SUM(benefit * quantity)")));
+            }
+            return array.toArray(new HighestBenefitCC[array.size()]);
+        } catch (SQLException e) {
+            System.out.println(e.getSQLState()); //Must be a JPopup or something
+        }
+        return null;
+    }
+
+    public static String getMaterialName(int id) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
+            Statement statement = connection.createStatement();
+            ResultSet resultset = statement.executeQuery("SELECT name FROM Material WHERE idMaterial='" + id + "';");
+            while (resultset.next()) {
+                return resultset.getString("name");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getSQLState()); //Must be a JPopup or something
+        }
+        return null;
+    }
+
+    public static void deleteNotebookMaterial(int materialID, int notebookID) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
+            Statement statement = connection.createStatement();
+            int rowsaffected = statement.executeUpdate("DELETE FROM Notebook_Material WHERE notebook_id=" + notebookID + " AND material_id="+materialID+";");
+        } catch (SQLException e) {
+            System.out.println(e.getSQLState()); //Must be a JPopup or something
+        }
+    }
+
+    public static NotebookMaterial searchMaterialNotebook(int notebookID, int materialID) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
+            Statement statement = connection.createStatement();
+            ResultSet resultset = statement.executeQuery("SELECT * FROM Notebook_Material WHERE notebook_id=" + notebookID + " AND material_id="+materialID+";");
+            //if there is no data on the data set, the session return will be false
+            while (resultset.next()) {
+                return new NotebookMaterial(resultset.getInt("notebook_id"), resultset.getInt("material_id"), resultset.getInt("ammount"));
+            }
+            statement.close();
+            connection.close();
+        } catch (SQLException e) {
+            System.out.println(e.getSQLState()); //Must be a JPopup or something
+        }
+        return null;
+    }
+
+    public static void updateNotebookMaterial(int notebookID, int materialID, int quantity) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
+            Statement statement = connection.createStatement();
+            int rowsaffected = statement.executeUpdate("UPDATE Notebook_Material SET notebook_id=" + notebookID + " , material_id=" + materialID + " , ammount=" + quantity + " WHERE notebook_id=" + notebookID + " AND material_id="+materialID+";");
+        } catch (SQLException e) {
+            System.out.println(e.getSQLState()); //Must be a JPopup or something
+        }
+    }
+
+    public static void addNotebookMaterial(int notebookID, int materialID, int quantity) {
+       try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
+            Statement statement = connection.createStatement();
+            int rowsaffected = statement.executeUpdate("INSERT INTO Notebook_Material VALUES (" + notebookID + " , " + materialID + " , " + quantity + ") ;");
+        } catch (SQLException e) {
+            System.out.println(e.getSQLState()); //Must be a JPopup or something
+        }
+    }
 
 }

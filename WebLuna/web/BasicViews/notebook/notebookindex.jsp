@@ -43,7 +43,7 @@
         <br>
         <div class="notebookhd"><h1>notebooks</h1></div>
         <br>
-        <p class="centeredform"><a href="Notebook?action=add" class="nonblue"><i class="fa fa-plus adduser"></i>Añadir Cuaderno</a></p>
+        <p class="centeredform"><a href="Notebook?action=add" class="nonblue"><i class="fa fa-plus adduser"></i>Añadiplusr Cuaderno</a></p>
         <div class="formm">
         <form action="Notebook" method='GET'>
             <table border="1">

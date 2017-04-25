@@ -49,8 +49,8 @@
         <servlet-class>Servlets.HighestBenefit</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>MaterialsToNotebooks</servlet-name>
-        <servlet-class>Servlets.MaterialsToNotebooks</servlet-class>
+        <servlet-name>MTNotebook</servlet-name>
+        <servlet-class>Servlets.MTNotebook</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
@@ -101,8 +101,8 @@
         <url-pattern>/HighestBenefit</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>MaterialsToNotebooks</servlet-name>
-        <url-pattern>/MaterialsToNotebooks</url-pattern>
+        <servlet-name>MTNotebook</servlet-name>
+        <url-pattern>/MTNotebook</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

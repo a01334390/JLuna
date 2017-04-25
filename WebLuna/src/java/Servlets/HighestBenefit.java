@@ -5,8 +5,11 @@
  */
 package Servlets;
 
+import AdvancedElements.HighestBenefitCC;
+import DatabaseManager.Handler;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -68,9 +71,13 @@ public class HighestBenefit extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String date1 = request.getParameter("date1");
+        String date2 = request.getParameter("date2");
+        HighestBenefitCC[] hob = Handler.getHighestBenefitBetweenDates(date1, date2);
+        request.setAttribute("hob", hob);
+        RequestDispatcher req = request.getRequestDispatcher("/AdvancedViews/HighestIndex.jsp");
+        req.forward(request, response);
     }
 
     /**
