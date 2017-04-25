@@ -21,7 +21,8 @@
         <title>Vistas Avanzadas</title>
         <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel='stylesheet' type='text/css'>
-        <link href="customStyling" rel="stylesheet" type="text/css">
+        <link href="customStyling.css" rel="stylesheet" type="text/css">
+        <link href="homeStyle.css" rel="stylesheet" type="text/css">
     </head>
     <body>
         <script>
@@ -47,11 +48,11 @@
         <div class="off-canvas-wrapper">
             <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
                 <div class="off-canvas position-left reveal-for-large" id="my-info" data-off-canvas data-position="left">
-                    <div class="row column">
+                    <div class="row column offcanvas">
                         <br>
-                        <img class="thumbnail" src="https://placehold.it/550x350">
-                        <h5><%=session.getAttribute("currentSessionName")%></h5>
-                        <p>Bienvenida a las vistas avanzadas</p>                        
+                        <img class="thumbnail" src="images/LunaLogo.png">
+                        <h5 class="whitetxt"><%=session.getAttribute("currentSessionName")%></h5>
+                        <p class="whitetxt">Bienvenida a las vistas avanzadas</p>                        
                     </div>
                 </div>
                 <div class="off-canvas-content" data-off-canvas-content>
@@ -63,42 +64,37 @@
                     </div>
                     <div class="callout primary">
                         <div class="row column" >
-                            <h1><%=session.getAttribute("currentSessionName")%></h1>
-                            <p class="lead">Escoge alguna de las vistas avanzadas</p>
+                            <h1 class="whitetxt"><%=session.getAttribute("currentSessionName")%></h1>
+                            <p class="lead whitetxt">Escoge alguna de las vistas avanzadas</p>
                         </div>
                     </div>
 
                     <div class="row small-up-2 medium-up-3 large-up-4">
                         <div class="column" type="left-rightpadd" type="left-rightpadd">
                             <form action="AdvancedHome"  method='GET'>
-                                <input type="image" src="https://placehold.it/300x400" name="action" value="priorityOrders"/>
+                                <input type="image" class="thumbnail" src="../images/RHAorden.png" name="action" value="priorityOrders"/>
                             </form>
-                            <h5 align="center">Ordenes por prioridad y fecha</h5>
                         </div>
                         <div class="column" type="left-rightpadd" type="left-rightpadd">
                             <form action="AdvancedHome" method='GET'>
-                                <input type="image" src="https://placehold.it/300x400" name="action" value="clientsOrders" />
+                                <input type="image" class="thumbnail" src="../images/RHAmasorden.png" name="action" value="clientsOrders" />
                             </form>
-                            <h5 align="center">Clientes con más ordenes</h5>
                         </div>
                         <%if (session.getAttribute("currentPrivilegeLevel").equals("admin") || session.getAttribute("currentPrivilegeLevel").equals("manager")) { %>
                         <div class="column" type="left-rightpadd" type="left-rightpadd">
                             <form action="AdvancedHome" method="GET">
-                                <input type="image" src="https://placehold.it/300x400" name="action" value="highestBenefit"/>
+                                <input type="image" class="thumbnail" src="../images/RHAbeneficio.png" name="action" value="highestBenefit"/>
                             </form>
-                            <h5 align="center">Pedidos con más beneficio</h5>
                         </div>
                         <div class="column" type="left-rightpadd" value="material" type="left-rightpadd">
                             <form action="AdvancedHome" method="GET">
-                                <input type="image" src="https://placehold.it/300x400" name="action" value="materialsToNotebooks"/>
+                                <input type="image" class="thumbnail" src="../images/RHAmateriales.png" name="action" value="materialsToNotebooks"/>
                             </form>
-                            <h5 align="center">Asignar materiales a cuadernos</h5>
                         </div>
                         <div class="column" type="left-rightpadd" value="macro" type="left-rightpadd">
                             <form action="AdvancedHome" method="GET">
-                                <input type="image" src="https://placehold.it/300x400" name="action" value="macro"/>
+                                <input type="image" class="thumbnail" src="../images/RHAmacro.png" name="action" value="macro"/>
                             </form>
-                            <h5 align="center">Macro Vista</h5>
                         </div>
                         <% } %>                       
                     </div>
