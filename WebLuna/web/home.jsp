@@ -20,7 +20,8 @@
         <title>Bienvenid@ <%=session.getAttribute("currentSessionName")%></title>
         <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel='stylesheet' type='text/css'>
-        <link href="customStyling" rel="stylesheet" type="text/css">
+        <link href="customStyling.css" rel="stylesheet" type="text/css">
+        <link href="homeStyle.css" rel="stylesheet" type="text/css">
     </head>
     <body>
         <script>
@@ -47,18 +48,18 @@
         <div class="off-canvas-wrapper">
             <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
                 <div class="off-canvas position-left reveal-for-large" id="my-info" data-off-canvas data-position="left">
-                    <div class="row column">
+                    <div class="row column offcanvas">
                         <br>
                         <img class="thumbnail" src="images/LunaLogo.png">
-                        <h5><%=session.getAttribute("currentSessionName")%></h5>
-                        <p>Bienvenida a la base de datos</p>
+                        <h5 class="whitetxt"><%=session.getAttribute("currentSessionName")%></h5>
+                        <p class="whitetxt">Bienvenida a la base de datos</p>
                         <%
                             Material [] material = Handler.getShortageOfMaterial();
                         %>
                         <% if (material.length > 0 ){%>
-                        <h5><strong>Hay escasez de los siguientes materiales:</strong></h5>
+                        <h5 class="whitetxt"><strong>Hay escasez de los siguientes materiales:</strong></h5>
                             <% for (int i = 0; i < material.length; i++){%>
-                                <p><%=material[i].getQuantity()+" "+material[i].getName()%></p>
+                                <p class="whitetxt"><%=material[i].getQuantity()+" "+material[i].getName()%></p>
                             <%}%>
                         <%}%>
                     </div>
@@ -72,57 +73,51 @@
                     </div>
                     <div class="callout primary">
                         <div class="row column" >
-                            <h1><%=session.getAttribute("currentSessionName")%></h1>
-                            <p class="lead">Escoge alguna de las siguientes opciones disponibles para ti</p>
+                            <h1 class="whitetxt"><%=session.getAttribute("currentSessionName")%></h1>
+                            <p class="lead whitetxt">Escoge alguna de las siguientes opciones disponibles para ti</p>
                         </div>
                     </div>
 
                     <div class="row small-up-2 medium-up-3 large-up-4">
-                        <div class="column" type="left-rightpadd" type="left-rightpadd">
+                        <div class="column">
                             <form action="login"  method="GET">
-                                <input type="image" src="images/pedidos.png" name="action" value="order"/>
+                                <input type="image" class="thumbnail" src="images/RHpedidos.png" name="action" value="order"/>
                             </form>
-                            <h5 align="center">Ordenes</h5>
                         </div>
                         <div class="column" type="left-rightpadd" type="left-rightpadd">
                             <form action="login" method="GET">
-                                <input type="image" src="images/inventario.png" name="action" value="inventory" />
+                                <input type="image"  class="thumbnail"  src="images/RHinventario.png" name="action" value="inventory" />
                             </form>
-                            <h5 align="center">Inventario</h5>
                         </div>
                         <%if (session.getAttribute("currentPrivilegeLevel").equals("admin") || session.getAttribute("currentPrivilegeLevel").equals("manager")) { %>
                         <div class="column" type="left-rightpadd" type="left-rightpadd">
                             <form action="login" method="GET">
-                                <input type="image" src="images/clientes.png" name="action" value="client"/>
+                                <input type="image" class="thumbnail" src="images/RHclientes.png" name="action" value="client"/>
                             </form>
-                            <h5 align="center">Clientes</h5>
                         </div>
                         <div class="column" type="left-rightpadd" value="material" type="left-rightpadd">
                             <form action="login" method="GET">
-                                <input type="image" src="images/materiales.png" name="action" value="material"/>
+                                <input type="image" class="thumbnail" src="images/RHmateriales.png" name="action" value="material"/>
                             </form>
-                            <h5 align="center">Materiales</h5>
                         </div>
                         <% } %>
                         <%if (session.getAttribute("currentPrivilegeLevel").equals("admin")) {%>
                         <div class="column" type="left-rightpadd" value="user" type="left-rightpadd">
                             <form action="login" method="GET">
-                                <input type="image" src="images/usuarios.png" name="action" value="user"/>
+                                <input type="image" class="thumbnail" src="images/RHusuarios.png" name="action" value="user"/>
                             </form>
-                            <h5 align="center">Usuarios</h5>
-                        </div>
-                        <div class="column" type="left-rightpadd" value="advanced" type="left-rightpadd">
-                            <form action="login" method="GET">
-                                <input type="image" src="images/avanzadas.png" name="action" value="advanced"/>
-                            </form>
-                            <h5 align="center">Vistas Avanzadas</h5>
                         </div>
                         <div class="column" type="left-rightpadd" type="left-rightpadd">
                             <form action="login"   method="GET">
-                                <input type="image" src="images/cuadernos.png" name="action" value="notebook"/>
+                                <input type="image" class="thumbnail" src="images/RHcuadernos.png" name="action" value="notebook"/>
                             </form>
-                            <h5 align="center">Cuadernos</h5>
                         </div>
+                        <div class="column" type="left-rightpadd" value="advanced" type="left-rightpadd">
+                            <form action="login" method="GET">
+                                <input type="image" class="thumbnail" src="images/RHavanzadas.png" name="action" value="advanced"/>
+                            </form>
+                        </div>
+
                         <% }%>
                     </div>
                 </div>

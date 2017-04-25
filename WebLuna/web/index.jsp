@@ -12,7 +12,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <title>imakenotebooks | Welcome</title>
         <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
-        <link rel="stylesheet" href="customStyling.css" rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="homeStyle.css" rel='stylesheet' type='text/css'>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel='stylesheet' type='text/css'>
     </head>
     <body>
@@ -49,13 +49,13 @@
                         <i class="fa fa-user"></i>
                         </span>
 
-                        <input class="input-group-field" type="text" placeholder="Nombre de usuario" name="username">
+                        <input class="input-group-field inputsi" type="text" placeholder="Nombre de usuario" name="username">
                     </div>
                     <div class="input-group">
                         <span class="input-group-label">
                         <i class="fa fa-unlock-alt"></i>
                         </span>
-                        <input class="input-group-field" type="password" placeholder="Password" name="password">
+                        <input class="input-group-field inputsi" type="password" placeholder="Password" name="password">
                     </div>
                     <button class="button expanded">Iniciar Sesion
                     </button><span class="forgot"><a href=".#">¿Olvidaste tu contraseña?</a></span>
