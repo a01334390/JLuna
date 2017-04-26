@@ -23,11 +23,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Cuadernos</title>
     <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+    <link href="newstyling.css" rel="stylesheet" type="text/css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel='stylesheet' type='text/css'>
-    <link href="notebookStyling.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+
     <script>
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
@@ -46,17 +47,50 @@
 
         ga('create', 'UA-2195009-27', 'auto', {name: "foundation"});
         ga('foundation.send', 'pageview');
-
     </script>
+    <script src="js/vendor/jquery.js"></script>
+    <script src="js/vendor/what-input.js"></script>
+    <script src="js/vendor/foundation.js"></script>
+    <script src="js/app.js"></script>
+
+    <div class="top-bar-container" data-sticky-container>
+        <div class="sticky sticky-topbar" data-sticky data-options="anchor: page; marginTop: 0; stickyOn: small;">
+            <div class="top-bar blackbg">
+                <div class="top-bar-left">
+                    <ul class="dropdown menu blackbg" data-dropdown-menu>
+                        <li class="menu-text whitetxt"><%=session.getAttribute("currentSessionName")%></li>
+                        <li><a href="#" class="whitetxt whitehover">Pedidos</a></li>
+                        <li><a href="#" class="whitetxt whitehover">Inventario</a></li>
+                        <li><a href="#" class="whitetxt whitehover">Clientes</a></li>
+                        <li><a href="#" class="whitetxt whitehover">Materiales</a></li>
+                        <li><a href="#" class="whitetxt whitehover">Usuarios</a></li>
+                        <li><a href="#" class="whitetxt whitehover">Cuadernos</a></li>
+                        <li class="has-submenu whitetxt">
+                            <a href="#" class="whitetxt whitehover">Vistas Avanzadas</a>
+                            <ul class="submenu menu vertical blackbg" data-submenu>
+                                <li><a href="#" class="whitetxt whitehover">Ordenes por prioridad y fecha</a></li>
+                                <li><a href="#" class="whitetxt whitehover">Ordenes con mas clientes</a></li>
+                                <li><a href="#" class="whitetxt whitehover">Pedidos con mas beneficio</a></li>
+                                <li><a href="#" class="whitetxt whitehover">Asignar materiales</a></li>
+                                <li><a href="#" class="whitetxt whitehover">Macro vista</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="top-bar-right">
+                </div>
+            </div>
+        </div>
+    </div>
     <br>
     <br>
-    <div class="notebookhd"><h1>notebooks</h1></div>
+    <div class="notebookhd"><h1 class="whitetxt">notebooks</h1></div>
     <br>
     <div class="formm">
         <form action="MTNotebook" method="GET">
             <table border="1">
                 <thead>
-                    <tr class="centeredform">
+                    <tr class="centeredform whitetxt">
                         <th>ID</th>
                         <th>Tiempo de produccion</th>
                         <th>Tipo de Cuaderno</th>

@@ -1,0 +1,98 @@
+body{
+    background-color: rgba(0,0,0,0.05);
+}
+
+.notebookhd{
+    background-color: black;
+    width: 100%;
+    padding-top: 0.6em;
+    padding-bottom: 0.6em;
+}
+
+.whitetxt{
+    color: white; !important
+}
+
+tr:hover{
+    background-color: #60F6BA;
+    -webkit-transition: background-color 400ms linear;
+    -ms-transition: background-color 400ms linear;
+    transition: background-color 400ms linear;
+}
+
+th{
+    background-color: #212121;
+}
+
+tr:nth-child(even):hover{
+    background-color: #60F6BA;
+}
+
+.nonblue{
+    color: black;
+    text-decoration: none;
+    padding-left: 0.3em;   
+    padding-right: 0.3em;
+}
+
+.nonblue:hover{
+    color: #212121;
+    -webkit-transition: color 400ms linear;
+    -ms-transition: color 400ms linear;
+    transition: color 400ms linear;
+    text-decoration: none;
+    padding-left: 0.3em;   
+    padding-right: 0.3em;
+}
+
+.adduser{
+    padding-left: 0.5em;
+    padding-right: 0.3em;
+}
+
+.centeredform{
+    text-align: center;
+    text-decoration: none;
+}
+
+div.formm{
+    display: block;
+    text-align: center; 
+}
+
+form
+{
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+
+h1{
+    text-align: center;
+    color: dimgray;
+}
+
+.blackbg{
+    background: rgba(0,0,0,1) !important
+}
+
+.sticky-topbar {
+    width: 100%;
+}
+
+.whitehover{
+    background: rgba(0,0,0,1);
+}
+
+.whitehover:hover{
+    color:aliceblue;
+    background: #212121;
+    -webkit-transition: background-color 300ms linear;
+    -ms-transition: background-color 300ms linear;
+    transition: background-color 300ms linear;
+}
+
+.menu-text{
+    padding-right: 5em;
+}
