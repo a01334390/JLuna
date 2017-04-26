@@ -42,7 +42,7 @@
                 </div>
                 <div class="row columns">
                     <label> Cuadernos
-                            <select name="id_Notebook" required>
+                            <select name="id_Notebook" required>                               
                                 <c:forEach var="item" items="${nb}">
                                     <option value="${item.getId()}" ${item.getId() == on.getId_Notebook() ? 'selected="selected"' : ''}>${item.getType()}</option>
                                 </c:forEach>
