@@ -72,28 +72,28 @@
                     <div class="row small-up-2 medium-up-3 large-up-4">
                         <div class="column" type="left-rightpadd" type="left-rightpadd">
                             <form action="AdvancedHome"  method='GET'>
-                                <input type="image" class="thumbnail" src="/images/RHAorden.png" name="action" value="priorityOrders"/>
+                                <input type="image" class="thumbnail" src="images/RHAorden.png" name="action" value="priorityOrders"/>
                             </form>
                         </div>
                         <div class="column" type="left-rightpadd" type="left-rightpadd">
                             <form action="AdvancedHome" method='GET'>
-                                <input type="image" class="thumbnail" src="/images/RHAmasorden.png" name="action" value="clientsOrders" />
+                                <input type="image" class="thumbnail" src="images/RHAmasorden.png" name="action" value="clientsOrders" />
                             </form>
                         </div>
                         <%if (session.getAttribute("currentPrivilegeLevel").equals("admin") || session.getAttribute("currentPrivilegeLevel").equals("manager")) { %>
                         <div class="column" type="left-rightpadd" type="left-rightpadd">
                             <form action="AdvancedHome" method="GET">
-                                <input type="image" class="thumbnail" src="/images/RHAbeneficio.png" name="action" value="highestBenefit"/>
+                                <input type="image" class="thumbnail" src="images/RHAbeneficio.png" name="action" value="highestBenefit"/>
                             </form>
                         </div>
                         <div class="column" type="left-rightpadd" value="material" type="left-rightpadd">
                             <form action="AdvancedHome" method="GET">
-                                <input type="image" class="thumbnail" src="/images/RHAmateriales.png" name="action" value="materialsToNotebooks"/>
+                                <input type="image" class="thumbnail" src="images/RHAmateriales.png" name="action" value="materialsToNotebooks"/>
                             </form>
                         </div>
                         <div class="column" type="left-rightpadd" value="macro" type="left-rightpadd">
                             <form action="AdvancedHome" method="GET">
-                                <input type="image" class="thumbnail" src="/images/RHAmacro.png" name="action" value="macro"/>
+                                <input type="image" class="thumbnail" src="images/RHAmacro.png" name="action" value="macro"/>
                             </form>
                         </div>
                         <% } %>                       
