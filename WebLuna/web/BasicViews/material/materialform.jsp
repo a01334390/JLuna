@@ -7,6 +7,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%
+    if (session.getAttribute("currentSessionName") == null) {
+        response.sendRedirect("/index.jsp");
+    }
+%>
 <html>
     <head>
         <meta charset="utf-8"/>
@@ -37,7 +42,7 @@
             ga('foundation.send', 'pageview');
 
         </script>
-        <form action="Material" method="POST" name="formAddMaterial">
+        <form action="Material" method="POST" name="formAddMaterial" data-abide>
             <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
             <div class="form-icons">
                 <div class="input-group">
@@ -58,14 +63,13 @@
                     <span class="input-group-label">
                         <i class="fa fa-money"></i>
                     </span>
-                    <input class="input-group-field" type="text" placeholder="Costo" name="cost" value="<c:out value="${material.getCost()}"/>"/>
+                    <input class="input-group-field" type="text" required placeholder="Costo" name="cost" value="<c:out value="${material.getCost()}"/>"/>
                 </div>
-                
                 <div class="input-group">
                     <span class="input-group-label">
                         <i class="fa fa-pencil"></i>
                     </span>
-                    <input class="input-group-field" type="text" placeholder="Cantidad" name="quantity" value="<c:out value="${material.getQuantity()}"/>"/>
+                    <input class="input-group-field" type="text" required placeholder="Cantidad" name="quantity" value="<c:out value="${material.getQuantity()}"/>"/>
                 </div>
             </div>
 

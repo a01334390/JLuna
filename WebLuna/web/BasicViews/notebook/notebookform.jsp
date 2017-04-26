@@ -7,6 +7,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%
+    if (session.getAttribute("currentSessionName") == null) {
+        response.sendRedirect("/index.jsp");
+    }
+%>
 <html>
     <head>
         <meta charset="utf-8"/>
@@ -39,7 +44,7 @@
         </script>
 
 
-        <form action="Notebook" method="POST" name="formAddNotebook">
+        <form action="Notebook" method="POST" name="formAddNotebook" data-abide>
             <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
 
             <form>
@@ -55,21 +60,21 @@
                         <span class="input-group-label">
                             <i class="fa fa-envelope"></i>
                         </span>
-                        <input class="input-group-field" type="text" placeholder="Tiempo Promedio" name="average_time" value="<c:out value="${notebook.getAverage_time()}"/>"/>
+                        <input class="input-group-field" required type="text" placeholder="Tiempo Promedio" name="average_time" value="<c:out value="${notebook.getAverage_time()}"/>"/>
                     </div>
 
                     <div class="input-group">
                         <span class="input-group-label">
                             <i class="fa fa-key"></i>
                         </span>
-                        <input class="input-group-field" type="text" placeholder="Tipo de Cuaderno" name="type" value="<c:out value="${notebook.getType()}"/>"/>
+                        <input class="input-group-field" required type="text" placeholder="Tipo de Cuaderno" name="type" value="<c:out value="${notebook.getType()}"/>"/>
                     </div>
 
                     <div class="input-group">
                         <span class="input-group-label">
                             <i class="fa fa-key"></i>
                         </span>
-                        <input class="input-group-field" type="text" placeholder="Beneficio Economico" name="benefit" value="<c:out value="${notebook.getBenefit()}"/>"/>
+                        <input class="input-group-field" required type="text" placeholder="Beneficio Economico" name="benefit" value="<c:out value="${notebook.getBenefit()}"/>"/>
                     </div>
                 </div>
 

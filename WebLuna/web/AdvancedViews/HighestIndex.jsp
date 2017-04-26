@@ -7,6 +7,14 @@
 <%@page import="AdvancedElements.HighestBenefitCC"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%
+    if (session.getAttribute("currentSessionName") == null) {
+        response.sendRedirect("/index.jsp");
+    }
+    if (!session.getAttribute("currentPrivilegeLevel").equals("admin")) {
+        response.sendRedirect("/index.jsp");
+    }
+%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

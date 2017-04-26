@@ -7,6 +7,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%
+    if (session.getAttribute("currentSessionName") == null) {
+        response.sendRedirect("/index.jsp");
+    }
+%>
 <html>
     <head>
         <meta charset="utf-8"/>
@@ -38,7 +43,7 @@
 
         </script>
         <div class="translucent-form-overlay">
-            <form action="Inventory" method="POST" name="formAddInventory">
+            <form action="Inventory" method="POST" name="formAddInventory" data-abide>
                 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
                 <div class="form-icons">
                     <div class="input-group">
@@ -54,7 +59,7 @@
                         <span class="input-group-label">
                             <i class="fa fa-pencil"></i>
                         </span>
-                        <input class="input-group-field" type="text" placeholder="Cantidad" name="ammount" value="<c:out value="${inventory.getAmmount()}"/>"/>
+                        <input class="input-group-field" required type="text" placeholder="Cantidad" name="ammount" value="<c:out value="${inventory.getAmmount()}"/>"/>
                     </div>
 
                 </div>

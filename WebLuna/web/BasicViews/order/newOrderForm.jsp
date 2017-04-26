@@ -7,6 +7,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%
+    if (session.getAttribute("currentSessionName") == null) {
+        response.sendRedirect("/index.jsp");
+    }
+%>
 <html>
     <head>
         <meta charset="utf-8"/>
@@ -18,7 +23,7 @@
     </head>
     <body>
         <div class="translucent-form-overlay">
-            <form action="Order" method="POST" name="OrderForm">
+            <form action="Order" method="POST" name="OrderForm" data-abide>
                 <h3>A&#241adir un nuevo pedido</h3>
                 <div class="row columns">
                     <label>Clave del Cliente
@@ -32,7 +37,7 @@
                 </div>
                 <div class="row columns">
                     <label>Fecha de la Orden
-                        <input type="text" name="date" value="<c:out value="${order.getDate()}"/>"/>
+                        <input type="text" required name="date" value="<c:out value="${order.getDate()}"/>"/>
                     </label>
                 </div>
                 <div class="row columns">
@@ -42,7 +47,7 @@
                 </div>
                 <div class="row columns">
                     <label> Prioridad
-                        <select name="priority" type="text">
+                        <select name="priority" type="text" required>
                             <option value="LOW">Baja</option>
                             <option value="MEDIUM">Media</option>
                             <option value="HIGH">Alta</option>

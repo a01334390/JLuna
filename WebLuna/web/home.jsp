@@ -44,7 +44,7 @@
             ga('foundation.send', 'pageview');
 
         </script>
-        
+
         <div class="off-canvas-wrapper">
             <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
                 <div class="off-canvas position-left reveal-for-large" id="my-info" data-off-canvas data-position="left">
@@ -54,13 +54,13 @@
                         <h5 class="whitetxt"><%=session.getAttribute("currentSessionName")%></h5>
                         <p class="whitetxt">Bienvenida a la base de datos</p>
                         <%
-                            Material [] material = Handler.getShortageOfMaterial();
+                            Material[] material = Handler.getShortageOfMaterial();
                         %>
-                        <% if (material.length > 0 ){%>
+                        <% if (material.length > 0) {%>
                         <h5 class="whitetxt"><strong>Hay escasez de los siguientes materiales:</strong></h5>
-                            <% for (int i = 0; i < material.length; i++){%>
-                                <p class="whitetxt"><%=material[i].getQuantity()+" "+material[i].getName()%></p>
-                            <%}%>
+                        <% for (int i = 0; i < material.length; i++) {%>
+                        <p class="whitetxt"><%=material[i].getQuantity() + " " + material[i].getName()%></p>
+                        <%}%>
                         <%}%>
                     </div>
                 </div>
@@ -89,15 +89,15 @@
                                 <input type="image"  class="thumbnail"  src="images/RHinventario.png" name="action" value="inventory" />
                             </form>
                         </div>
+                        <div class="column" type="left-rightpadd" value="material" type="left-rightpadd">
+                            <form action="login" method="GET">
+                                <input type="image" class="thumbnail" src="images/RHmateriales.png" name="action" value="material"/>
+                            </form>
+                        </div>
                         <%if (session.getAttribute("currentPrivilegeLevel").equals("admin") || session.getAttribute("currentPrivilegeLevel").equals("manager")) { %>
                         <div class="column" type="left-rightpadd" type="left-rightpadd">
                             <form action="login" method="GET">
                                 <input type="image" class="thumbnail" src="images/RHclientes.png" name="action" value="client"/>
-                            </form>
-                        </div>
-                        <div class="column" type="left-rightpadd" value="material" type="left-rightpadd">
-                            <form action="login" method="GET">
-                                <input type="image" class="thumbnail" src="images/RHmateriales.png" name="action" value="material"/>
                             </form>
                         </div>
                         <% } %>
@@ -130,7 +130,7 @@
         </script>
         <script type="text/javascript" src="https://intercom.zurb.com/scripts/zcom.js"></script>
         <footer>
-           
+
         </footer>
     </body>
 </html>

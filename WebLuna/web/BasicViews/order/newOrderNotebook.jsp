@@ -11,6 +11,11 @@
 <%@page import="BasicElements.OrderNotebooks"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%
+    if (session.getAttribute("currentSessionName") == null) {
+        response.sendRedirect("/index.jsp");
+    }
+%>
 <html>
     <head>
         <meta charset="utf-8"/>
@@ -22,7 +27,7 @@
     </head>
     <body>
         <div class="translucent-form-overlay">
-            <form action="ONotebook" method="POST" name="OrderForm">
+            <form action="ONotebook" method="POST" name="OrderForm" data-abide>
                 <h3>A&#241adir un nuevo set de cuadernos al pedido</h3>
                 <div class="row columns">
                         <input type="text" readonly="readonly" name="action" value="<c:out value="${action}"/>"/>
@@ -37,7 +42,7 @@
                 </div>
                 <div class="row columns">
                     <label> Cuadernos
-                            <select name="id_Notebook">
+                            <select name="id_Notebook" required>
                                 <c:forEach var="item" items="${nb}">
                                     <option value="${item.getId()}" ${item.getId() == on.getId_Notebook() ? 'selected="selected"' : ''}>${item.getType()}</option>
                                 </c:forEach>
@@ -46,13 +51,13 @@
                 </div>
                 <div class="row columns">
                     <label>Cantidad de cuadernos
-                        <input type="text"  name="quantity" value="<c:out value="${on.getQuantity()}"/>"/>
+                        <input type="text" required name="quantity" value="<c:out value="${on.getQuantity()}"/>"/>
                     </label>
                 </div>
 
                 <div class="row columns">
                     <label> Status de la orden
-                        <select name="status" type="text">
+                        <select name="status" type="text" required>
                             <option value="Design" ${on.getStatus() == "Design" ? 'selected="selected"' : ''}> Diseño</option>
                             <option value="Preview" ${on.getStatus() == "Preview" ? 'selected="selected"' : ''}>Preview</option>
                             <option value="Laminado" ${on.getStatus() == "Laminado" ? 'selected="selected"' : ''}>Laminado</option>
@@ -66,7 +71,7 @@
                 </div>
                 <div class="row columns">
                     <label> Liston
-                        <select name="ribbon" type="text">
+                        <select name="ribbon" type="text" required>
                             <option value="B" ${on.getRibbon() == "B" ? 'selected="selected"' : ''}>Negro</option>
                             <option value="W"${on.getRibbon() == "W" ? 'selected="selected"' : ''}>Blanco</option>
                              <option value="RED" ${on.getRibbon() == "RED" ? 'selected="selected"' : ''}>Rojo</option>
@@ -80,7 +85,7 @@
                 </div>
                 <div class="row columns">
                     <label> Elastico
-                        <select name="elastic" type="text">
+                        <select name="elastic" type="text" required>
                             <option value="Y" ${on.getElastic() == "Y" ? 'selected="selected"' : ''}>Si</option>
                             <option value="N" ${on.getElastic() == "N" ? 'selected="selected"' : ''}>No</option>
                         </select>
@@ -88,7 +93,7 @@
                 </div>
                 <div class="row columns">
                     <label> Tipo de hojas
-                        <select name="pageType" type="text">
+                        <select name="pageType" type="text" required>
                             <option value="PLAIN"  ${on.getPageType() == "PLAIN" ? 'selected="selected"' : ''}>Plano</option>
                             <option value="LINED"  ${on.getPageType() == "LINED" ? 'selected="selected"' : ''}>Rayado</option>
                             <option value="DOTTED"  ${on.getPageType() == "LINED" ? 'selected="selected"' : ''}>Punteado</option>
@@ -98,7 +103,7 @@
                 </div>
                 <div class="row columns">
                     <label>Link de la imagen
-                        <input type="text"  name="image" value="<c:out value="${on.getImage()}"/>"/>
+                        <input placeholder="http://www.imgur.com/img/something" required type="text"  name="image" value="<c:out value="${on.getImage()}"/>"/>
                     </label>
                 </div>
                 <input type="submit" class="primary button expanded search-button" value="Modificar"/>

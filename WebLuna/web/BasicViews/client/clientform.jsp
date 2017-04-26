@@ -7,6 +7,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%
+    if (session.getAttribute("currentSessionName") == null) {
+        response.sendRedirect("/index.jsp");
+    }
+%>
 <html>
     <head>
         <meta charset="utf-8"/>
@@ -39,7 +44,7 @@
         </script>
 
 
-        <form action="Client" method="POST" name="formAddUser">
+        <form action="Client" method="POST" name="formAddUser" data-abide>
             <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
 
             <form>
@@ -56,30 +61,36 @@
                         <span class="input-group-label">
                             <i class="fa fa-user"></i>
                         </span>
-                        <input class="input-group-field" type="text" placeholder="Primer Nombre" name="first_name" value="<c:out value="${client.getFirst_name()}" />"/>
+                        <input class="input-group-field" required type="text" placeholder="Primer Nombre" name="first_name" value="<c:out value="${client.getFirst_name()}" />"/>
                     </div>
 
                     <div class="input-group">
                         <span class="input-group-label">
                             <i class="fa fa-envelope"></i>
                         </span>
-                        <input class="input-group-field" type="text" placeholder="Segundo Nombre" name="second_name" value="<c:out value="${client.getSecond_name()}" />"/>
+                        <input class="input-group-field" required type="text" placeholder="Segundo Nombre" name="second_name" value="<c:out value="${client.getSecond_name()}" />"/>
                     </div>
 
                     <div class="input-group">
                         <span class="input-group-label">
                             <i class="fa fa-key"></i>
                         </span>
-                        <input class="input-group-field" type="text" placeholder="Direccion" name="address" value="<c:out value="${client.getAddress()}" />"/>
+                        <input class="input-group-field" required type="text" placeholder="Direccion" name="address" value="<c:out value="${client.getAddress()}" />"/>
                     </div>
                 </div>
-
                 <div class="input-group">
-                    <fieldset class="large-6 columns">
-                         <input type="radio" name="isPhysical" value="1" id="yes" required><label for="pokemonRed">Es Fisico</label>
-                          <input type="radio" name="isPhysical" value="0" id="no" required><label for="pokemonRed">No es Fisico</label>
-                    </fieldset>
+                    <select name="isPhysical" type="text" required>
+                        <option value="1" ${client.getIsPhysical() == 1 ? 'selected="selected"' : ''}> Es Fisico</option>
+                        <option value="0" ${client.getIsPhysical() == 0 ? 'selected="selected"' : ''}>No es Fisico</option>
+                    </select>
                 </div>
+                
+                    <div class="input-group">
+                        <span class="input-group-label">
+                            <i class="fa fa-envelope"></i>
+                        </span>
+                        <input class="input-group-field" required type="text" placeholder="mail@mail.com" name="email" value="<c:out value="${client.getEmail()}" />"/>
+                    </div>
 
                 <button class="button expanded">Hacer Cambios</button>
             </form>

@@ -8,6 +8,11 @@
 <%@page import="DatabaseManager.Handler"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%
+    if (session.getAttribute("currentSessionName") == null) {
+        response.sendRedirect("/index.jsp");
+    }
+%>
 <html>
     <head>
         <meta charset="utf-8"/>
@@ -67,8 +72,11 @@
                         <td><%=material[i].getCost()%></td>
                         <td><%=material[i].getQuantity()%></td>
                         <td>
-                            <a href="Material?action=edit&materialID=<%=material[i].getId()%>"><i class="fa fa-pencil nonblue"></i></a> 
+                            
+                            <a href="Material?action=edit&materialID=<%=material[i].getId()%>"><i class="fa fa-pencil nonblue"></i></a>
+                            <%if (session.getAttribute("currentPrivilegeLevel").equals("admin") || session.getAttribute("currentPrivilegeLevel").equals("manager")) { %>
                             <a href="Material?action=erase&materialID=<%=material[i].getId()%>"><i class="fa fa-trash nonblue"></i></a>
+                            <% } %>
                         </td>
                     </tr>
                     <%}%>

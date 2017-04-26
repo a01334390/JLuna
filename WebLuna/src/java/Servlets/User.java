@@ -100,11 +100,9 @@ public class User extends HttpServlet {
         String username=request.getParameter("username");
         if(!Handler.userExists(username)){
             DBUser user = new DBUser(username,request.getParameter("privilege"),request.getParameter("email"),request.getParameter("first_name"),request.getParameter("second_name"),request.getParameter("image"));
-            user.setPassword(request.getParameter("password"));
             Handler.addUserToDatabase(user);
         }else{
             DBUser user = new DBUser(username,request.getParameter("privilege"),request.getParameter("email"),request.getParameter("first_name"),request.getParameter("second_name"),request.getParameter("image"));
-            user.setPassword(request.getParameter("password"));
             Handler.editUserInDatase(user);
         }
         RequestDispatcher req = request.getRequestDispatcher("/BasicViews/user/userindex.jsp");

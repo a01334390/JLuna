@@ -44,46 +44,50 @@
             ga('foundation.send', 'pageview');
 
         </script>
-                    
+
         <br>
         <br>
         <div class="notebookhd"><h1>clientes</h1></div>
         <br>
-        <p class="centeredform"><a href="Client?action=add" class="nonblue"><i class="fa fa-plus adduser"></i>Añadir Usuario</a></p>
-                    
-                    <div class="formm">
-                        <form action="Client" method="GET">
-                        <table border="1">
-                            <thead>
-                                <tr>
-                                    <th class="centeredform">ID del Cliente</th>
-                                    <th class="centeredform">Primer Nombre</th>
-                                    <th class="centeredform">Segundo Nombre</th>
-                                    <th class="centeredform">Direccion</th>
-                                    <th class="centeredform">Es cliente fisico</th>
-                                    <th class="centeredform">Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <%Cliente[] clients = Handler.getAllClients();%>
-                                <%for (int i = 0; i < clients.length; i++) {%>
-                                <tr>
-                                    <td class="centeredform"><%=clients[i].getId()%></td>
-                                    <td class="centeredform"><%=clients[i].getFirst_name()%></td>
-                                    <td class="centeredform"><%=clients[i].getSecond_name()%></td>
-                                    <td><%=clients[i].getAddress()%></td>
-                                    <%if (clients[i].getIsPhysical() == 1) {%>
-                                    <td class="centeredform">Si</td>
-                                    <% } else {%>
-                                    <td class="centeredform">No</td>
-                                    <% }%>
-                                    <td class="centeredform"><a href="Client?action=edit&userID=<%=clients[i].getId()%>"><i class="fa fa-pencil nonblue"></i></a>     
-                                        <a href="Client?action=erase&userID=<%=clients[i].getId()%>"><i class="fa fa-trash nonblue"></i></a> </td>
-                                </tr>
-                                <% } %>
-                            </tbody>
-                        </table>
-                    </form>
-                    </div>
-                    </body>
-                    </html>
+        <p class="centeredform"><a href="Client?action=add" class="nonblue"><i class="fa fa-plus adduser"></i>Añadir Cliente</a></p>
+
+        <div class="formm">
+            <form action="Client" method="GET">
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th class="centeredform">ID del Cliente</th>
+                            <th class="centeredform">Primer Nombre</th>
+                            <th class="centeredform">Segundo Nombre</th>
+                            <th class="centeredform">Direccion</th>
+                            <th class="centeredform">Es cliente fisico</th>
+                            <th class="centeredform">Correo Electronico</th>
+                            <th class="centeredform">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%Cliente[] clients = Handler.getAllClients();%>
+                        <%for (int i = 0; i < clients.length; i++) {%>
+                        <tr>
+                            <td class="centeredform"><%=clients[i].getId()%></td>
+                            <td class="centeredform"><%=clients[i].getFirst_name()%></td>
+                            <td class="centeredform"><%=clients[i].getSecond_name()%></td>
+                            <td><%=clients[i].getAddress()%></td>
+                            <%if (clients[i].getIsPhysical() == 1) {%>
+                            <td class="centeredform">Si</td>
+                            <% } else {%>
+                            <td class="centeredform">No</td>
+                            <% }%>
+                            <td><%=clients[i].getEmail()%></td>
+                            <td class="centeredform"><a href="Client?action=edit&userID=<%=clients[i].getId()%>"><i class="fa fa-pencil nonblue"></i></a>  
+                                    <% if (session.getAttribute("currentPrivilegeLevel").equals("admin")) {%>
+                                <a href="Client?action=erase&userID=<%=clients[i].getId()%>"><i class="fa fa-trash nonblue"></i></a> </td>
+                                    <%}%>
+                        </tr>
+                        <% }%>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </body>
+</html>

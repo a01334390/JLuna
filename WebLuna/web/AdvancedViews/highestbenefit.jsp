@@ -29,9 +29,9 @@
     <body>
         <h1>Orders with the highest benefit</h1>
     </body>
-    <form action="HighestBenefit" method="POST" name="formGetByCalendar">
-        Fecha uno: <input type="text" value="1990-01-01" name="date1"><br>
-        Fecha dos: <input type="text" value="2200-01-01" name="date2">
+    <form action="HighestBenefit" method="POST" name="formGetByCalendar" data-abide>
+        Fecha uno: <input type="text" value="1990-01-01" name="date1" required><br>
+        Fecha dos: <input type="text" value="2200-01-01" name="date2" required>
         <input type="submit" value="Submit" />
     </form>
 

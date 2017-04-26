@@ -9,6 +9,15 @@
 <%@page import="BasicElements.Notebook"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<html>
+<%
+    if (session.getAttribute("currentSessionName") == null) {
+        response.sendRedirect("/index.jsp");
+    }
+    if (!session.getAttribute("currentPrivilegeLevel").equals("admin")) {
+        response.sendRedirect("/index.jsp");
+    }
+%>
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>

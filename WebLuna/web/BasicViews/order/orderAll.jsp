@@ -10,6 +10,11 @@
 <%@page import="BasicElements.OrderNotebooks"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%
+    if (session.getAttribute("currentSessionName") == null) {
+        response.sendRedirect("/index.jsp");
+    }
+%>
 <html>
     <head>
         <meta charset="utf-8"/>
@@ -44,7 +49,9 @@
             Cliente client = (Cliente) request.getAttribute("client");
             Order[] order = Handler.getOrdersFromClient(client.getId());
         %>
+        <% if (session.getAttribute("currentPrivilegeLevel").equals("admin") || session.getAttribute("currentPrivilegeLevel").equals("manager")) {%> 
         <a href="Order?action=add&clientID=<%=client.getId()%>">A&#241adir un nuevo pedido</a>
+        <%}%>
         <%for (int i = 0; i < order.length; i++) {%>
         <div>
             <div class="travel-feature-card">
@@ -100,15 +107,17 @@
                                             <a href="#"><img src="http://placehold.it/180x180"/></a>
                                         </div>
                                         <h2 class="product-card-title"><a href="#"><%=Handler.searchNotebookByID(on[x].getId_Notebook()).getType()%></a></h2>
-                                        <span class="product-card-desc">Status: <%=on[x].getStatus()%></span>
-                                        <span class="product-card-price"><%=on[x].getQuantity()%></span>
+                                        <p><span class="product-card-desc">Status: <%=on[x].getStatus()%></span></p>
+                                        <p><span class="product-card-price">Cantidad:<%=on[x].getQuantity()%></span></p>
                                         <div class="product-card-colors">
                                             <p>Liston: <%=on[x].getRibbon()%></p>
                                             <p>Elastico: <%=on[x].getElastic()%></p>
                                             <p>Imagen: <%=on[x].getImage()%></p>
                                             <p>Tipo de Hojas: <%=on[x].getPageType()%></p>
+                                            <% if (session.getAttribute("currentPrivilegeLevel").equals("admin") || session.getAttribute("currentPrivilegeLevel").equals("manager")){%>
                                             <a href="ONotebook?action=delete&OrderID=<%=order[i].getId()%>&NotebookID=<%=on[x].getId_Notebook()%>&clientID=<%=client.getId()%>">Eliminar</a>
-                                            <a href="ONotebook?action=edit&OrderID=<%=order[i].getId()%>&NotebookID=<%=on[x].getId_Notebook()%>&clientID=<%=client.getId()%>">editar</a>
+                                            <% } %>
+                                            <a href="ONotebook?action=edit&OrderID=<%=order[i].getId()%>&NotebookID=<%=on[x].getId_Notebook()%>&clientID=<%=client.getId()%>">Editar</a>
                                         </div>
                                     </div>
                                     <%}
@@ -119,8 +128,10 @@
 
                         <div class="small-12 medium-3 columns travel-feature-card-price">
                             <h6>Acciones</h6>
+                            <% if (session.getAttribute("currentPrivilegeLevel").equals("admin") || session.getAttribute("currentPrivilegeLevel").equals("manager")){%>
                             <a href="Order?action=delete&OrderID=<%=order[i].getId()%>&clientID=<%=client.getId()%>">Eliminar</a>
-                            <a href="Order?action=edit&OrderID=<%=order[i].getId()%>&clientID=<%=client.getId()%>">A&#241adir mas cuadernos a la orden</a>
+                            <% } %>
+                            <a href="Order?action=edit&OrderID=<%=order[i].getId()%>&clientID=<%=client.getId()%>">Editar la orden
                         </div>
                     </div> 
                 </div>

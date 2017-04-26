@@ -120,6 +120,8 @@ public class ONotebook extends HttpServlet {
            Handler.editNotebookOrder(new OrderNotebooks(Integer.parseInt(id_Notebook),Integer.parseInt(idOrder),Integer.parseInt(quantity),status,ribbon,image,elastic,pageType));
         } else {
            Handler.addNotebookOrder(new OrderNotebooks(Integer.parseInt(id_Notebook),Integer.parseInt(idOrder),Integer.parseInt(quantity),status,ribbon,image,elastic,pageType));
+           Handler.substractAllRelatedMaterials(id_Notebook);
+           Handler.substractAllRelatedNotebooks(id_Notebook,quantity);
         }
         Cliente client = Handler.searchClientByID(clientID);
         request.setAttribute("client", client);

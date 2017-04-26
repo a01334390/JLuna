@@ -7,6 +7,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%
+    if (session.getAttribute("currentSessionName") == null) {
+        response.sendRedirect("/index.jsp");
+    }
+    if (!session.getAttribute("currentPrivilegeLevel").equals("admin")) {
+        response.sendRedirect("/index.jsp");
+    }
+%>
 <html>
     <head>
         <meta charset="utf-8"/>
@@ -18,7 +26,7 @@
     </head>
     <body>
         <div class="translucent-form-overlay">
-            <form action="MTNotebook" method="POST" name="OrderForm">
+            <form action="MTNotebook" method="POST" name="OrderForm" data-abide>
                 <h3>Material/Cuaderno</h3>
                 <div class="row columns">
                     <label>Clave del Cuaderno
@@ -27,12 +35,12 @@
                 </div>
                     <div class="row columns">
                     <label>Status
-                        <input type="text" readonly="readonly" name="status" value="<c:out value="${status}"/>"/>
+                        <input required type="text" readonly="readonly" name="status" value="<c:out value="${status}"/>"/>
                     </label>
                 </div>
                 <div class="row columns">
                     <label> Material
-                        <select name="materialID">
+                        <select name="materialID" required>
                             <c:forEach var="item" items="${material}">
                                 <option value="${item.getId()}" ${mn.getMaterial_id() == item.getId() ? 'selected="selected"' : ''}>${item.getName()}</option>
                             </c:forEach>
@@ -41,7 +49,7 @@
                 </div>
                 <div class="row columns">
                     <label>Cantidad
-                        <input type="text" name="quantity" value="<c:out value="${mn.getAmmount()}"/>"/>
+                        <input required type="text" name="quantity" value="<c:out value="${mn.getAmmount()}"/>"/>
                     </label>
                 </div>
                 <input type="submit" class="primary button expanded search-button" value="Modificar"/>

@@ -16,15 +16,16 @@ package BasicElements;
  */
 public class Cliente {
     private int id;
-    private  String first_name,second_name,address;
+    private  String first_name,second_name,address,email;
     private int isPhysical;
 
-    public Cliente(int id, String first_name, String second_name, String address, int isPhysical) {
+    public Cliente(int id, String first_name, String second_name, String address, int isPhysical,String email) {
         this.id = id;
         this.first_name = first_name;
         this.second_name = second_name;
         this.address = address;
         this.isPhysical = isPhysical;
+        this.email=email;
     }
 
     public int getId() {
@@ -71,4 +72,13 @@ public class Cliente {
     public void setIsPhysical(int isPhysical) {
         this.isPhysical = isPhysical;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
 }

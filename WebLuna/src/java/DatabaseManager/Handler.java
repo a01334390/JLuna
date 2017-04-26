@@ -141,6 +141,11 @@ public class Handler {
 
     public static boolean deleteUserInDatabase(String usname) {
         try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             int rowsaffected = statement.executeUpdate("DELETE FROM User WHERE username='" + usname + "';");
@@ -157,6 +162,11 @@ public class Handler {
      * @return all users in an ArrayList
      */
     public static DBUser[] getAllUsers() {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
         ArrayList<DBUser> array = new ArrayList<>();
         try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
@@ -178,6 +188,11 @@ public class Handler {
      * @return
      */
     public static Material[] getAllMaterials() {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
         ArrayList<Material> array = new ArrayList<>();
         try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
@@ -200,6 +215,11 @@ public class Handler {
      */
     public static boolean deleteMaterialInDatabase(int id) {
         try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             int rowsaffected = statement.executeUpdate("DELETE FROM Material WHERE idMaterial='" + id + "';");
@@ -216,6 +236,11 @@ public class Handler {
      * @return
      */
     public static boolean addMaterialToDatabase(Material mat) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
         try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
@@ -234,6 +259,11 @@ public class Handler {
      */
     public static boolean editMaterialInDatabase(Material mat) {
         try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             int rowsaffected = statement.executeUpdate("UPDATE Material SET name='" + mat.getName() + "' , quantity='" + mat.getQuantity() + "' , cost='" + mat.getCost() + "' WHERE idMaterial=" + mat.getId() + " ;");
@@ -250,6 +280,11 @@ public class Handler {
      * @return
      */
     public static Material searchMaterial(String searname) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
         try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
@@ -271,6 +306,11 @@ public class Handler {
      */
     public static Material searchMaterialByID(int id) {
         try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT * FROM Material WHERE idMaterial='" + id + "';");
@@ -291,6 +331,11 @@ public class Handler {
      */
     public static boolean deleteClient(int id) {
         try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             int rowsaffected = statement.executeUpdate("DELETE FROM Client WHERE idClient='" + Integer.toString(id) + "';");
@@ -308,11 +353,16 @@ public class Handler {
      */
     public static Cliente searchClientByID(String id) {
         try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT * FROM Client WHERE idClient='" + id + "';");
             while (resultset.next()) {
-                return new Cliente(resultset.getInt("idClient"), resultset.getString("first_name"), resultset.getString("second_name"), resultset.getString("address"), resultset.getInt("isPhysical"));
+                return new Cliente(resultset.getInt("idClient"), resultset.getString("first_name"), resultset.getString("second_name"), resultset.getString("address"), resultset.getInt("isPhysical"), resultset.getString("email"));
             }
         } catch (SQLException e) {
             System.out.println(e.getSQLState()); //Must be a JPopup or something
@@ -327,11 +377,16 @@ public class Handler {
      */
     public static Cliente searchClientByName(String name) {
         try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT * FROM Client WHERE first_name='" + name + "' OR second_name='" + name + "';");
             while (resultset.next()) {
-                return new Cliente(resultset.getInt("idClient"), resultset.getString("first_name"), resultset.getString("second_name"), resultset.getString("address"), resultset.getInt("isPhysical"));
+                return new Cliente(resultset.getInt("idClient"), resultset.getString("first_name"), resultset.getString("second_name"), resultset.getString("address"), resultset.getInt("isPhysical"), resultset.getString("email"));
             }
         } catch (SQLException e) {
             System.out.println(e.getSQLState()); //Must be a JPopup or something
@@ -346,9 +401,14 @@ public class Handler {
      */
     public static boolean addClientToDatabase(Cliente cli) {
         try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
-            int rowsaffected = statement.executeUpdate("INSERT INTO Client(first_name,second_name,address,isPhysical) VALUES ('" + cli.getFirst_name() + "' , '" + cli.getSecond_name() + "' , '" + cli.getAddress() + "','" + cli.getIsPhysical() + "') ;");
+            int rowsaffected = statement.executeUpdate("INSERT INTO Client(first_name,second_name,address,isPhysical) VALUES ('" + cli.getFirst_name() + "' , '" + cli.getSecond_name() + "' , '" + cli.getAddress() + "','" + cli.getIsPhysical() + "' ,'"+cli.getEmail()+"') ;");
             return rowsaffected > 0;
         } catch (SQLException e) {
             System.out.println(e.getSQLState()); //Must be a JPopup or something
@@ -362,6 +422,11 @@ public class Handler {
      * @return
      */
     public static boolean editClientInDatabase(Cliente cli) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
         try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
@@ -378,13 +443,18 @@ public class Handler {
      * @return
      */
     public static Cliente[] getAllClients() {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
         ArrayList<Cliente> array = new ArrayList<>();
         try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT * FROM Client;");
             while (resultset.next()) {
-                array.add(new Cliente(resultset.getInt("idClient"), resultset.getString("first_name"), resultset.getString("second_name"), resultset.getString("address"), resultset.getInt("isPhysical")));
+                array.add(new Cliente(resultset.getInt("idClient"), resultset.getString("first_name"), resultset.getString("second_name"), resultset.getString("address"), resultset.getInt("isPhysical"), resultset.getString("email")));
             }
             return array.toArray(new Cliente[array.size()]);
         } catch (SQLException e) {
@@ -399,6 +469,11 @@ public class Handler {
      * @return
      */
     public static Order[] getOrdersFromClient(int clientID) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
         ArrayList<Order> array = new ArrayList<>();
         try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
@@ -421,6 +496,11 @@ public class Handler {
      */
     public static Order searchOrderByID(String orderID) {
         try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT * FROM Pola.Order WHERE idOrder= " + orderID + ";");
@@ -441,6 +521,11 @@ public class Handler {
      */
     public static AVOrderNotebook searchNotebookON(String idNotebook, int idOrder) {
         try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT Notebook.type,Customization.ribbon,Customization.elastic,Customization.pageType,Customization.image "
@@ -457,6 +542,11 @@ public class Handler {
     }
 
     public static AVOrderNotebook searchNotebookON(int idOrder) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
         try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
@@ -505,6 +595,11 @@ public class Handler {
      */
     public static Notebook searchNotebookByType(String ntype) {
         try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT * FROM Notebook WHERE type='" + ntype + "';");
@@ -523,6 +618,11 @@ public class Handler {
      */
     public static int getLastOrderGenerated() {
         try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT MAX(idOrder) FROM Pola.Order;");
@@ -537,6 +637,11 @@ public class Handler {
 
     public static Inventory getInventoryByNotebookID(int id) {
         try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT * FROM Inventory WHERE id_Notebook=" + Integer.toString(id) + ";");
@@ -550,6 +655,11 @@ public class Handler {
     }
 
     public static boolean editInventoryInDatabase(int idNotebook, int ammounty) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
         try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
@@ -567,6 +677,11 @@ public class Handler {
 
     public static boolean editInventoryInDatabase(Inventory inventory) {
         try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             int rowsaffected = statement.executeUpdate(
@@ -579,6 +694,11 @@ public class Handler {
     }
 
     public static boolean addNotebookToDatabase(Notebook currentNotebook) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
         try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
@@ -613,6 +733,11 @@ public class Handler {
 
     public static boolean deleteNotebookInDatabase(String currentNotebook) {
         try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             int rowsaffected = statement.executeUpdate("DELETE FROM Notebook WHERE idNotebook=" + currentNotebook + ";");
@@ -625,7 +750,11 @@ public class Handler {
 
     //nuevos metodos
     public static Material[] getShortageOfMaterial() {
-
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
         ArrayList<Material> array = new ArrayList<>();
         try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
@@ -641,6 +770,11 @@ public class Handler {
     }
 
     public static String[] getShortageOfNotebooks() {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
         ArrayList<String> array = new ArrayList<>();
         try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
@@ -658,6 +792,11 @@ public class Handler {
     }
 
     public static String[] getOrdersByDate() {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
         ArrayList<String> array = new ArrayList<>();
         try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
@@ -678,6 +817,11 @@ public class Handler {
     }
 
     public static String[] getOrdersByPriority() {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
         ArrayList<String> array = new ArrayList<>();
         try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
@@ -698,6 +842,11 @@ public class Handler {
     }
 
     public static String[] getMostOrderedNotebooks() {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
         ArrayList<String> array = new ArrayList<>();
         try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
@@ -718,6 +867,11 @@ public class Handler {
     }
 
     public static String[] getMostOrderedNotebooksWithPriority() {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
         ArrayList<String> array = new ArrayList<>();
         try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
@@ -738,6 +892,11 @@ public class Handler {
     }
 
     public static String[] getMostOrderedNotebooksWithStatus() {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
         ArrayList<String> array = new ArrayList<>();
         try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
@@ -758,6 +917,12 @@ public class Handler {
     }
 
     public static String[] getOrdersUnfinished() {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         ArrayList<String> array = new ArrayList<>();
         try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
@@ -781,6 +946,11 @@ public class Handler {
     }
 
     public static String[] getOrdersBetweenDates(String date1, String date2) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
         ArrayList<String> array = new ArrayList<>();
         try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
@@ -801,6 +971,11 @@ public class Handler {
     }
 
     public static String[] getDistinctTypeOfNotebooks() {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
         ArrayList<String> array = new ArrayList<>();
         try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
@@ -820,6 +995,11 @@ public class Handler {
     }
 
     public static Order[] getCompleteOrdersByDate(String date1, String date2) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
         ArrayList<Order> array = new ArrayList<>();
         try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
@@ -837,6 +1017,11 @@ public class Handler {
 
     public static String getOldestUser() {
         try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT username,MIN(create_time) FROM User GROUP BY username DESC;");
@@ -849,6 +1034,11 @@ public class Handler {
     }
 
     public static String getNumberOfWorkers() {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
         try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
@@ -863,6 +1053,11 @@ public class Handler {
 
     public static String getNumberOfImageOrders() {
         try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT COUNT(id_Order) FROM Notebook_Order JOIN Customization ON Notebook_Order.id_Customization = Customization.idCustomization WHERE image IS NOT NULL;");
@@ -875,6 +1070,11 @@ public class Handler {
     }
 
     public static void addAllNotebookMaterials(NotebookMaterial get) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
         try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
@@ -915,7 +1115,7 @@ public class Handler {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             statement.executeUpdate("UPDATE Client "
-                    + "SET first_name='" + client.getFirst_name() + "', second_name='" + client.getSecond_name() + "', address='" + client.getAddress() + "', isPhysical=" + client.getIsPhysical() + " "
+                    + "SET first_name='" + client.getFirst_name() + "', second_name='" + client.getSecond_name() + "', address='" + client.getAddress() + "', isPhysical=" + client.getIsPhysical() + ", email='"+client.getEmail()+"' "
                     + "WHERE idClient=" + client.getId() + ";");
             //if there is no data on the data set, the session return will be false
 
@@ -1200,7 +1400,7 @@ public class Handler {
         try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
-            int rowsaffected = statement.executeUpdate("DELETE FROM Notebook_Material WHERE notebook_id=" + notebookID + " AND material_id="+materialID+";");
+            int rowsaffected = statement.executeUpdate("DELETE FROM Notebook_Material WHERE notebook_id=" + notebookID + " AND material_id=" + materialID + ";");
         } catch (SQLException e) {
             System.out.println(e.getSQLState()); //Must be a JPopup or something
         }
@@ -1215,7 +1415,7 @@ public class Handler {
         try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
-            ResultSet resultset = statement.executeQuery("SELECT * FROM Notebook_Material WHERE notebook_id=" + notebookID + " AND material_id="+materialID+";");
+            ResultSet resultset = statement.executeQuery("SELECT * FROM Notebook_Material WHERE notebook_id=" + notebookID + " AND material_id=" + materialID + ";");
             //if there is no data on the data set, the session return will be false
             while (resultset.next()) {
                 return new NotebookMaterial(resultset.getInt("notebook_id"), resultset.getInt("material_id"), resultset.getInt("ammount"));
@@ -1237,14 +1437,14 @@ public class Handler {
         try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
-            int rowsaffected = statement.executeUpdate("UPDATE Notebook_Material SET notebook_id=" + notebookID + " , material_id=" + materialID + " , ammount=" + quantity + " WHERE notebook_id=" + notebookID + " AND material_id="+materialID+";");
+            int rowsaffected = statement.executeUpdate("UPDATE Notebook_Material SET notebook_id=" + notebookID + " , material_id=" + materialID + " , ammount=" + quantity + " WHERE notebook_id=" + notebookID + " AND material_id=" + materialID + ";");
         } catch (SQLException e) {
             System.out.println(e.getSQLState()); //Must be a JPopup or something
         }
     }
 
     public static void addNotebookMaterial(int notebookID, int materialID, int quantity) {
-       try {
+        try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
@@ -1256,6 +1456,44 @@ public class Handler {
         } catch (SQLException e) {
             System.out.println(e.getSQLState()); //Must be a JPopup or something
         }
+    }
+
+    public static void substractAllRelatedMaterials(String id_Notebook) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //We first get all related materials to the notebook
+        NotebookMaterial[] nm = getMaterialsofNotebook(Integer.parseInt(id_Notebook));
+        for (int i = 0; i < nm.length; i++) {
+            Connection connection;
+            try {
+                connection = DriverManager.getConnection(host, huser, hpassword);
+                Statement statement = connection.createStatement();
+                int rowsaffected = statement.executeUpdate("UPDATE Material SET quantity=quantity-" + nm[i].getAmmount() + " WHERE idMaterial=" + nm[i].getMaterial_id() + ";");
+            } catch (SQLException ex) {
+                Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    public static void substractAllRelatedNotebooks(String id_Notebook, String quantity) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        Connection connection;
+        try {
+            connection = DriverManager.getConnection(host, huser, hpassword);
+            Statement statement = connection.createStatement();
+            statement.executeUpdate("UPDATE Inventory SET ammount=ammount-" + quantity + " WHERE id_Notebook=" + id_Notebook + ";");
+        } catch (SQLException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
 }
