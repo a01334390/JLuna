@@ -1,0 +1,22 @@
+SMAP
+inventoryindex_jsp.java
+JSP
+*S JSP
+*F
++ 0 inventoryindex.jsp
+BasicViews/inventory/inventoryindex.jsp
+*L
+5,12:47
+16,41:59
+57:100,3
+58,22:103
+79,24:124
+103,7:149
+109,2:156
+111,3:158,3
+114:167
+115:168,3
+116,2:171
+118:173,3
+119,77:176
+*E

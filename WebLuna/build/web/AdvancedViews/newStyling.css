@@ -1,0 +1,217 @@
+body{
+    background-color: rgba(0,0,0,0.05) !important;
+}
+
+.notebookhd{
+    background-color: black;
+    width: 100%;
+    padding-top: 0.6em;
+    padding-bottom: 0.6em;
+}
+
+.whitetxt{
+    color: white; !important
+}
+
+tr:hover{
+    background-color: #60F6BA;
+    -webkit-transition: background-color 400ms linear;
+    -ms-transition: background-color 400ms linear;
+    transition: background-color 400ms linear;
+}
+
+th{
+    background-color: #212121;
+}
+
+tr:nth-child(even):hover{
+    background-color: #60F6BA;
+}
+
+.nonblue{
+    color: black;
+    text-decoration: none;
+    padding-left: 0.3em;   
+    padding-right: 0.3em;
+}
+
+.nonblue:hover{
+    color: #212121;
+    -webkit-transition: color 400ms linear;
+    -ms-transition: color 400ms linear;
+    transition: color 400ms linear;
+    text-decoration: none;
+    padding-left: 0.3em;   
+    padding-right: 0.3em;
+}
+
+.adduser{
+    padding-left: 0.5em;
+    padding-right: 0.3em;
+}
+
+.centeredform{
+    text-align: center;
+    text-decoration: none;
+}
+
+div.formm{
+    display: block;
+    text-align: center; 
+}
+
+form
+{
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+
+h1{
+    text-align: center;
+    color: dimgray;
+}
+
+.blackbg{
+    background: rgba(0,0,0,1) !important
+}
+
+.sticky-topbar {
+    width: 100%;
+}
+
+.whitehover{
+    background: rgba(0,0,0,1);
+}
+
+.whitehover:hover{
+    color:aliceblue;
+    background: #212121;
+    -webkit-transition: background-color 300ms linear;
+    -ms-transition: background-color 300ms linear;
+    transition: background-color 300ms linear;
+}
+
+.menu-text{
+    padding-right: 5em;
+}
+
+
+
+/*style for footer*/
+
+.ecommerce-footer {
+background-color: black;
+padding: 50px ;
+}
+
+.ecommerce-footer-links h5 {
+color: white;
+font-size: 1.2rem;
+font-weight: 600;
+}
+
+.ecommerce-footer-links .menu > li > a {
+line-height: 1.5em;
+padding: 0.5rem 0rem;
+}
+
+.ecommerce-footer-links a {
+color: #757575
+;
+font-size: 1rem;
+transition: all 0.5s ease;
+}
+
+.ecommerce-footer-links a:hover {
+color: whitesmoke;
+transition: all 0.5s ease;
+}
+
+.ecommerce-footer-links .more-categories {
+margin-top: 2rem;
+}
+
+@media screen and (max-width: 39.9375em) {
+.ecommerce-footer-links .more-categories {
+margin-top: 2rem;
+}
+}
+
+@media screen and (max-width: 63.9375em) {
+.ecommerce-footer-links .ecommerce-footer-links-block {
+margin-bottom: 3rem;
+}
+}
+
+.ecommerce-footer-bottom-bar {
+border-top: 1px solid #e6e6e6;
+margin-top: 40px;
+padding-bottom: 80px;
+padding-top: 30px;
+}
+
+.ecommerce-footer-bottom-bar .menu > li > a {
+line-height: 1.2em;
+padding: 10px 0;
+}
+
+.ecommerce-footer-bottom-bar a {
+color: #8a8a8a;
+font-size: 0.9rem;
+transition: all 0.5s ease;
+}
+
+.ecommerce-footer-bottom-bar a:hover {
+color: #0a0a0a;
+transition: all 0.5s ease;
+}
+
+@media screen and (max-width: 39.9375em) {
+.ecommerce-footer-bottom-bar ul {
+text-align: center;
+}
+}
+
+.ecommerce-footer-bottom-bar li {
+display: inline;
+}
+
+.ecommerce-footer-bottom-bar .bottom-links {
+margin-top: 0.65rem;
+margin-left: 0;
+}
+
+.ecommerce-footer-bottom-bar .bottom-links li {
+padding-right: 2rem;
+}
+
+@media screen and (max-width: 39.9375em) {
+.ecommerce-footer-bottom-bar .bottom-links li {
+text-align: center;
+}
+}
+
+
+
+@media screen and (max-width: 39.9375em) {
+.ecommerce-footer-bottom-bar .ecommerce-footer-logomark {
+padding-top: 1rem;
+margin-bottom: 1rem;
+}
+}
+
+.ecommerce-footer-bottom-bar .bottom-copyright {
+color: #8a8a8a;
+font-size: 0.9rem;
+line-height: 1.2em;
+padding-top: 1rem;
+text-align: right;
+}
+
+@media screen and (max-width: 39.9375em) {
+.ecommerce-footer-bottom-bar .bottom-copyright {
+text-align: center;
+}
+}
