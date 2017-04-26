@@ -43,22 +43,54 @@
 
             ga('create', 'UA-2195009-27', 'auto', {name: "foundation"});
             ga('foundation.send', 'pageview');
-
         </script>
+        <script src="js/vendor/jquery.js"></script>
+        <script src="js/vendor/what-input.js"></script>
+        <script src="js/vendor/foundation.js"></script>
+        <script src="js/app.js"></script>
+        <div class="top-bar-container" data-sticky-container>
+            <div class="sticky sticky-topbar" data-sticky data-options="anchor: page; marginTop: 0; stickyOn: small;">
+                <div class="top-bar blackbg">
+                    <div class="top-bar-left">
+                        <ul class="dropdown menu blackbg" data-dropdown-menu>
+                            <li class="menu-text whitetxt"><%=session.getAttribute("currentSessionName")%></li>
+                            <li><a href="#" class="whitetxt whitehover">Pedidos</a></li>
+                            <li><a href="#" class="whitetxt whitehover">Inventario</a></li>
+                            <li><a href="#" class="whitetxt whitehover">Clientes</a></li>
+                            <li><a href="#" class="whitetxt whitehover">Materiales</a></li>
+                            <li><a href="#" class="whitetxt whitehover">Usuarios</a></li>
+                            <li><a href="#" class="whitetxt whitehover">Cuadernos</a></li>
+                            <li class="has-submenu whitetxt">
+                                <a href="#" class="whitetxt whitehover">Vistas Avanzadas</a>
+                                <ul class="submenu menu vertical blackbg" data-submenu>
+                                    <li><a href="#" class="whitetxt whitehover">Ordenes por prioridad y fecha</a></li>
+                                    <li><a href="#" class="whitetxt whitehover">Ordenes con mas clientes</a></li>
+                                    <li><a href="#" class="whitetxt whitehover">Pedidos con mas beneficio</a></li>
+                                    <li><a href="#" class="whitetxt whitehover">Asignar materiales</a></li>
+                                    <li><a href="#" class="whitetxt whitehover">Macro vista</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="top-bar-right">
+                    </div>
+                </div>
+            </div>
+        </div>
         <br>
         <br>
-        <div class="notebookhd"><h1>inventario</h1></div>
+        <div class="notebookhd"><h1 class="whitetxt">inventario</h1></div>
         <br>
         <br>
         <div class="formm">
         <form action="Inventory" method='GET'>
             <table border="1">
                 <thead>
-                    <tr>
-                        <th class="centeredform">ID</th>                    
-                        <th class="centeredform">Nombre</th>
-                        <th class="centeredform">Cantidad</th>
-                        <th class="centeredform">Acciones</th>
+                    <tr class="centeredform whitetxt">
+                        <th>ID</th>                    
+                        <th>Nombre</th>
+                        <th>Cantidad</th>
+                        <th>Acciones</th>
                     </tr>                    
                 </thead>
                 <tbody>

@@ -44,10 +44,43 @@
             ga('foundation.send', 'pageview');
 
         </script>
+        <script src="js/vendor/jquery.js"></script>
+        <script src="js/vendor/what-input.js"></script>
+        <script src="js/vendor/foundation.js"></script>
+        <script src="js/app.js"></script>
 
+        <div class="top-bar-container" data-sticky-container>
+            <div class="sticky sticky-topbar" data-sticky data-options="anchor: page; marginTop: 0; stickyOn: small;">
+                <div class="top-bar blackbg">
+                    <div class="top-bar-left">
+                        <ul class="dropdown menu blackbg" data-dropdown-menu>
+                            <li class="menu-text whitetxt"><%=session.getAttribute("currentSessionName")%></li>
+                            <li><a href="#" class="whitetxt whitehover">Pedidos</a></li>
+                            <li><a href="#" class="whitetxt whitehover">Inventario</a></li>
+                            <li><a href="#" class="whitetxt whitehover">Clientes</a></li>
+                            <li><a href="#" class="whitetxt whitehover">Materiales</a></li>
+                            <li><a href="#" class="whitetxt whitehover">Usuarios</a></li>
+                            <li><a href="#" class="whitetxt whitehover">Cuadernos</a></li>
+                            <li class="has-submenu whitetxt">
+                                <a href="#" class="whitetxt whitehover">Vistas Avanzadas</a>
+                                <ul class="submenu menu vertical blackbg" data-submenu>
+                                    <li><a href="#" class="whitetxt whitehover">Ordenes por prioridad y fecha</a></li>
+                                    <li><a href="#" class="whitetxt whitehover">Ordenes con mas clientes</a></li>
+                                    <li><a href="#" class="whitetxt whitehover">Pedidos con mas beneficio</a></li>
+                                    <li><a href="#" class="whitetxt whitehover">Asignar materiales</a></li>
+                                    <li><a href="#" class="whitetxt whitehover">Macro vista</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="top-bar-right">
+                    </div>
+                </div>
+            </div>
+        </div>
         <br>
         <br>
-        <div class="notebookhd"><h1>clientes</h1></div>
+        <div class="notebookhd"><h1 class="whitetxt">clientes</h1></div>
         <br>
         <p class="centeredform"><a href="Client?action=add" class="nonblue"><i class="fa fa-plus adduser"></i>Añadir Cliente</a></p>
 
@@ -55,14 +88,14 @@
             <form action="Client" method="GET">
                 <table border="1">
                     <thead>
-                        <tr>
-                            <th class="centeredform">ID del Cliente</th>
-                            <th class="centeredform">Primer Nombre</th>
-                            <th class="centeredform">Segundo Nombre</th>
-                            <th class="centeredform">Direccion</th>
-                            <th class="centeredform">Es cliente fisico</th>
-                            <th class="centeredform">Correo Electronico</th>
-                            <th class="centeredform">Acciones</th>
+                        <tr class="centeredform whitetxt">
+                            <th>ID del Cliente</th>
+                            <th>Primer Nombre</th>
+                            <th>Segundo Nombre</th>
+                            <th>Direccion</th>
+                            <th>Es cliente fisico</th>
+                            <th>Correo Electronico</th>
+                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>

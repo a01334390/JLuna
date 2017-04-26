@@ -1,23 +1,31 @@
 body{
-    background-color: #a58855;
+    background-color: rgba(0,0,0,0.05);
 }
 
 .notebookhd{
-    background-color: white;
+    background-color: black;
     width: 100%;
     padding-top: 0.6em;
     padding-bottom: 0.6em;
 }
 
+.whitetxt{
+    color: white; !important
+}
+
 tr:hover{
-    background-color: #C9F188;
+    background-color: #60F6BA;
     -webkit-transition: background-color 400ms linear;
     -ms-transition: background-color 400ms linear;
     transition: background-color 400ms linear;
 }
 
 th{
-    background-color: #c9b188;
+    background-color: #212121;
+}
+
+tr:nth-child(even):hover{
+    background-color: #60F6BA;
 }
 
 .nonblue{
@@ -28,7 +36,7 @@ th{
 }
 
 .nonblue:hover{
-    color: white;
+    color: #212121;
     -webkit-transition: color 400ms linear;
     -ms-transition: color 400ms linear;
     transition: color 400ms linear;
@@ -45,7 +53,6 @@ th{
 .centeredform{
     text-align: center;
     text-decoration: none;
-    color: black;
 }
 
 div.formm{
@@ -64,4 +71,28 @@ form
 h1{
     text-align: center;
     color: dimgray;
+}
+
+.blackbg{
+    background: rgba(0,0,0,1) !important
+}
+
+.sticky-topbar {
+    width: 100%;
+}
+
+.whitehover{
+    background: rgba(0,0,0,1);
+}
+
+.whitehover:hover{
+    color:aliceblue;
+    background: #212121;
+    -webkit-transition: background-color 300ms linear;
+    -ms-transition: background-color 300ms linear;
+    transition: background-color 300ms linear;
+}
+
+.menu-text{
+    padding-right: 5em;
 }
