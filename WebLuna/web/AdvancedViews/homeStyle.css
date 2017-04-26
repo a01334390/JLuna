@@ -774,11 +774,11 @@ left-rightpadd {
 }
 
 .inputsi{
-    color: mediumseagreen;
+    color: mediumseagreen; !important
 }
 
 .callout.primary{
-    background-color: rgba(0,0,0,0.90);
+    background-color: rgba(0,0,0,0.95);
 }
 
 .offcanvas{
