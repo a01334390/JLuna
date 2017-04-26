@@ -99,10 +99,10 @@ public class User extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username=request.getParameter("username");
         if(!Handler.userExists(username)){
-            DBUser user = new DBUser(username,request.getParameter("privilege"),request.getParameter("email"),request.getParameter("first_name"),request.getParameter("second_name"),request.getParameter("image"));
+            DBUser user = new DBUser(username,request.getParameter("privilege"),request.getParameter("email"),request.getParameter("first_name"),request.getParameter("second_name"),request.getParameter("image"), request.getParameter("password"));
             Handler.addUserToDatabase(user);
         }else{
-            DBUser user = new DBUser(username,request.getParameter("privilege"),request.getParameter("email"),request.getParameter("first_name"),request.getParameter("second_name"),request.getParameter("image"));
+            DBUser user = new DBUser(username,request.getParameter("privilege"),request.getParameter("email"),request.getParameter("first_name"),request.getParameter("second_name"),request.getParameter("image"), request.getParameter("password"));
             Handler.editUserInDatase(user);
         }
         RequestDispatcher req = request.getRequestDispatcher("/BasicViews/user/userindex.jsp");

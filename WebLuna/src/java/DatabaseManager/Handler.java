@@ -8,6 +8,7 @@ package DatabaseManager;
 import AdvancedElements.HighestBenefitCC;
 import BasicElements.*;
 import Servlets.HighestBenefit;
+import java.io.UnsupportedEncodingException;
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -75,7 +76,7 @@ public class Handler {
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT * FROM User WHERE username='" + username + "';");
             while (resultset.next()) {
-                return new DBUser(resultset.getString("username"), resultset.getString("privilege"), resultset.getString("email"), resultset.getString("first_name"), resultset.getString("second_name"), resultset.getString("image"));
+                return new DBUser(resultset.getString("username"), resultset.getString("privilege"), resultset.getString("email"), resultset.getString("first_name"), resultset.getString("second_name"), resultset.getString("image"), resultset.getString("password"));
             }
         } catch (SQLException e) {
             System.out.println(e.getSQLState()); //Must be a JPopup or something
@@ -89,7 +90,7 @@ public class Handler {
      * @param user, as an DBUser in the database
      * @return a boolean if it was possible or not
      */
-    public static boolean addUserToDatabase(DBUser user) {
+    public static boolean addUserToDatabase(DBUser user) throws UnsupportedEncodingException {
         try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException ex) {
@@ -112,7 +113,7 @@ public class Handler {
      * @param user, based on an user element
      * @return a boolean if it was possible
      */
-    public static boolean editUserInDatase(DBUser user) {
+    public static boolean editUserInDatase(DBUser user) throws UnsupportedEncodingException {
         try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException ex) {
@@ -173,7 +174,7 @@ public class Handler {
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT * FROM User;");
             while (resultset.next()) {
-                array.add(new DBUser(resultset.getString("username"), resultset.getString("privilege"), resultset.getString("email"), resultset.getString("first_name"), resultset.getString("second_name"), resultset.getString("image")));
+                array.add(new DBUser(resultset.getString("username"), resultset.getString("privilege"), resultset.getString("email"), resultset.getString("first_name"), resultset.getString("second_name"), resultset.getString("image"), resultset.getString("password")));
             }
             return array.toArray(new DBUser[array.size()]);
         } catch (SQLException e) {
@@ -1096,7 +1097,7 @@ public class Handler {
             ResultSet resultset = statement.executeQuery("SELECT * FROM User WHERE username='" + username + "';");
             //if there is no data on the data set, the session return will be false
             while (resultset.next()) {
-                return new DBUser(resultset.getString("username"), resultset.getString("privilege"), resultset.getString("email"), resultset.getString("first_name"), resultset.getString("second_name"), resultset.getString("image"));
+                return new DBUser(resultset.getString("username"), resultset.getString("privilege"), resultset.getString("email"), resultset.getString("first_name"), resultset.getString("second_name"), resultset.getString("image"), resultset.getString("password"));
             }//return session;
         } catch (SQLException e) {
             System.out.println(e.getSQLState()); //Must be a JPopup or something

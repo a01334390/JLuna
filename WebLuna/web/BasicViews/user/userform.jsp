@@ -22,7 +22,7 @@
         <title>Forma de Usuarios</title>
         <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel='stylesheet' type='text/css'>
-        <link href="customStyling" rel="stylesheet" type="text/css">
+        <link href="customStyling.css" rel="stylesheet" type="text/css">
     </head>
     <body>
         <script>
@@ -46,65 +46,66 @@
 
         </script>
 
+        <div class="translucent-form-overlay">
+            <form action="User" method="POST" name="formAddUser">
+                <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+                <div class="translucent-form-overlay">
 
-        <form action="User" method="POST" name="formAddUser">
-            <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+                    <div class="form-icons">
+                        <div class="input-group">
+                            <span class="input-group-label">
+                                <i class="fa fa-user"></i>
+                            </span>
+                            <input class="input-group-field" type="text"  name="username" value="<c:out value="${user.getUsername()}"/>"/>
+                        </div>
+                        <div class="input-group">
+                            <label>Privilegios</label>
+                                <fieldset class="large-6 columns">
+                                    <input type="radio" name="privilege" value="admin" id="y1" required><label for="pokemonRed">Administrador</label>
+                                    <input type="radio" name="privilege" value="manager" id="n2" required><label for="pokemonRed">Project Manager</label>
+                                    <input type="radio" name="privilege" value="worker" id="n3" required><label for="pokemonRed">Encuadernador</label>
+                                </fieldset>
+                        </div>
 
-            <form>
-                <div class="form-icons">
-                    <div class="input-group">
-                        <span class="input-group-label">
-                            <i class="fa fa-user"></i>
-                        </span>
-                        <input class="input-group-field" type="text"  name="username" value="<c:out value="${user.getUsername()}"/>"/>
+                        <div class="input-group">
+                            <span class="input-group-label">
+                                <i class="fa fa-envelope"></i>
+                            </span>
+                            <input class="input-group-field" type="text" placeholder="Correo Electronico" name="email" value="<c:out value="${user.getEmail()}"/>"/>
+                        </div>
+
+                        <div class="input-group">
+                            <span class="input-group-label">
+                                <i class="fa fa-key"></i>
+                            </span>
+                            <input class="input-group-field" type="text" placeholder="Primer Nombre" name="first_name" value="<c:out value="${user.getFirst_name()}"/>"/>
+                        </div>
+
+                        <div class="input-group">
+                            <span class="input-group-label">
+                                <i class="fa fa-key"></i>
+                            </span>
+                            <input class="input-group-field" type="text" placeholder="Segundo Nombre" name="second_name" value="<c:out value="${user.getSecond_name()}"/>"/>
+                        </div>
+
+                        <div class="input-group">
+                            <span class="input-group-label">
+                                <i class="fa fa-key"></i>
+                            </span>
+                            <input class="input-group-field" type="text" placeholder="image path" name="image" value="<c:out value="${user.getImage()}"/>"/>
+                        </div>
+
+                        <div class="input-group">
+                            <span class="input-group-label">
+                                <i class="fa fa-key"></i>
+                            </span>
+                            <input class="input-group-field" type="password" placeholder="Password" name="password" value="<c:out value="${user.getPassword()}"/>"/>
+                        </div>
                     </div>
-                    <div class="input-group">
-                        <label>Privilegios</label>
-                            <fieldset class="large-6 columns">
-                                <input type="radio" name="privilege" value="admin" id="y1" required><label for="pokemonRed">Administrador</label>
-                                <input type="radio" name="privilege" value="manager" id="n2" required><label for="pokemonRed">Project Manager</label>
-                                <input type="radio" name="privilege" value="worker" id="n3" required><label for="pokemonRed">Encuadernador</label>
-                            </fieldset>
-                    </div>
 
-                    <div class="input-group">
-                        <span class="input-group-label">
-                            <i class="fa fa-envelope"></i>
-                        </span>
-                        <input class="input-group-field" type="text" placeholder="Correo Electronico" name="email" value="<c:out value="${user.getEmail()}"/>"/>
-                    </div>
+                    <button class="button expanded">Hacer Cambios</button>
 
-                    <div class="input-group">
-                        <span class="input-group-label">
-                            <i class="fa fa-key"></i>
-                        </span>
-                        <input class="input-group-field" type="text" placeholder="Primer Nombre" name="first_name" value="<c:out value="${user.getFirst_name()}"/>"/>
-                    </div>
-
-                    <div class="input-group">
-                        <span class="input-group-label">
-                            <i class="fa fa-key"></i>
-                        </span>
-                        <input class="input-group-field" type="text" placeholder="Segundo Nombre" name="second_name" value="<c:out value="${user.getSecond_name()}"/>"/>
-                    </div>
-
-                    <div class="input-group">
-                        <span class="input-group-label">
-                            <i class="fa fa-key"></i>
-                        </span>
-                        <input class="input-group-field" type="text" placeholder="image path" name="image" value="<c:out value="${user.getImage()}"/>"/>
-                    </div>
-
-                    <div class="input-group">
-                        <span class="input-group-label">
-                            <i class="fa fa-key"></i>
-                        </span>
-                        <input class="input-group-field" type="password" placeholder="imapassword" name="password" />
-                    </div>
-                </div>
-
-                <button class="button expanded">Hacer Cambios</button>
             </form>
-        </form>
+        </div>
     </body>
 </html>
