@@ -117,11 +117,25 @@ public class ONotebook extends HttpServlet {
         String image = request.getParameter("image");
         String clientID = request.getParameter("clientID");
         if (action.equalsIgnoreCase("Editando")) {
-           Handler.editNotebookOrder(new OrderNotebooks(Integer.parseInt(id_Notebook),Integer.parseInt(idOrder),Integer.parseInt(quantity),status,ribbon,image,elastic,pageType));
+            int amm = Handler.getAmmountOfNotebooksInOrder(idOrder, id_Notebook);
+            if (amm < Integer.parseInt(quantity)) {
+                for(int i=0;i<Integer.parseInt(quantity)-amm;i++){
+                    Handler.substractAllRelatedMaterials(id_Notebook);   
+                }
+                Handler.substractAllRelatedNotebooks(id_Notebook, Integer.toString(Integer.parseInt(quantity)-amm));
+            } else {
+                for(int i=0;i<amm-Integer.parseInt(quantity);i++){
+                Handler.addAllRelatedMaterials(id_Notebook);
+                }
+                Handler.addAllRelatedNotebooks(id_Notebook, Integer.toString(amm-Integer.parseInt(quantity)));
+            }
+          Handler.editNotebookOrder(new OrderNotebooks(Integer.parseInt(id_Notebook), Integer.parseInt(idOrder), Integer.parseInt(quantity), status, ribbon, image, elastic, pageType));
         } else {
-           Handler.addNotebookOrder(new OrderNotebooks(Integer.parseInt(id_Notebook),Integer.parseInt(idOrder),Integer.parseInt(quantity),status,ribbon,image,elastic,pageType));
-           Handler.substractAllRelatedMaterials(id_Notebook);
-           Handler.substractAllRelatedNotebooks(id_Notebook,quantity);
+            Handler.addNotebookOrder(new OrderNotebooks(Integer.parseInt(id_Notebook), Integer.parseInt(idOrder), Integer.parseInt(quantity), status, ribbon, image, elastic, pageType));
+            for(int i=0;i<Integer.parseInt(quantity);i++){
+              Handler.substractAllRelatedMaterials(id_Notebook);   
+            }
+            Handler.substractAllRelatedNotebooks(id_Notebook, quantity);
         }
         Cliente client = Handler.searchClientByID(clientID);
         request.setAttribute("client", client);

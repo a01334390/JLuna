@@ -409,7 +409,7 @@ public class Handler {
         try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
-            int rowsaffected = statement.executeUpdate("INSERT INTO Client(first_name,second_name,address,isPhysical) VALUES ('" + cli.getFirst_name() + "' , '" + cli.getSecond_name() + "' , '" + cli.getAddress() + "','" + cli.getIsPhysical() + "' ,'"+cli.getEmail()+"') ;");
+            int rowsaffected = statement.executeUpdate("INSERT INTO Client(first_name,second_name,address,isPhysical) VALUES ('" + cli.getFirst_name() + "' , '" + cli.getSecond_name() + "' , '" + cli.getAddress() + "','" + cli.getIsPhysical() + "' ,'" + cli.getEmail() + "') ;");
             return rowsaffected > 0;
         } catch (SQLException e) {
             System.out.println(e.getSQLState()); //Must be a JPopup or something
@@ -1116,7 +1116,7 @@ public class Handler {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
             statement.executeUpdate("UPDATE Client "
-                    + "SET first_name='" + client.getFirst_name() + "', second_name='" + client.getSecond_name() + "', address='" + client.getAddress() + "', isPhysical=" + client.getIsPhysical() + ", email='"+client.getEmail()+"' "
+                    + "SET first_name='" + client.getFirst_name() + "', second_name='" + client.getSecond_name() + "', address='" + client.getAddress() + "', isPhysical=" + client.getIsPhysical() + ", email='" + client.getEmail() + "' "
                     + "WHERE idClient=" + client.getId() + ";");
             //if there is no data on the data set, the session return will be false
 
@@ -1495,6 +1495,65 @@ public class Handler {
             Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+
+    public static int getAmmountOfNotebooksInOrder(String idOrder, String id_Notebook) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
+            Statement statement = connection.createStatement();
+            ResultSet resultset = statement.executeQuery("SELECT quantity FROM Notebook_Order WHERE id_Notebook=" + id_Notebook + " AND id_Order=" + idOrder + ";");
+            //if there is no data on the data set, the session return will be false
+            while (resultset.next()) {
+                return resultset.getInt("quantity");
+            }
+            statement.close();
+            connection.close();
+        } catch (SQLException e) {
+            System.out.println(e.getSQLState()); //Must be a JPopup or something
+        }
+        return -1;
+    }
+
+    public static void addAllRelatedMaterials(String id_Notebook) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            //We first get all related materials to the notebook
+            Connection connection = DriverManager.getConnection(host, huser, hpassword);
+            Statement statement = connection.createStatement();
+            NotebookMaterial[] nm = getMaterialsofNotebook(Integer.parseInt(id_Notebook));
+            for (int i = 0; i < nm.length; i++) {
+                statement.executeUpdate("UPDATE Notebook_Material SET ammount=ammount+" + nm[i].getAmmount() + " WHERE material_id=" + nm[i].getMaterial_id() + ";");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+    }
+
+    public static void addAllRelatedNotebooks(String id_Notebook, String quantity) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        Connection connection;
+        try {
+            connection = DriverManager.getConnection(host, huser, hpassword);
+            Statement statement = connection.createStatement();
+            statement.executeUpdate("UPDATE Inventory SET ammount=ammount+" + quantity + " WHERE id_Notebook=" + id_Notebook + ";");
+        } catch (SQLException ex) {
+            Logger.getLogger(Handler.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }
