@@ -10,7 +10,7 @@ body{
 }
 
 .whitetxt{
-    color: white; !important
+    color: white!important
 }
 
 tr:hover{
@@ -215,4 +215,45 @@ text-align: right;
 .ecommerce-footer-bottom-bar .bottom-copyright {
 text-align: center;
 }
+}
+
+
+
+
+
+.translucent-form-overlay {
+  max-width: 500px;
+  width: 100%;
+  background-color: rgba(54, 54, 54, 0.8);
+  padding: 20px;
+  color: #fefefe;
+}
+
+.translucent-form-overlay .columns.row {
+  display: block;
+}
+
+.translucent-form-overlay h3, .translucent-form-overlay label {
+  color: #fefefe;
+}
+
+.translucent-form-overlay input, .translucent-form-overlay select {
+  color: #8a8a8a;
+}
+
+.translucent-form-overlay input::-webkit-input-placeholder {
+  color: #8a8a8a;
+}
+
+.translucent-form-overlay input:-ms-input-placeholder {
+  color: #8a8a8a;
+}
+
+.translucent-form-overlay input::placeholder {
+  color: #8a8a8a;
+}
+
+body{
+    background-image: url(../../images/bg1.jpg);
+    background-size: cover;
 }

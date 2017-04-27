@@ -43,7 +43,8 @@
 
         </script>
 
-
+        <div class="formm">
+            <div class="translucent-form-overlay">
         <form action="Client" method="POST" name="formAddUser" data-abide>
             <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
 
@@ -94,10 +95,8 @@
 
                 <button class="button expanded">Hacer Cambios</button>
             </form>
-
-
         </form>
-
-
+            </div>
+        </div>
     </body>
 </html>

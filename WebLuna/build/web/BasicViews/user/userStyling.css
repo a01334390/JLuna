@@ -10,7 +10,7 @@ body{
 }
 
 .whitetxt{
-    color: white; !important
+    color: white!important
 }
 
 tr:hover{
@@ -134,7 +134,6 @@ body{
     background-image: url(../../images/bg1.jpg);
     background-size: cover;
 }
-
 
 
 
