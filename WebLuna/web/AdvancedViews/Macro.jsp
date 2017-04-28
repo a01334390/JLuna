@@ -28,6 +28,8 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel='stylesheet' type='text/css'>
         <link href="newStyling.css" rel="stylesheet" type="text/css">
         <title>Macro vista</title>
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/favicon.ico" type="image/x-icon">
     </head>
     <body>
         <script src="js/vendor/jquery.js"></script>
