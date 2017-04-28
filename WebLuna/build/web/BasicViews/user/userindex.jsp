@@ -22,9 +22,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <title>Usuarios</title>
         <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
-            <link href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel='stylesheet' type='text/css'>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel='stylesheet' type='text/css'>
         <link href="userStyling.css" rel="stylesheet" type="text/css">
-        <link href="">
     </head>
     <body>
          <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
@@ -77,17 +76,13 @@
                         </ul>
                     </div>
                     <div class="top-bar-right">
-                        <ul class="dropdown menu blackbg" data-dropdown-menu>
-                            <li><a href="#" class="whitetxt whitehover">Cerrar Sesion</a></li>
-                            <%-- CHECAR FUNCIONALIDAD BOTON CERRAR SESION--%>
-                        </ul>
                     </div>
                 </div>
             </div>
         </div>
  <br>
         <br>
-        <div class="notebookhd"><h1 class="whitetxt">Usuarios</h1></div>
+        <div class="notebookhd"><h1 class="whitetxt">users</h1></div>
         <br>
         <p class="centeredform"><a href="User?action=add" class="nonblue"><i class="fa fa-plus adduser"></i>Añadir Usuario</a></p>
                     <div class="formm">
@@ -130,72 +125,5 @@
                         </table>
                     </form>
                     </div>
-                            
-                    <footer>
-                         <div class="ecommerce-footer">
-                            <div class="ecommerce-footer-links row">
-                              <div class="small-10 medium-10 large-6 columns">
-                                <div class="row ecommerce-footer-links-block">
-                                  <div class="small-4 medium-4 large-4 columns">
-                                    <h5>Ayuda</h5>
-                                    <ul class="lista">
-                                        <li><a href="#">Preguntas Frecuentes</a></li>
-                                        <li><a href="#">Politica de devolucion</a></li>
-                                        <li><a href="#">Envio y entrega</a></li>
-                                    </ul>                                  
-                                  </div>
-                                </div>
-                              </div>
-                              
-                              <div class="small-12 medium-12 large-6 columns">
-                                <div class="row">
-                                  <div class="small-4 medium-4 large-4 columns">
-                                  
-                                  <h5>Mi cuenta</h5>
-                                    <ul class="lista">
-                                        <li><a href="#">Ingresar</a></li>
-                                        <li><a href="#">Estatus de pedido</a></li>
-                                        <li><a href="#">Lista de deseos</a></li>
-                                    </ul>
-                                </div>
-                                <div class="small-4 medium-4 large-4 columns">
-                                  <h5>Acerca  </h5>
-                                    <ul class="lista">
-                                        <li><a href="#">Compañia</a></li>
-                                        <li><a href="#">Locacion</a></li>
-                                        <li><a href="#">Equipo</a></li>
-                                        <li><a href="#">Soporte</a></li>
-                                        <li><a href="#">Contacto</a></li>            
-                                    </ul>
-                                </div>
-                                    <div class="small-4 medium-4 large-4 columns">
-                                  <h5>Redes sociales  </h5>
-                                    <ul class="lista">
-                                        <li><a href="#">Facebook</a></li>
-                                        <li><a href="#">Twitter</a></li>
-                                        <li><a href="#">Instagram</a></li>
-                                        <li><a href="#">Youtube</a></li>
-                                    </ul>
-                                </div>
-                               </div> 
-                              </div>
-                            </div>
-                            <div class="ecommerce-footer-bottom-bar row">
-                              <div class="small-12 medium-5 columns">
-                                <ul class="bottom-links">
-                                  <li><a href="#">Politica de privacidad</a></li>
-                                  <li><a href="#">Terminos & Condiciones</a></li>
-                                </ul>
-                              </div>
-                             
-                              <div class="small-12 medium-5 columns">
-                                <div class="bottom-copyright">
-                                  <span>©2017 imakenootebooks. Todos los derechos reservados.</span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-
-                    </footer>
                     </body>
                     </html>

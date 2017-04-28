@@ -23,7 +23,7 @@
         <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel='stylesheet' type='text/css'>
         <link href="newStyling.css" rel="stylesheet" type="text/css">
-        <title>JSP Page</title>
+        <title>Pedidos de prioridad</title>
     </head>
     <body>
         <script src="js/vendor/jquery.js"></script>
@@ -51,7 +51,7 @@
             </div>
             <br>
             <br>
-        <div class="notebookhd"><h1 class="whitetxt">Priority orders</h1>
+        <div class="notebookhd"><h1 class="whitetxt">Pedidos de prioridad</h1>
     </body>
     
     <h3 class="centeredform">Pedidos por fecha</h3>

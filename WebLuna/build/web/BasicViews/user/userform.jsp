@@ -22,7 +22,7 @@
         <title>Forma de Usuarios</title>
         <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel='stylesheet' type='text/css'>
-        <link href="userStyling.css" rel="stylesheet" type="text/css">
+        <link href="customStyling.css" rel="stylesheet" type="text/css">
     </head>
     <body>
         <script>
@@ -45,8 +45,7 @@
             ga('foundation.send', 'pageview');
 
         </script>
-        <br>
-        <div class="formm">
+
         <div class="translucent-form-overlay">
             <form action="User" method="POST" name="formAddUser">
                 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
@@ -60,12 +59,11 @@
                             <input class="input-group-field" type="text"  name="username" value="<c:out value="${user.getUsername()}"/>"/>
                         </div>
                         <div class="input-group">
-                                <fieldset class="columns centeredform smallselect">
-                                    <select name="privilege" class="centeredform">
-                                        <option value="admin" id="y1" required><label for="pokemonRed">Administrador</label></option>
-                                        <option value="manager" id="n2" required><label for="pokemonRed">Project Manager</label></option>
-                                        <option value="worker" id="n3" required><label for="pokemonRed">Encuadernador</label></option>
-                                    </select>
+                            <label>Privilegios</label>
+                                <fieldset class="large-6 columns">
+                                    <input type="radio" name="privilege" value="admin" id="y1" required><label for="pokemonRed">Administrador</label>
+                                    <input type="radio" name="privilege" value="manager" id="n2" required><label for="pokemonRed">Project Manager</label>
+                                    <input type="radio" name="privilege" value="worker" id="n3" required><label for="pokemonRed">Encuadernador</label>
                                 </fieldset>
                         </div>
 
@@ -108,8 +106,6 @@
                     <button class="button expanded">Hacer Cambios</button>
 
             </form>
-</div>
-        </div>
         </div>
     </body>
 </html>

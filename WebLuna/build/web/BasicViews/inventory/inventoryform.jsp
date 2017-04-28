@@ -42,7 +42,6 @@
             ga('foundation.send', 'pageview');
 
         </script>
-        <div class="formm">
         <div class="translucent-form-overlay">
             <form action="Inventory" method="POST" name="formAddInventory" data-abide>
                 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
@@ -69,6 +68,6 @@
 
             </form>
         </div>
-        </div>
+
     </body>
 </html>

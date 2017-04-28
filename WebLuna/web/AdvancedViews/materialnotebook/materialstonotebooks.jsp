@@ -84,7 +84,7 @@
     </div>
     <br>
     <br>
-    <div class="notebookhd"><h1 class="whitetxt">notebooks</h1></div>
+    <div class="notebookhd"><h1 class="whitetxt">Cuadernos</h1></div>
     <br>
     <div class="formm">
         <form action="MTNotebook" method="GET">

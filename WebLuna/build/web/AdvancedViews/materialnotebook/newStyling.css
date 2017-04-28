@@ -10,7 +10,7 @@ body{
 }
 
 .whitetxt{
-    color: white!important
+    color: white;
 }
 
 tr:hover{

@@ -129,7 +129,7 @@
                     <% } %>
                 </tbody>
             </table>
-            <h3 class="centeredform">Clientes por stauts</h3>
+            <h3 class="centeredform">Clientes por status</h3>
                 <table border="1">
                 <thead>
                     <tr class="centeredform whitetxt">

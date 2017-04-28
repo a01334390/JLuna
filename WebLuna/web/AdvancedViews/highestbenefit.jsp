@@ -52,7 +52,7 @@
             </div>
             <br>
             <br>
-            <div class="notebookhd"><h1 class="whitetxt">Orders with the highest benefit</h1></div>
+            <div class="notebookhd"><h1 class="whitetxt">Ordenes con el mayor beneficio</h1></div>
     </body>
     <form action="HighestBenefit" method="POST" name="formGetByCalendar" data-abide>
         Fecha uno: <input type="text" value="1990-01-01" name="date1" required><br>

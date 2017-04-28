@@ -32,19 +32,15 @@
                     <div class="top-bar-left">
                         <ul class="dropdown menu blackbg" data-dropdown-menu>
                             <li class="menu-text whitetxt"><%=session.getAttribute("currentSessionName")%></li>
-                            <li><a href="#" class="whitetxt whitehover">Ordenes prioridad/fecha</a></li>
-                            <li><a href="#" class="whitetxt whitehover">Ordenes por clientes</a></li>
-                            <li><a href="#" class="whitetxt whitehover">Pedidos por beneficio</a></li>
+                            <li><a href="#" class="whitetxt whitehover">Ordenes por prioridad y fecha</a></li>
+                            <li><a href="#" class="whitetxt whitehover">Ordenes con mas clientes</a></li>
+                            <li><a href="#" class="whitetxt whitehover">Pedidos con mas beneficio</a></li>
                             <li><a href="#" class="whitetxt whitehover">Asignar materiales</a></li>
                             <li><a href="#" class="whitetxt whitehover">Macro vista</a></li>
                             <li class="whitetxt"><a href="#" class="whitetxt whitehover">Vistas Basicas</a>
                             </li>
                             </div>
                         <div class="top-bar-right">
-                            <ul class="dropdown menu blackbg" data-dropdown-menu>
-                            <li><a href="#" class="whitetxt whitehover">Cerrar Sesion</a></li>
-                            <%-- CHECAR FUNCIONALIDAD BOTON CERRAR SESION--%>
-                            </ul>
                         </div>
                     </div>
                 </div>
@@ -69,73 +65,5 @@
             </tbody>
         </table>
 
-            
-            <footer>
-<div class="ecommerce-footer">
-<div class="ecommerce-footer-links row">
-<div class="small-10 medium-10 large-6 columns">
-<div class="row ecommerce-footer-links-block">
-<div class="small-4 medium-4 large-4 columns">
-<h5>Ayuda</h5>
-<ul class="lista">
-<li><a href="#">Preguntas Frecuentes</a></li>
-<li><a href="#">Politica de devolucion</a></li>
-<li><a href="#">Envio y entrega</a></li>
-</ul>                                  
-</div>
-</div>
-</div>
-
-<div class="small-12 medium-12 large-6 columns">
-<div class="row">
-<div class="small-4 medium-4 large-4 columns">
-
-<h5>Mi cuenta</h5>
-<ul class="lista">
-<li><a href="#">Ingresar</a></li>
-<li><a href="#">Estatus de pedido</a></li>
-<li><a href="#">Lista de deseos</a></li>
-</ul>
-</div>
-<div class="small-4 medium-4 large-4 columns">
-<h5>Acerca  </h5>
-<ul class="lista">
-<li><a href="#">Compañia</a></li>
-<li><a href="#">Locacion</a></li>
-<li><a href="#">Equipo</a></li>
-<li><a href="#">Soporte</a></li>
-<li><a href="#">Contacto</a></li>            
-</ul>
-</div>
-<div class="small-4 medium-4 large-4 columns">
-<h5>Redes sociales  </h5>
-<ul class="lista">
-<li><a href="#">Facebook</a></li>
-<li><a href="#">Twitter</a></li>
-<li><a href="#">Instagram</a></li>
-<li><a href="#">Youtube</a></li>
-</ul>
-</div>
-</div> 
-</div>
-</div>
-<div class="ecommerce-footer-bottom-bar row">
-<div class="small-12 medium-5 columns">
-<ul class="bottom-links">
-<li><a href="#">Politica de privacidad</a></li>
-<li><a href="#">Terminos & Condiciones</a></li>
-</ul>
-</div>
-
-<div class="small-12 medium-5 columns">
-<div class="bottom-copyright">
-<span>©2017 imakenootebooks. Todos los derechos reservados.</span>
-</div>
-</div>
-</div>
-</div>
-
-</footer>
-            
     </body>
 </html>

@@ -27,7 +27,7 @@
         <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel='stylesheet' type='text/css'>
         <link href="newStyling.css" rel="stylesheet" type="text/css">
-        <title>Macroview</title>
+        <title>Macro vista</title>
     </head>
     <body>
         <script src="js/vendor/jquery.js"></script>
@@ -55,7 +55,7 @@
             </div>
             <br>
             <br>
-            <div class="notebookhd"><h1 class="whitetxt">Welcome to the macroview </h1></div>
+            <div class="notebookhd"><h1 class="whitetxt">Macro vista </h1></div>
     </body>
         <div class="formm">
     <% MacroView macroview = new MacroView();%>
