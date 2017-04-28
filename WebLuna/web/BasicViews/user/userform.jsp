@@ -60,11 +60,12 @@
                         </div>
                         <div class="input-group">
                             <label>Privilegios</label>
-                                <fieldset class="large-6 columns">
-                                    <input type="radio" name="privilege" value="admin" id="y1" required><label for="pokemonRed">Administrador</label>
-                                    <input type="radio" name="privilege" value="manager" id="n2" required><label for="pokemonRed">Project Manager</label>
-                                    <input type="radio" name="privilege" value="worker" id="n3" required><label for="pokemonRed">Encuadernador</label>
-                                </fieldset>
+                                <select name="privilege" type="text" required>
+                                    <option value="admin" ${user.getPrivilege() == "admin" ? 'selected="selected"' : ''}>Administrador</option>
+                                    <option value="manager" ${user.getPrivilege() == "manager" ? 'selected="selected"' : ''}>Manager</option>
+                                    <option value="worker" ${user.getPrivilege() == "worker" ? 'selected="selected"' : ''}>Encuadernador</option>
+                                        
+                                </select>
                         </div>
 
                         <div class="input-group">
