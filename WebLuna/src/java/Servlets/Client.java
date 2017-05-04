@@ -101,7 +101,7 @@ public class Client extends HttpServlet {
             Cliente user = new Cliente(1000,request.getParameter("first_name"),request.getParameter("second_name"),request.getParameter("address"),Integer.parseInt(request.getParameter("isPhysical")),request.getParameter("email"));
             Handler.addClientToDatabase(user);
         }else{
-            Cliente user = new Cliente(Integer.parseInt(request.getParameter("idClient")),request.getParameter("first_name"),request.getParameter("second_name"),request.getParameter("address"),Integer.parseInt(request.getParameter("isPhysical")),request.getParameter("email"));
+            Cliente user = new Cliente(Integer.parseInt(id),request.getParameter("first_name"),request.getParameter("second_name"),request.getParameter("address"),Integer.parseInt(request.getParameter("isPhysical")),request.getParameter("email"));
             Handler.updateClientInDatabase(user);
         }
         RequestDispatcher req = request.getRequestDispatcher("/BasicViews/client/clientindex.jsp");

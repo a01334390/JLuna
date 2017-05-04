@@ -47,6 +47,7 @@
             ga('foundation.send', 'pageview');
 
         </script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
          <div class="notebookhd"><h1 class="whitetxt">Client orders</h1></div>
         <br>
         <%
@@ -88,57 +89,49 @@
                 </tbody>
               </table>
         </div>
+        <div> 
+            <h2 class="product-card-title centeredform"><a id="addcuad" href="ONotebook?action=add&OrderID=<%=order[i].getId()%>&clientID=<%=client.getId()%>">A&#241adir set de cuadernos</a></h2>
+        </div>
+        <br>
         <div>
-            <div class="travel-feature-card">
-                <div class="travel-feature-card-details">
-                    <div class="row">
-                        <div class="small-12 medium-9 columns travel-feature-card-content">
-                            <div class="row">
-                                <div class="small-4 medium-2 columns">
-                                    <img class="travel-feature-card-image" src="https://unsplash.it/600/600/?image=1081" alt="">
-                                </div>
-                                <div class="small-8 medium-10 columns">
+            <div class="centeredform">
                                     <%
                                         OrderNotebooks[] on = Handler.getAllNotebooksFromOrders(order[i].getId());
                                     %>
-                                    <div class="product-card">
-                                        <div class="product-card-thumbnail">
-                                            <a href="ONotebook?action=add&OrderID=<%=order[i].getId()%>&clientID=<%=client.getId()%>"><img src="http://placehold.it/180x180"/></a>
-                                        </div>
-                                        <h2 class="product-card-title"><a href="ONotebook?action=add&OrderID=<%=order[i].getId()%>&clientID=<%=client.getId()%>">A&#241adir set de cuadernos</a></h2>
-                                        <div class="product-card-colors">
-
-                                        </div>
-                                    </div>
                                     <%if (on != null) {
                                             for (int x = 0; x < on.length; x++) {%>
-                                    <div class="product-card">
-                                        <div class="product-card-thumbnail">
-                                            <a href="#"><img src="http://placehold.it/180x180"/></a>
-                                        </div>
-                                        <h2 class="product-card-title"><a href="#"><%=Handler.searchNotebookByID(on[x].getId_Notebook()).getType()%></a></h2>
-                                        <p><span class="product-card-desc">Status: <%=on[x].getStatus()%></span></p>
-                                        <p><span class="product-card-price">Cantidad:<%=on[x].getQuantity()%></span></p>
-                                        <div class="product-card-colors">
-                                            <p>Liston: <%=on[x].getRibbon()%></p>
-                                            <p>Elastico: <%=on[x].getElastic()%></p>
-                                            <p>Imagen: <%=on[x].getImage()%></p>
-                                            <p>Tipo de Hojas: <%=on[x].getPageType()%></p>
-                                            <% if (session.getAttribute("currentPrivilegeLevel").equals("admin") || session.getAttribute("currentPrivilegeLevel").equals("manager")){%>
-                                            <a href="ONotebook?action=delete&OrderID=<%=order[i].getId()%>&NotebookID=<%=on[x].getId_Notebook()%>&clientID=<%=client.getId()%>">Eliminar</a>
+                                            <div class="centeredform">
+                                                <span id="notebooktype" class="centeredform"><%=Handler.searchNotebookByID(on[x].getId_Notebook()).getType()%></span>
+                                                <table>
+                                                    <tr class="whitetxt centeredform">
+                                                      <th>Status</th>
+                                                      <th>Cantidad</th>
+                                                      <th>Liston</th>
+                                                      <th>Elastico</th>
+                                                      <th>Imagen</th>
+                                                      <th>Hojas</th>
+                                                      <th>Acciones</th>
+                                                    </tr>
+                                                    <tr class="centeredform">
+                                                      <td><%=on[x].getStatus()%></td>
+                                                      <td><%=on[x].getQuantity()%></td>
+                                                      <td><%=on[x].getRibbon()%></td>
+                                                      <td><%=on[x].getElastic()%></td>
+                                                      <td><%=on[x].getImage()%></td>
+                                                      <td><%=on[x].getPageType()%></td>
+                                                      <td>  <% if (session.getAttribute("currentPrivilegeLevel").equals("admin") || session.getAttribute("currentPrivilegeLevel").equals("manager")){%>
+                                            <a href="ONotebook?action=edit&OrderID=<%=order[i].getId()%>&NotebookID=<%=on[x].getId_Notebook()%>&clientID=<%=client.getId()%>"><i class="fa fa-pencil nonblue"></i></a>
                                             <% } %>
-                                            <a href="ONotebook?action=edit&OrderID=<%=order[i].getId()%>&NotebookID=<%=on[x].getId_Notebook()%>&clientID=<%=client.getId()%>">Editar</a>
-                                        </div>
+                                            <a href="ONotebook?action=delete&OrderID=<%=order[i].getId()%>&NotebookID=<%=on[x].getId_Notebook()%>&clientID=<%=client.getId()%>"><i class="fa fa-trash nonblue"></i></a>
+                                            </tr>
+                                                </table>
+                                            <br><br>
+                                            </div>
                                     </div>
                                     <%}
                                         }%>
                                 </div>
-                            </div> 
-                        </div>
-                    </div> 
-                </div>
-            </div>
-        </div>
+                            </div>
         <%}%>
     </body>
 </html>

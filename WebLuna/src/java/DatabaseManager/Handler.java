@@ -409,7 +409,7 @@ public class Handler {
         try {
             Connection connection = DriverManager.getConnection(host, huser, hpassword);
             Statement statement = connection.createStatement();
-            int rowsaffected = statement.executeUpdate("INSERT INTO Client(first_name,second_name,address,isPhysical) VALUES ('" + cli.getFirst_name() + "' , '" + cli.getSecond_name() + "' , '" + cli.getAddress() + "','" + cli.getIsPhysical() + "' ,'" + cli.getEmail() + "') ;");
+            int rowsaffected = statement.executeUpdate("INSERT INTO Client(first_name,second_name,address,isPhysical,email) VALUES ('" + cli.getFirst_name() + "' , '" + cli.getSecond_name() + "' , '" + cli.getAddress() + "','" + cli.getIsPhysical() + "' ,'" + cli.getEmail() + "') ;");
             return rowsaffected > 0;
         } catch (SQLException e) {
             System.out.println(e.getSQLState()); //Must be a JPopup or something

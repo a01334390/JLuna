@@ -1,4 +1,16 @@
 .addpedido{
     text-align: center;
-    color: black;
+    color: mediumseagreen;
+}
+
+#notebooktype{
+    font-size: 2em;
+}
+
+#addcuad{
+    color: mediumseagreen;
+}
+
+table{
+    margin: 0px auto;
 }

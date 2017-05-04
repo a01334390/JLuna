@@ -19,6 +19,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Productos que generaron más beneficio</title>
+         <link href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel='stylesheet' type='text/css'>
+         <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
         <link href="AdvancedViews/newStyling.css" rel="stylesheet" type="text/css">
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
         <link rel="icon" href="/favicon.ico" type="image/x-icon">
@@ -52,7 +54,11 @@
             </div>
             <br>
             <br>
-        <table border="1">
+            <br>
+        <br><br>
+        <br><br>
+        <br>
+        <table border="1" align="center">
             <thead>
                 <tr class="centeredform whitetxt">
                     <th>Tipo de Cuaderno</th>
