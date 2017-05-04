@@ -20,7 +20,7 @@
         <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel='stylesheet' type='text/css'>
         <link href="BasicViews/material/materialStyling.css" rel="stylesheet" type="text/css">
-        <link href="customStyling.css" rel="stylesheet" type="text/css">
+        <link href="BasicViews/material/formStyling.css" rel="stylesheet" type="text/css">
     </head>
     <body>
         <script>
@@ -43,6 +43,7 @@
             ga('foundation.send', 'pageview');
 
         </script>
+        <div class="translucent-form-overlay">
         <form action="Material" method="POST" name="formAddMaterial" data-abide>
             <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
             <div class="form-icons">
@@ -68,14 +69,14 @@
                 </div>
                 <div class="input-group">
                     <span class="input-group-label">
-                        <i class="fa fa-pencil"></i>
+                        <i class="fa fa-question"></i>
                     </span>
                     <input class="input-group-field" type="text" required placeholder="Cantidad" name="quantity" value="<c:out value="${material.getQuantity()}"/>"/>
                 </div>
             </div>
 
-            <button class="button expanded">Hacer Cambios</button>
+                <button id="submitbutton" class="button expanded">Hacer Cambios</button>
         </form>
-        
+        </div>
     </body>
 </html>

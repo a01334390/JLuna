@@ -57,25 +57,19 @@
                     <div class="top-bar-left">
                         <ul class="dropdown menu blackbg" data-dropdown-menu>
                             <li class="menu-text whitetxt"><%=session.getAttribute("currentSessionName")%></li>
-                            <li><a href="#" class="whitetxt whitehover">Pedidos</a></li>
-                            <li><a href="#" class="whitetxt whitehover">Inventario</a></li>
-                            <li><a href="#" class="whitetxt whitehover">Clientes</a></li>
-                            <li><a href="#" class="whitetxt whitehover">Materiales</a></li>
-                            <li><a href="#" class="whitetxt whitehover">Usuarios</a></li>
-                            <li><a href="#" class="whitetxt whitehover">Cuadernos</a></li>
-                            <li class="has-submenu whitetxt">
-                                <a href="#" class="whitetxt whitehover">Vistas Avanzadas</a>
-                                <ul class="submenu menu vertical blackbg" data-submenu>
-                                    <li><a href="#" class="whitetxt whitehover">Ordenes por prioridad y fecha</a></li>
-                                    <li><a href="#" class="whitetxt whitehover">Ordenes con mas clientes</a></li>
-                                    <li><a href="#" class="whitetxt whitehover">Pedidos con mas beneficio</a></li>
-                                    <li><a href="#" class="whitetxt whitehover">Asignar materiales</a></li>
-                                    <li><a href="#" class="whitetxt whitehover">Macro vista</a></li>
-                                </ul>
-                            </li>
+                            <li><a href="http://localhost:8080/WebLuna/login?action.x=157&action.y=242&action=order" class="whitetxt whitehover">Pedidos</a></li>
+                            <li><a href="http://localhost:8080/WebLuna/login?action.x=157&action.y=192&action=inventory" class="whitetxt whitehover">Inventario</a></li>
+                            <li><a href="http://localhost:8080/WebLuna/login?action.x=174&action.y=233&action=client" class="whitetxt whitehover">Clientes</a></li>
+                            <li><a href="http://localhost:8080/WebLuna/login?action.x=64&action.y=249&action=material" class="whitetxt whitehover">Materiales</a></li>
+                            <li><a href="http://localhost:8080/WebLuna/login?action.x=173&action.y=143&action=user" class="whitetxt whitehover">Usuarios</a></li>
+                            <li><a href="http://localhost:8080/WebLuna/login?action.x=160&action.y=140&action=notebook" class="whitetxt whitehover">Cuadernos</a></li>
+                            <li><a href="http://localhost:8080/WebLuna/login?action.x=17&action.y=129&action=advanced" class="whitetxt whitehover">Vistas Avanzadas</a></li>
                         </ul>
                     </div>
                     <div class="top-bar-right">
+                        <ul class="dropdown menu blackbg" data-dropdown-menu>
+                            <li><a href="#" class="whitetxt whitehover">Logout</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -84,7 +78,7 @@
         <br>
         <div class="notebookhd"><h1 class="whitetxt">clientes</h1></div>
         <br>
-        <p class="centeredform"><a href="Client?action=add" class="nonblue"><i class="fa fa-plus adduser"></i>Añadir Cliente</a></p>
+        <p class="centeredform"><a href="Client?action=add" class="nonblue"><i class="fa fa-plus adduser"></i>Agregar Cliente</a></p>
 
         <div class="formm">
             <form action="Client" method="GET">

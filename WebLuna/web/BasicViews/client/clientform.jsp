@@ -20,7 +20,7 @@
         <link href="BasicViews/client/clientStyling.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel='stylesheet' type='text/css'>
-        <link href="customStyling" rel="stylesheet" type="text/css">
+        <link href="BasicViews/inventory/formStyling.css" rel="stylesheet" type="text/css">
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
         <link rel="icon" href="/favicon.ico" type="image/x-icon">
     </head>
@@ -49,13 +49,13 @@
 
         <form action="Client" method="POST" name="formAddUser" data-abide>
             <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
-
+            <div class="translucent-form-overlay">
             <form>
                 <div class="form-icons">
                     
                     <div class="input-group">
                         <span class="input-group-label">
-                            <i class="fa fa-user"></i>
+                            <i class="fa fa-id-card-o"></i>
                         </span>
                         <input class="input-group-field" type="text" readonly="readonly" name="idClient" value="<c:out value="${client.getId()}" />"/>
                     </div>
@@ -69,14 +69,14 @@
 
                     <div class="input-group">
                         <span class="input-group-label">
-                            <i class="fa fa-envelope"></i>
+                            <i class="fa fa-user"></i>
                         </span>
                         <input class="input-group-field" required type="text" placeholder="Segundo Nombre" name="second_name" value="<c:out value="${client.getSecond_name()}" />"/>
                     </div>
 
                     <div class="input-group">
                         <span class="input-group-label">
-                            <i class="fa fa-key"></i>
+                            <i class="fa fa-location-arrow"></i>
                         </span>
                         <input class="input-group-field" required type="text" placeholder="Direccion" name="address" value="<c:out value="${client.getAddress()}" />"/>
                     </div>
@@ -95,12 +95,12 @@
                         <input class="input-group-field" required type="text" placeholder="mail@mail.com" name="email" value="<c:out value="${client.getEmail()}" />"/>
                     </div>
 
-                <button class="button expanded">Hacer Cambios</button>
+                <button id="submitbutton" class="button expanded">Hacer Cambios</button>
             </form>
 
 
         </form>
-
+</div>
 
     </body>
 </html>

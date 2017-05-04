@@ -93,7 +93,6 @@ h1{
     transition: background-color 300ms linear;
 }
 
-#menutext{
+.menu-text{
     padding-right: 5em;
-    color: white;
 }

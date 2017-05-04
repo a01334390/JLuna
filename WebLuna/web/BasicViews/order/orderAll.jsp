@@ -21,11 +21,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <title>Ordenes del cliente</title>
         <link href="BasicViews/order/orderStyling.css" rel="stylesheet" type="text/css">
-        <link href="customStyling.css" rel="stylesheet" type="text/css">
+        <link href="BasicViews/order/oaStyling.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel='stylesheet' type='text/css'>
     </head>
     <body>
+                <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
         <script>
             (function (i, s, o, g, r, a, m) {
                 i['GoogleAnalyticsObject'] = r;
@@ -46,98 +47,91 @@
             ga('foundation.send', 'pageview');
 
         </script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+         <div class="notebookhd"><h1 class="whitetxt">Client orders</h1></div>
+        <br>
         <%
             Cliente client = (Cliente) request.getAttribute("client");
             Order[] order = Handler.getOrdersFromClient(client.getId());
         %>
         <% if (session.getAttribute("currentPrivilegeLevel").equals("admin") || session.getAttribute("currentPrivilegeLevel").equals("manager")) {%> 
-        <a href="Order?action=add&clientID=<%=client.getId()%>">A&#241adir un nuevo pedido</a>
+        <div class="addpedido"><a class="addpedido" href="Order?action=add&clientID=<%=client.getId()%>">A&#241adir un nuevo pedido</a></div>
         <%}%>
         <%for (int i = 0; i < order.length; i++) {%>
-        <div>
-            <div class="travel-feature-card">
-                <div class="travel-feature-card-header">
-                    <div class="row">
-                        <div class="medium-12 columns">
-                            <h5 class="travel-feature-card-subtitle">Pedido numero: <%=order[i].getId()%></h5>
-                            <div class="travel-feature-card-header-controls">
-                                <span><a href="#"><i class="fa fa-edit"></i></a></span>
-                                <span><a href="#"><i class="fa fa-remove"></i></a></span>
-                            </div>
-                        </div>
-                    </div>  
-                </div>
-                <div class="travel-feature-card-details">
-
-                    <h6 class="travel-feature-card-date-range"><p>Fecha de entrega <%=order[i].getDate()%></p></h6>
-                    <h6 class="travel-feature-card-date-range"><p>Orden hecha por: <%=client.getFirst_name()%></p></h6>
-
-                    <div class="row">
-                        <div class="small-12 medium-9 columns travel-feature-card-content">
-                            <div class="row">
-                                <div class="small-4 medium-2 columns">
-                                    <img class="travel-feature-card-image" src="https://unsplash.it/600/600/?image=1081" alt="">
-                                </div>
-                                <div class="small-8 medium-10 columns">
-                                    <h6 class="travel-feature-card-title">Caracteristicas del pedido</h6>
-                                    <%if (order[i].getPriority().equals("HIGH")) {%>
-                                    <p>Prioridad del pedido: Alta</p>
+        <br>
+        <div class="formm">
+            <table border="1">
+                <thead>
+                <tr class="centeredform">
+                        <th class="whitetxt">Pedido</th>
+                        <th class="whitetxt">Cliente</th>
+                        <th class="whitetxt">Fecha de entrega</th>
+                        <th class="whitetxt">Prioridad</th>
+                        <th class="whitetxt">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="centeredform">
+                        <td><%=order[i].getId()%></td>
+                        <td><%=client.getFirst_name()%></td>
+                        <td><%=order[i].getDate()%></td>
+                        <td><%if (order[i].getPriority().equals("HIGH")) {%>
+                                    <p>Alta</p>
                                     <%} else if (order[i].getPriority().equals("MEDIUM")) {%>
-                                    <p>Prioridad del pedido: Media</p>
+                                    <p>Media</p>
                                     <%} else {%>
-                                    <p>Prioridad del pedido: Baja</p>
-                                    <% } %>
-                                </div>
-                                <div class="small-8 medium-10 columns">
+                                    <p>Baja</p>
+                                    <% } %></td>
+                        <td><a href="Order?action=edit&OrderID=<%=order[i].getId()%>&clientID=<%=client.getId()%>"><i class="fa fa-pencil nonblue"></i></a> 
+                            <a href="Order?action=delete&OrderID=<%=order[i].getId()%>&clientID=<%=client.getId()%>"><i class="fa fa-trash nonblue"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+              </table>
+        </div>
+        <div> 
+            <h2 class="product-card-title centeredform"><a id="addcuad" href="ONotebook?action=add&OrderID=<%=order[i].getId()%>&clientID=<%=client.getId()%>">A&#241adir set de cuadernos</a></h2>
+        </div>
+        <br>
+        <div>
+            <div class="centeredform">
                                     <%
                                         OrderNotebooks[] on = Handler.getAllNotebooksFromOrders(order[i].getId());
                                     %>
-                                    <div class="product-card">
-                                        <div class="product-card-thumbnail">
-                                            <a href="ONotebook?action=add&OrderID=<%=order[i].getId()%>&clientID=<%=client.getId()%>"><img src="http://placehold.it/180x180"/></a>
-                                        </div>
-                                        <h2 class="product-card-title"><a href="ONotebook?action=add&OrderID=<%=order[i].getId()%>&clientID=<%=client.getId()%>">A&#241adir set de cuadernos</a></h2>
-                                        <div class="product-card-colors">
-
-                                        </div>
-                                    </div>
                                     <%if (on != null) {
                                             for (int x = 0; x < on.length; x++) {%>
-                                    <div class="product-card">
-                                        <div class="product-card-thumbnail">
-                                            <a href="#"><img src="http://placehold.it/180x180"/></a>
-                                        </div>
-                                        <h2 class="product-card-title"><a href="#"><%=Handler.searchNotebookByID(on[x].getId_Notebook()).getType()%></a></h2>
-                                        <p><span class="product-card-desc">Status: <%=on[x].getStatus()%></span></p>
-                                        <p><span class="product-card-price">Cantidad:<%=on[x].getQuantity()%></span></p>
-                                        <div class="product-card-colors">
-                                            <p>Liston: <%=on[x].getRibbon()%></p>
-                                            <p>Elastico: <%=on[x].getElastic()%></p>
-                                            <p>Imagen: <%=on[x].getImage()%></p>
-                                            <p>Tipo de Hojas: <%=on[x].getPageType()%></p>
-                                            <% if (session.getAttribute("currentPrivilegeLevel").equals("admin") || session.getAttribute("currentPrivilegeLevel").equals("manager")){%>
-                                            <a href="ONotebook?action=delete&OrderID=<%=order[i].getId()%>&NotebookID=<%=on[x].getId_Notebook()%>&clientID=<%=client.getId()%>">Eliminar</a>
+                                            <div class="centeredform">
+                                                <span id="notebooktype" class="centeredform"><%=Handler.searchNotebookByID(on[x].getId_Notebook()).getType()%></span>
+                                                <table>
+                                                    <tr class="whitetxt centeredform">
+                                                      <th>Status</th>
+                                                      <th>Cantidad</th>
+                                                      <th>Liston</th>
+                                                      <th>Elastico</th>
+                                                      <th>Imagen</th>
+                                                      <th>Hojas</th>
+                                                      <th>Acciones</th>
+                                                    </tr>
+                                                    <tr class="centeredform">
+                                                      <td><%=on[x].getStatus()%></td>
+                                                      <td><%=on[x].getQuantity()%></td>
+                                                      <td><%=on[x].getRibbon()%></td>
+                                                      <td><%=on[x].getElastic()%></td>
+                                                      <td><%=on[x].getImage()%></td>
+                                                      <td><%=on[x].getPageType()%></td>
+                                                      <td>  <% if (session.getAttribute("currentPrivilegeLevel").equals("admin") || session.getAttribute("currentPrivilegeLevel").equals("manager")){%>
+                                            <a href="ONotebook?action=edit&OrderID=<%=order[i].getId()%>&NotebookID=<%=on[x].getId_Notebook()%>&clientID=<%=client.getId()%>"><i class="fa fa-pencil nonblue"></i></a>
                                             <% } %>
-                                            <a href="ONotebook?action=edit&OrderID=<%=order[i].getId()%>&NotebookID=<%=on[x].getId_Notebook()%>&clientID=<%=client.getId()%>">Editar</a>
-                                        </div>
+                                            <a href="ONotebook?action=delete&OrderID=<%=order[i].getId()%>&NotebookID=<%=on[x].getId_Notebook()%>&clientID=<%=client.getId()%>"><i class="fa fa-trash nonblue"></i></a>
+                                            </tr>
+                                                </table>
+                                            <br><br>
+                                            </div>
                                     </div>
                                     <%}
                                         }%>
                                 </div>
-                            </div> 
-                        </div>
-
-                        <div class="small-12 medium-3 columns travel-feature-card-price">
-                            <h6>Acciones</h6>
-                            <% if (session.getAttribute("currentPrivilegeLevel").equals("admin") || session.getAttribute("currentPrivilegeLevel").equals("manager")){%>
-                            <a href="Order?action=delete&OrderID=<%=order[i].getId()%>&clientID=<%=client.getId()%>">Eliminar</a>
-                            <% } %>
-                            <a href="Order?action=edit&OrderID=<%=order[i].getId()%>&clientID=<%=client.getId()%>">Editar la orden
-                        </div>
-                    </div> 
-                </div>
-            </div>
-        </div>
+                            </div>
         <%}%>
     </body>
 </html>

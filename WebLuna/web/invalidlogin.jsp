@@ -66,8 +66,9 @@
                         <span class="form-error">Ingrese una contraseña</span>
                     </div>
                     <button class="button expanded">Iniciar Sesion
-                        <p class="wrongacc center-form">Usuario o contraseña incorrecta.</p>
-                    </button><span class="forgot"><a href=".#">¿Olvidaste tu contraseña?</a></span>
+                    </button>
+                    <span class="wrongacc">Usuario o contraseña incorrecta.</span>
+                    <span class="forgot"><a href=".#">¿Olvidaste tu contraseña?</a></span>
                 </form>
             </div>
         </div>

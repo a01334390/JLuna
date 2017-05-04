@@ -790,3 +790,9 @@ left-rightpadd {
 .whitetxt{
     color: white;
 }
+
+.wrongacc{
+    color: red;
+    padding-left: 1em;
+    font-size: 0.75em;
+}

@@ -23,7 +23,7 @@
         <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel='stylesheet' type='text/css'>
          <link href="BasicViews/user/userStyling.css" rel="stylesheet" type="text/css">
-        <link href="customStyling.css" rel="stylesheet" type="text/css">
+        <link href="BasicViews/user/formStyling.css" rel="stylesheet" type="text/css">
     </head>
     <body>
         <script>
@@ -78,21 +78,21 @@
 
                         <div class="input-group">
                             <span class="input-group-label">
-                                <i class="fa fa-key"></i>
+                                <i class="fa fa-user"></i>
                             </span>
                             <input class="input-group-field" type="text" placeholder="Primer Nombre" name="first_name" value="<c:out value="${user.getFirst_name()}"/>"/>
                         </div>
 
                         <div class="input-group">
                             <span class="input-group-label">
-                                <i class="fa fa-key"></i>
+                                <i class="fa fa-user"></i>
                             </span>
                             <input class="input-group-field" type="text" placeholder="Segundo Nombre" name="second_name" value="<c:out value="${user.getSecond_name()}"/>"/>
                         </div>
 
                         <div class="input-group">
                             <span class="input-group-label">
-                                <i class="fa fa-key"></i>
+                                <i class="fa fa-picture-o"></i>
                             </span>
                             <input class="input-group-field" type="text" placeholder="image path" name="image" value="<c:out value="${user.getImage()}"/>"/>
                         </div>
@@ -105,9 +105,10 @@
                         </div>
                     </div>
 
-                    <button class="button expanded">Hacer Cambios</button>
+                        <button id="submitbutton" class="button expanded">Hacer Cambios</button>
 
             </form>
+        </div>
         </div>
     </body>
 </html>
