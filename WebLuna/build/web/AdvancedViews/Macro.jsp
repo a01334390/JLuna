@@ -26,8 +26,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel='stylesheet' type='text/css'>
-        <link href="newStyling.css" rel="stylesheet" type="text/css">
+        <link href="AdvancedViews/newStyling.css" rel="stylesheet" type="text/css">
         <title>Macro vista</title>
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/favicon.ico" type="image/x-icon">
     </head>
     <body>
         <script src="js/vendor/jquery.js"></script>
@@ -79,14 +81,15 @@
                     <%--
                         cortar string
                     --%>
-                    <% String tabla[] = semana[i].split(", ");%>
+                    <%if(semana[i]!=null){%>
+                    <% String tabla[] = semana[i].split(",");%>
                     <td><%=tabla[0]%></td>
                     <td><%=tabla[1]%></td>
                     <td><%=tabla[2]%></td>
                     <td><%=tabla[3]%></td>
 
                 </tr>
-                <% } %>
+                <% } }%>
             </tbody>
         </table> 
         <% } %>

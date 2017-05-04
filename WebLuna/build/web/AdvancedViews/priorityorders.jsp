@@ -22,7 +22,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel='stylesheet' type='text/css'>
-        <link href="newStyling.css" rel="stylesheet" type="text/css">
+        <link href="AdvancedViews/newStyling.css" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/favicon.ico" type="image/x-icon">
         <title>Pedidos de prioridad</title>
     </head>
     <body>
@@ -51,7 +53,7 @@
             </div>
             <br>
             <br>
-        <div class="notebookhd"><h1 class="whitetxt">Pedidos de prioridad</h1>
+            <div class="notebookhd"><h1 class="whitetxt">Pedidos de prioridad</h1></div>
     </body>
     
     <h3 class="centeredform">Pedidos por fecha</h3>

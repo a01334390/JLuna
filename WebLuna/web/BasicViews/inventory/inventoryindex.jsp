@@ -21,7 +21,7 @@
         <title>Inventario</title>
         <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel='stylesheet' type='text/css'>
-        <link href="inventoryStyling.css" rel="stylesheet" type="text/css">
+        <link href="BasicViews/inventory/inventoryStyling.css" rel="stylesheet" type="text/css">
     </head>
     <body>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">

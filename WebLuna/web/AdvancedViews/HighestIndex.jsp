@@ -19,7 +19,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Productos que generaron más beneficio</title>
-        <link href="newStyling.css" rel="stylesheet" type="text/css">
+        <link href="AdvancedViews/newStyling.css" rel="stylesheet" type="text/css">
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
         <link rel="icon" href="/favicon.ico" type="image/x-icon">
     </head>
