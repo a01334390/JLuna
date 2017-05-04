@@ -52,36 +52,28 @@
     <script src="js/vendor/what-input.js"></script>
     <script src="js/vendor/foundation.js"></script>
     <script src="js/app.js"></script>
-
-    <div class="top-bar-container" data-sticky-container>
-        <div class="sticky sticky-topbar" data-sticky data-options="anchor: page; marginTop: 0; stickyOn: small;">
-            <div class="top-bar blackbg">
-                <div class="top-bar-left">
-                    <ul class="dropdown menu blackbg" data-dropdown-menu>
-                        <li class="menu-text whitetxt"><%=session.getAttribute("currentSessionName")%></li>
-                        <li><a href="#" class="whitetxt whitehover">Pedidos</a></li>
-                        <li><a href="#" class="whitetxt whitehover">Inventario</a></li>
-                        <li><a href="#" class="whitetxt whitehover">Clientes</a></li>
-                        <li><a href="#" class="whitetxt whitehover">Materiales</a></li>
-                        <li><a href="#" class="whitetxt whitehover">Usuarios</a></li>
-                        <li><a href="#" class="whitetxt whitehover">Cuadernos</a></li>
-                        <li class="has-submenu whitetxt">
-                            <a href="#" class="whitetxt whitehover">Vistas Avanzadas</a>
-                            <ul class="submenu menu vertical blackbg" data-submenu>
-                                <li><a href="#" class="whitetxt whitehover">Ordenes por prioridad y fecha</a></li>
-                                <li><a href="#" class="whitetxt whitehover">Ordenes con mas clientes</a></li>
-                                <li><a href="#" class="whitetxt whitehover">Pedidos con mas beneficio</a></li>
-                                <li><a href="#" class="whitetxt whitehover">Asignar materiales</a></li>
-                                <li><a href="#" class="whitetxt whitehover">Macro vista</a></li>
+        <div class="top-bar-container" data-sticky-container>
+            <div class="sticky sticky-topbar" data-sticky data-options="anchor: page; marginTop: 0; stickyOn: small;">
+                <div class="top-bar blackbg">
+                    <div class="top-bar-left">
+                        <ul class="dropdown menu blackbg" data-dropdown-menu>
+                            <li class="menu-text whitetxt"><%=session.getAttribute("currentSessionName")%></li>
+                            <li><a href="http://localhost:8080/WebLuna/AdvancedHome?action.x=139&action.y=71&action=priorityOrders" class="whitetxt whitehover">Ordenes por prioridad y fecha</a></li>
+                            <li><a href="http://localhost:8080/WebLuna/AdvancedHome?action.x=120&action.y=92&action=clientsOrders" class="whitetxt whitehover">Ordenes con mas clientes</a></li>
+                            <li><a href="http://localhost:8080/WebLuna/AdvancedHome?action.x=101&action.y=74&action=highestBenefit" class="whitetxt whitehover">Pedidos con mas beneficio</a></li>
+                            <li><a href="http://localhost:8080/WebLuna/AdvancedHome?action.x=175&action.y=176&action=materialsToNotebooks" class="whitetxt whitehover">Asignar materiales</a></li>
+                            <li><a href="http://localhost:8080/WebLuna/AdvancedHome?action.x=164&action.y=27&action=macro" class="whitetxt whitehover">Macro vista</a></li>
+                            <li class="whitetxt"><a href="#" class="whitetxt whitehover">Vistas Basicas</a>
+                            </li>
+                            </div>
+                        <div class="top-bar-right">
+                            <ul class="dropdown menu blackbg" data-dropdown-menu>
+                                <li><a href="#" class="whitetxt whitehover">Logout</a></li>
                             </ul>
-                        </li>
-                    </ul>
-                </div>
-                <div class="top-bar-right">
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
     <br>
     <br>
     <div class="notebookhd"><h1 class="whitetxt">Cuadernos</h1></div>

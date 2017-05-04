@@ -22,11 +22,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <title>Forma de Cuadernos</title>
         <link href="BasicViews/order/orderStyling.css" rel="stylesheet" type="text/css">
-        <link href="customStyling.css" rel="stylesheet" type="text/css">
+        <link href="BasicViews/order/formStyling.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel='stylesheet' type='text/css'>
     </head>
-    <body>
+    <body id="casobase">
         <div class="translucent-form-overlay">
             <form action="ONotebook" method="POST" name="OrderForm" data-abide>
                 <h3>A&#241adir un nuevo set de cuadernos al pedido</h3>
@@ -107,7 +107,7 @@
                         <input placeholder="http://www.imgur.com/img/something" required type="text"  name="image" value="<c:out value="${on.getImage()}"/>"/>
                     </label>
                 </div>
-                <input type="submit" class="primary button expanded search-button" value="Modificar"/>
+                    <input id="submitbutton" type="submit" class="primary button expanded search-button" value="Modificar"/>
             </form>
         </div>
     </body>

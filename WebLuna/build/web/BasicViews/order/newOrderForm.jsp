@@ -18,12 +18,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <title>Forma de Ordenes</title>
         <link href="BasicViews/order/orderStyling.css" rel="stylesheet" type="text/css">
-        <link href="customStyling.css" rel="stylesheet" type="text/css">
+        <link href="BasicViews/order/formStyling.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel='stylesheet' type='text/css'>
         <link rel="icon" href="/favicon.ico" type="image/x-icon">
     </head>
-    <body>
+    <body id="casobase">
         <div class="translucent-form-overlay">
             <form action="Order" method="POST" name="OrderForm" data-abide>
                 <h3>A&#241adir un nuevo pedido</h3>
@@ -39,12 +39,12 @@
                 </div>
                 <div class="row columns">
                     <label>Fecha de la Orden
-                        <input type="text" required name="date" value="<c:out value="${order.getDate()}"/>"/>
+                        <input type="date" required name="date" value="<c:out value="${order.getDate()}"/>"/>
                     </label>
                 </div>
                 <div class="row columns">
                     <label>Fecha de creacion
-                        <input type="text" name="create_time" value="<c:out value="${order.getCreate_time()}"/>"/>
+                        <input type="date" name="create_time" value="<c:out value="${order.getCreate_time()}"/>"/>
                     </label>
                 </div>
                 <div class="row columns">
@@ -56,7 +56,7 @@
                         </select>
                     </label>
                 </div>
-                    <input type="submit" class="primary button expanded search-button" value="Modificar"/>
+                    <input type="submit" id="submitbutton" class="primary button expanded search-button" value="Modificar"/>
             </form>
         </div>
     </body>

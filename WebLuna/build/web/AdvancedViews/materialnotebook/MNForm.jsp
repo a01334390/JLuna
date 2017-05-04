@@ -24,6 +24,7 @@
         <link href="customStyling.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.css" rel='stylesheet' type='text/css'>
+        <link href="AdvancedViews/materialnotebook/formStyling.css" rel="stylesheet" type="text/css">
     </head>
     <body>
         <div class="translucent-form-overlay">
@@ -53,7 +54,7 @@
                         <input required type="text" name="quantity" value="<c:out value="${mn.getAmmount()}"/>"/>
                     </label>
                 </div>
-                <input type="submit" class="primary button expanded search-button" value="Modificar"/>
+                <input id="submitbutton" type="submit" class="primary button expanded search-button" value="Modificar"/>
             </form>
         </div>
     </body>
